@@ -1,3 +1,7 @@
+Random Plot Generator : DSE
+
+====================
+
 Requis :
 - Positionnement (PNJ/Objet)
 - Méthode de déplacement (voir d&d et cases)
@@ -7,6 +11,8 @@ Requis :
 - Gestion de l'inventaire
 - Gestion de l'argent
 
+====================
+
 Maybe :
 - PNJ ayant leurs objectifs propres ordonnés
 - Gestion des désirs des PNJs
@@ -14,11 +20,15 @@ Maybe :
 - Gestion des distances pour les interactions
 - Lien avec le programme de Quentin
 
+====================
+
 MightBe :
 - Interaction entre PNJ (communication de l'émotion)
 - Expérience
 - Obstacle et Path finding
 - Interaction entre PNJ (combat). C'est à dire lien avec ce que fait le groupe de Léo.
+
+====================
 
 Crazy :
 - Interaction entre PNJ (accointance, amitié, mariage, couple, enfant)
