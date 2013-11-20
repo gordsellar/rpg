@@ -11,8 +11,7 @@ Requis :
 ====================
 
 Maybe :
-- PNJ ayant leurs objectifs propres ordonnés
-- Gestion des désirs des PNJs
+- PNJ ayant leurs objectifs et leurs désirs propres ordonnés
 - Gestion des connaissances (en fonction de l’intelligence rayon plus important)
 - Gestion des distances pour les interactions
 - Lien avec le programme de Quentin
@@ -22,8 +21,7 @@ Maybe :
 MightBe :
 - Interaction entre PNJ (communication de l'émotion)
 - Expérience
-- Obstacle et Path finding
-- Interaction entre PNJ (combat). C'est à dire lien avec ce que fait le groupe de Léo.
+- Interaction entre PNJ et path finding (combat). C'est à dire lien avec ce que fait le groupe de Léo.
 
 ====================
 
