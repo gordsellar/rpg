@@ -1,0 +1,6 @@
+# Définition du nom du document
+NOM_FICHIER=bibliographie
+
+# Récupération du chemin de la classe picINSA pour les documents LaTeX
+CLSPATH="$(shell pwd)/lib/cls/"
+
