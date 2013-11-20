@@ -16,7 +16,7 @@ clean: cleanrep cleanpdf
 
 # Nettoyage du répertoire
 cleanrep:	
-	rm -rf *.aux *.cb *.cb2 *.log *.toc *.out *.glg *.gls *.ist *.glo *.xdy *.lof *.bbl *.blg
+	rm -rf *.aux *.cb *.cb2 *.log *.toc *.out *.glg *.gls *.ist *.glo *.xdy *.lof *.bbl *.blg *~
 
 # Nettoyage des pdf
 cleanpdf:	
