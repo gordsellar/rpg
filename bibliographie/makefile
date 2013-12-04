@@ -1,14 +1,14 @@
 include makevars
 
-# Génération du pdf
+# Génération des pdf
 all: 
 	TEXINPUTS=${TEXINPUTS}:$(CLSPATH);\
 	export TEXINPUTS;\
-	pdflatex $(NOM_FICHIER).tex;\
-	bibtex $(NOM_FICHIER);\
-	pdflatex $(NOM_FICHIER).tex;\
-	pdflatex $(NOM_FICHIER).tex;\
-	pdflatex $(NOM_FICHIER).tex;\
+	for file in *.tex; do\
+		pdflatex $$file;\
+		bibtex $$file;\
+		pdflatex $$file;\
+	done;
 	make cleanrep;\
 	
 # Nettoyage total
