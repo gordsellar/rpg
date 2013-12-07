@@ -16,13 +16,24 @@
 
 \chapter{IA décisionnelles (Intelligence fixe)}
 \section{Arbre de decision}
+Les intelligences artificielles de jeux vidéo les plus basiques possèdent simplement leur comportement décrit en dur dans le code, sous forme d'un arbre de décision. \\
+ Mais cette méthode possède des limites : lorsque le nombre d'actions possibles et le nombre de stimulations de l'environnement augmente, c'est la complexité de l'IA qui augmente également car il faut envisager toutes les situations possibles.
+
 \section{Machines à état fini}
 \section{Fuzzy Logic}
   
 \chapter{IA Evolutives (Machine Learning)}
 \section{Réseau de neurones}
-\section{Apprentissage supervisé}
+
 \section{Algorithmes génétiques}
+\section{Apprentissage supervisé et non-supervisé}
+Les algorithmes d'intelligence artificielle fonctionnant par apprentissage sont nombreux. Dans cette catégorie peuvent rentrer les réseaux de neurones, les algorithmes génétiques … Dans tous les cas, deux méthodes d'apprentissages sont possibles : l'apprentissage supervisé et l'apprentissage non supervisé.
+
+\subsection{Apprentissage supervisé}
+Cette méthode demande une base d'exemple sur laquelle fonder l'apprentissage, en l'occurrence, l'enregistrement d'un joueur humain jouant au jeu. L'IA analyse la situation dans laquelle se trouve le joueur et enregistre ses actions, pour les reproduire lorsqu'elle se retrouve dans la même situation. Cette méthode est assez contraignante pour les développeurs qui doivent passer un certain temps à jouer pour rendre l'IA efficace.
+
+\subsection{Apprentissage non-supervisé}
+Cela consiste à créer des intelligences artificielles qui s'adaptent toutes seules à leur environnement. Cette méthode a l'avantage d'être assez légère pour le développeur qui doit juste créer un système de "récompense" quand l'IA agit correctement, et inversement quand elle fait des erreurs. Mais elle est plus dure à réaliser, et plus souvent sujette à des erreurs non prévues. Si on prévoit mal la réaction de l'IA par rapport à ses stimulations extérieures, on risque de rentrer dans un comportement illogique.
 \section{Algorithmes de Vie Artificielle}
   
 \chapter{Systèmes multi-agents}
