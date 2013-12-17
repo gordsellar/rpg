@@ -1,4 +1,5 @@
 \documentclass[asi]{picINSA}
+\usepackage{cite}
 
 \begin{document}
 
@@ -16,11 +17,11 @@
 
 \chapter{Création des personnages}
 ~\\
-Il y a plusieurs approches possibles dans la narration interactive. Nous allons d'abord voir comment sont représentées les actions des personnages non joueurs, et comment un joueur peut agir dessus. Nous verrons ensuite comment modéliser la personnalité des personnages, pour agir automatiquement sur le choix des actions d'un personnage.\\
+Il y a plusieurs approches possibles pour rendre les personnages intéressant dans la narration interactive. Nous allons d'abord voir comment sont représentées les actions des personnages non joueurs, et comment un joueur peut agir dessus. Nous verrons ensuite comment modéliser la personnalité des personnages, pour agir automatiquement sur le choix des actions d'un personnage.\\
 
 \section{Interactions humain-personnage}
 
-Dans [2], une histoire se déroule sous les yeux d'un joueur humain. Celui-ci peut à tout moment décider d'intervenir, en agissant dans la scène (ex : déplacement d'un objet), ou bien en donnant des conseils ou des indications à un personnage. Leur système utilise une reconnaissance vocale pour interprêter ce que le joueur veut dire au personnage. Ce message est ensuite transformé pour être comprise par le personnage, qui va changer son comportement en fonction. Par exemple, si le personnage cherche un objet mais ne le trouve pas dans la pièce où il se trouve, le joueur peut donner une indication au personnage, qui va aller au bon endroit.\\
+Dans ~\cite{IRIS:conf/aamas/CavazzaCM2002}, une histoire se déroule sous les yeux d'un joueur humain. Celui-ci peut à tout moment décider d'intervenir, en agissant dans la scène (ex : déplacement d'un objet), ou bien en donnant des conseils ou des indications à un personnage. Leur système utilise une reconnaissance vocale pour interprêter ce que le joueur veut dire au personnage. Ce message est ensuite transformé pour être comprise par le personnage, qui va changer son comportement en fonction. Par exemple, si le personnage cherche un objet mais ne le trouve pas dans la pièce où il se trouve, le joueur peut donner une indication au personnage, qui va aller au bon endroit.\\
 
 Les actions du personnages sont représentées par un HTN : Hierarchical Task Networks. [figure]\\
 
@@ -30,7 +31,7 @@ La racine de cet arbre contient l'objectif principal du personnage. Les noeuds e
 
 Dans un jeu vidéo, beaucoup d'élements peuvent être scripté pour faire réagir les personnages d'une certaine façon. En revanche, en laissant le joueur assez libre dans ses actions, il faut trouver un autre moyen pour que les personnage non joueurs (PNJ) réagissent automatiquement, que ce soit par leurs actions directes, ou les émotions qu'ils laissent paraîtres.\\
 
-Comme présenté dans [3], la plupart des jeux de rôles ou des jeux d'aventures plongent le joueurs dans un rôle précis, avec un contexte déjà établie. L'impact des actions du joueurs sont alors généralement simplifiés a :
+Comme présenté dans ~\cite{IRIS:conf/aiide/OchsSC2008}, la plupart des jeux de rôles ou des jeux d'aventures plongent le joueurs dans un rôle précis, avec un contexte déjà établie. L'impact des actions du joueurs sont alors généralement simplifiés a :
 
 \begin{itemize}
 \item un alignement : bien ou mal, loyal ou chaotic, pouvant limiter
@@ -43,5 +44,8 @@ Comme présenté dans [3], la plupart des jeux de rôles ou des jeux d'aventures
   un garde).
 \end{itemize}
 
+Des résultats tirés d'études psychologique peuvent être utilisés afin de représenter plus précisément les relations sociales
   
+\bibliography{sources/bibliographieST}{}
+\bibliographystyle{plain}
 \end{document}

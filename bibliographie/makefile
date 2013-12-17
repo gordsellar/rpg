@@ -1,14 +1,9 @@
 include makevars
 
+CIBLES=$(patsubst %.tex, %.pdf, $(wildcard *.tex))
+
 # Génération des pdf
-all: 
-	TEXINPUTS=${TEXINPUTS}:$(CLSPATH);\
-	export TEXINPUTS;\
-	for file in *.tex; do\
-		pdflatex $$file;\
-		bibtex $$file;\
-		pdflatex $$file;\
-	done;
+all: $(CIBLES)
 	make cleanrep;\
 	
 # Nettoyage total
@@ -20,4 +15,14 @@ cleanrep:
 
 # Nettoyage des pdf
 cleanpdf:	
-	rm -rf $(NOM_FICHIER).pdf 
+	rm -rf $(CIBLES)
+
+# Génération d'un pdf
+%.pdf: %.tex
+	TEXINPUTS=${TEXINPUTS}:$(CLSPATH);\
+	export TEXINPUTS;\
+	pdflatex $?;\
+	bibtex $(shell basename $? .tex);\
+	pdflatex $?;\
+	pdflatex $?;\
+	make cleanrep;
