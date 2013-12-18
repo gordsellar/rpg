@@ -13,19 +13,16 @@
 \tableofcontents{}
 
 \chapter{Introduction}
+De nos jours, les jeux vidéos prennent de plus en plus d'ampleur, et les joueurs sont devenus plus exigeants que jamais. La qualité d'un jeu vidéo dépend de beaucoup de facteurs, et notament, du sentiment d'immersion resenti par le joueur. Ce sentiment d'immersion est optimal, lorsque le monde dans lequel il est plongé est crédible, et cette crédibilité repose souvent sur le comportement des Personnages Non Jouables (PNJ). Ceux-ci ne peuvent plus se contenter d'un comportement basique et sans réfléxion derrière, ou sinon le joueur se rendra vite compte qu'il tourne en rond dans un univers fermé. Pour éviter cela, l'Intelligence Artificielle (IA) du PNJ est primordiale. \\
+Il existe différentes façons de doter les PNJ d'une IA. Dans cette snthèse bibliographique, nous allons commencer par présenter les IA de type décisionnelles, qui possèdent un fonctionnement fixé en dur dans le code. Ensuite, nous parlerons des IA évolutives, capables d'apprendre et de s'améliorer au cours du jeu. Pour finir nous évoquerons l'implémentation de la personnalité des IA, qui permet de les doter d'un comportement plus riche et plus vraisemblable.
+
 
 \chapter{IA décisionnelles (Intelligence fixe)}
-\section{Arbre de decision}
+\section{Arbre de decision et machines à états finis}
 Les intelligences artificielles de jeux vidéo les plus basiques possèdent simplement leur comportement décrit en dur dans le code, sous forme d’un arbre de décision. \\
-%{\begin{figure} [ht]
-%         \begin{center}
-%        \includegraphics[scale=0.3]{./images/arbre.pdf}
-%         \end{center}
-%\end{figure}
+Les machines a états finis sont une version améliorée de ces arbres de décisions, dont la conception est plus réfléchi et permet un minimum de réfléxion de l'IA face à la situation dans laquelle elle est. On peut voir de telles machines dans  ~\cite{khoo2002applying}. \\
+Mais ces méthodes possèdent des limites : lorsque le nombre d’actions possibles et le nombre de stimulations de l’environnement augmentent, c’est la complexité de l’IA qui augmente également car il faut envisager toutes les situations possibles. En terme de temps de développement et de temps de calcul, ce n'est souvent pas suffisant pour les jeux vidéos actuels.
 
-Mais cette méthode possède des limites : lorsque le nombre d’actions possibles et le nombre de stimulations de l’environnement augmente, c’est la complexité de l’IA qui augmente également car il faut envisager toutes les situations possibles.
-
-\section{Machines à état fini}
 \section{Fuzzy Logic}
   
 \chapter{IA Evolutives (Machine Learning)}
@@ -33,7 +30,7 @@ Mais cette méthode possède des limites : lorsque le nombre d’actions possibl
 
 \section{Algorithmes génétiques}
 \section{Apprentissage supervisé et non-supervisé}
-Les algorithmes d’intelligence artificielle fonctionnant par apprentissage sont nombreux. Dans cette catégorie peuvent rentrer les réseaux de neurones, les algorithmes génétiques . . . Dans tous les cas, deux méthodes d’apprentissages sont possibles : l’apprentissage supervisé et l’apprentissage non supervisé.
+Les algorithmes d’intelligence artificielle fonctionnant par apprentissage sont nombreux. Dans cette catégorie peuvent rentrer les réseaux de neurones, les algorithmes génétiques . . . Dans tous les cas, comme décrit dans ~\cite{tambellinicomment}, deux méthodes d’apprentissages sont possibles : l’apprentissage supervisé et l’apprentissage non supervisé.
 
 \subsection{Apprentissage supervisé}
 Cette méthode demande une base d’exemple sur laquelle fonder l’apprentissage, en l’occurrence, l’enregistrement d’un joueur humain jouant au jeu. L’IA analyse la situation dans laquelle se trouve le joueur et enregistre ses actions, pour les reproduire lorsqu’elle se retrouve dans la même situation. Cette méthode est assez contraignante pour les développeurs qui doivent passer un certain temps à jouer pour rendre l’IA efficace.
@@ -48,7 +45,7 @@ Cela consiste à créer des intelligences artificielles qui s’adaptent toutes 
 Lorsque l'on veut intégrer dans un jeu vidéo des PNJ (personnages non jouables) assez développés, intervient un moment ou l'on se heurte au problème de la personnalité du personnage. En effet si on veut que les différents PNJ n'aient pas les mêmes réactions face à ce qui leur arrive, il faut pouvoir leur donner une personnalité. Par exemple, un villageois et un chevalier ne réagiront pas de la même façon face à une attaque : on peut considérer que cela leur vient de la différence dans leur niveau de courage. De même, si on veut mettre en place une relation perticulière vis-à-vis du joueur ou des autres personnages, il faut pouvoir représenter les émotions des personnages, et que celles-ci influent sur leurs réactions sociales. Par exemple, un personnage sera moins enclin à donner des informations au joueur si celui-ci l'a attaqué que s’il l'a aidé. 
 
 \section{Modèles de personnalité}
-Différentes approches existent pour représenter la personnalité d'un personnage :
+D'après ~\cite{ochs2009simulation}, Différentes approches existent pour représenter la personnalité d'un personnage :
 \begin{itemize}
 \item L'approche par catégorie : on spécifie des comportements en fonction d'une catégorie comme par exemple « gentil/méchant » ou « peureux/courageux » comme dans le cas du villageois et du chevalier. Les différentes catégories sont spécifiées à l'avance dans le code du jeu et n'évoluent pas.
 \item L'approche qui se base sur des traits de caractères. Par exemple, une capacité de « courage » peut être utilisée pour savoir si le personnage va répondre à une attaque en fuyant ou en se battant. Cette méthode permet par la suite d'implémenter une modification des attributs en cours de jeu, en fonction de ce qui arrive au personnage.  
@@ -76,5 +73,8 @@ Ces variables sont spécifiques à chacun des 2 personnages qui sont en relation
 
 \chapter{Conclusion}
 
+
+\bibliography{sources/bibliographieIA}{}
+\bibliographystyle{plain}
   
 \end{document}
