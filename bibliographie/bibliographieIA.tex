@@ -1,4 +1,15 @@
 \documentclass[asi]{picINSA}
+\usepackage{cite}
+
+% Bout de code pour enlever le ``chapitre'' écrit à chaque fois
+\makeatletter
+\def\@makechapterhead#1{
+  {\parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@M
+    \Huge\bfseries  \thechapter.\quad #1\par\nobreak
+    \vskip 40\p@
+  }}
+\makeatother
 
 \begin{document}
 
@@ -20,11 +31,20 @@ Il existe différentes façons de doter les PNJ d'une IA. Dans cette snthèse bi
 \chapter{IA décisionnelles (Intelligence fixe)}
 \section{Arbre de decision et machines à états finis}
 Les intelligences artificielles de jeux vidéo les plus basiques possèdent simplement leur comportement décrit en dur dans le code, sous forme d’un arbre de décision. \\
-Les machines a états finis sont une version améliorée de ces arbres de décisions, dont la conception est plus réfléchi et permet un minimum de réfléxion de l'IA face à la situation dans laquelle elle est. On peut voir de telles machines dans  ~\cite{khoo2002applying}. \\
-Mais ces méthodes possèdent des limites : lorsque le nombre d’actions possibles et le nombre de stimulations de l’environnement augmentent, c’est la complexité de l’IA qui augmente également car il faut envisager toutes les situations possibles. En terme de temps de développement et de temps de calcul, ce n'est souvent pas suffisant pour les jeux vidéos actuels.
+Les machines a états finis sont une version améliorée de ces arbres de décisions, dont la conception est plus réfléchi et permet un minimum de réfléxion de l'IA face à la situation dans laquelle elle est. Un exemple très simple serait celui d'un garde ~\cite{MindGames}. Aussitôt que le garde voit le jouer et possède un certain montant de point de vie, il va attqué celui-ci. Si le garde passe sous un certain montant de vie, il fuit, et si le joueur fuit, il retourne à son poste. Ce cas peut évidemment être conplexifié, mais représente bien les machines à états finis. On peut retrouver d'autres exmples de telles machines dans ~\cite{khoo2002applying}.\\
+
+L'avantage de ces techniques, est leur facilité de mise place, et un temps de calcul très court, mais elles possèdent des limites : lorsque le nombre d’actions possibles et le nombre de stimulations de l’environnement augmentent, c’est la complexité de l’IA qui augmente également car il faut envisager toutes les situations possibles. En terme de temps de développement cela devient très complexe et peut provoquer des actions illogiques au regard du joueur.
 
 \section{Fuzzy Logic}
-  
+Le problème avec les machines à état fini est que les joueurs peuvent, à force de jouer, reconnaitre un pattern d'actions de la part de l'IA et alors leur intérêt pour le jeu sera moindre. Afin de préserver une part de ``surprise'' de la part de l'IA envers le joueur, certains développeurs intègrent ce que l'on appelle une logique floutée (fuzzy logic).
+
+L'intelligence sera la même que précédemment, mais celle-ci sera pondérée par d'autres paramètres. Le but est d'avoir des décisions non-binaires, c'est-à-dire ne semblant pas être de simples SI ... ALORS dans des machines à états finis ~\cite{CompGamesWithIntel}.
+Ces paramètres peuvent être de simple poids aléatoires sur les données permettant la prise de décision, mais sont généralement des poids basés sur la personnalité que les développeurs souhaitent donner à leur IA. Cela peut permettre des IA plus ou moins aggressives et plus ou moins prévisibles en fonction des poids.\\
+
+Par exemple, le FPS Unreal possède une IA basée sur cette logique, et permet aux PNJ, en fonction des évènements de la bataille, de fuir, se cacher, créer des embuscasdes, etc. ~\cite{CompGamesWithIntel}.
+De même le jeu de statégie Civilisation: Call to Power, une seule IA est développée pour le jeu. Celle-ci est ensuite pondérée afin de la faire varier pour représenter un comportement différent pour chaque différente civilisation ~\cite{CompGamesWithIntel}. 
+
+
 \chapter{IA Evolutives (Machine Learning)}
 \section{Réseau de neurones}
 
@@ -39,9 +59,43 @@ Cette méthode demande une base d’exemple sur laquelle fonder l’apprentissag
 Cela consiste à créer des intelligences artificielles qui s’adaptent toutes seules à leur environnement. Cette méthode a l’avantage d’être assez légère pour le développeur qui doit juste créer un système de "récompense" quand l’IA agit correctement, et inversement  quand elle fait des erreurs. Mais elle est plus difficile à réaliser, et plus souvent sujette à des erreurs non prévues. Si on prévoit mal la réaction de l’IA par rapport à ses stimulations extérieures, on risque de rentrer dans un comportement illogique.
 \section{Algorithmes de Vie Artificielle}
   
-\chapter{Systèmes multi-agents}
 
-\chapter{Modèlisation de la parsonnalité et des relation sociales}
+  
+\chapter{Systèmes multi-agents}
+Le fait que les IA dans les jeux vidéos sont souvent associées à des personnages fait que celles-ci s'adapdent très bien au concept des agents en tant qu'IA, et plus particulièrement à un systèmes-multi agent dans le cas ou plusieurs personnages doivent coexister.
+Ces agents sont généralement composés d'un ensemble de capteurs leur permettant d'obtenir un certain nombre d'informations sur leur environnement (objets, autres agents, joueurs, sons, etc.), sur eux-même (faim, vie, alignement, etc.), ainsi que d'un ensemble d'actions réalisables et de but ~\cite{IntelAgents4CompGames}. A partir ces informations, et en fonction de son implémentation, un agent déterminera un comportement à avoir.
+Ces agents peuvent être classés en plusiseurs catégories.
+
+\section{Les agents réactif}
+Les agents réactifs sont la version la plus simple des agents. Pour certaines informations obtenues par les capteurs, certaines actions seront effectuées. Cela correspond à de simple conditions SI ... ALORS. Souvent, ce genre de système contient un très grand nombre de règles de ce genre, ce qui rend le code très difficile à maintenir, malgré sa simplicité de mise en place. De plus, ce genre de d'agent force les développeurs à prendre en compte chaque situation et si une est oubliée, cela peut amener l'agent à effectuer des actions erronées ou illogiques au regard du joueur.
+
+Ces agents restent cependant très utilisés dans des cas où une intelligence simple suffit car ils sont, comme dit précédemment, très simple à mettre en place. Le nombre limité de règles les rend aussi simples à tester et modifier.
+De plus, ils nécessitent une faible puissance de calcul, mais ce paramètre tend à devenir négligeable, au vu de l'augmentation de la puissance de calcul maintenant disponible pour le grand public (et qui permet don de mettre en place des IA plus complexes.
+
+\section{Les agents délibératifs}
+Les agents délibératifs sont plus complexes que les réactifs, car au lieu d'exécuter une action pour certaines entrées, ceux-ci vont ``construire'' un plan à partir des actions qu'ils peuvent exécuter pour arriver à leur but ~\cite{IntelAgents4CompGames} ~\cite{IntelAgentsInCompGames}. Cela va conduire les agents à former une séquence d'actions afin de modifier le monde dans le sens qu'il souhaite.
+
+Ainsi, il n'est pas nécessaire d'implémenter chaque règle comme avec un agent réactif, puisque à partir des ses connaissances et de son(ses) but(s), et connaissant ses actions possibles, va établir un plan afin d'arriver à son(ses) but(s).\\
+Une implémentation connue de ce type d'agents est le modèle BDI (Belives - Desires - Intentions).\\
+Le problème de ce type d'agents est que dans des cas complexes, ils peuvent demander un temps de calcul élevé car si au cours de la réalisation de son plan, des paramètres changent et font que celui-ci n'est plus réalisable, alors l'ensemble du plan doit être recalculé.
+
+\section{Les agents hybrides}
+Le but des agents hybrides, est de combiner la rapidité d'action d'un agent réactif, et l'intelligence (relative) d'un agent délibératif.
+Pour cela, un temps de calcul fixe est donné à l'agent, et tant que celui-ci n'est pas dépassé, l'agent va améliorer et faire évoluer son plan afin de s'adapter aux changements de son environnement. Cependant, une fois les temps de calcul dépassé, l'agent va exécuter l'action suivante de son plan.
+
+Cela permet de mettre en place un agent relativement intelligent, s'adaptant à son environnement comme un agent délibératif, mais ne calculant pas forcement l'ensemble du plan à chaque changement, et permettant une rapidité accrue.\\
+Le seul paramètre reste alors le temps de calcul alloué à l'agent. Plus l'agent aura de temps, et plus son plan ira loin dans le futur et sera optimisé.
+
+\section{Un exemple d'application}
+En 2001, Lionhead Studios a sorti le jeu vidéo Black \& White. Celui-ci a été reconnu pour les qualités de son IA. En effet, les developpeurs du jeu ont voulu rendre cette partie la plus plausible et évolutive possible, et il en résulte une IA restant comme un exemple à suivre dans le monde du jeu vidéo aujourd'hui ~\cite{MindGames} ~\cite{CompGamesWithIntel}.\\
+Dans ce jeu, le joueur prend la place d'un dieu dans un monde imaginaire, habité par différents peuples. Ce dieu est représenté dans le monde par une créature, dont l'IA évolue avec les actions du joueur.\\
+
+L'ensemble des IA du jeu sont implémentée sous la forme de BDI, et ont la capacité d'apprendre de nouveaux buts, des priorités, des méthodes (ainsi que leur efficacité), etc. La créature représentant le joueur est autonome et apprend des actions de celui-ci et de l'observation des autres agents que faire, mais le joueur peut également faire évoluer l'IA lui-même par un système de récompenses / punitions. Les différents villageois du jeu sont eux controllés par un agent représentant un esprit de groupe et donnant aux villageois des désirs / buts. Ils agissent alors ensuite seuls.\\
+Finalement, l'ensemble des ces méthodes permettent au jeu d'être vivant et surtout crédible, et c'est pour cela qu'il est un exemple.
+
+
+
+\chapter{Modèlisation de la personnalité et des relation sociales}
 Lorsque l'on veut intégrer dans un jeu vidéo des PNJ (personnages non jouables) assez développés, intervient un moment ou l'on se heurte au problème de la personnalité du personnage. En effet si on veut que les différents PNJ n'aient pas les mêmes réactions face à ce qui leur arrive, il faut pouvoir leur donner une personnalité. Par exemple, un villageois et un chevalier ne réagiront pas de la même façon face à une attaque : on peut considérer que cela leur vient de la différence dans leur niveau de courage. De même, si on veut mettre en place une relation perticulière vis-à-vis du joueur ou des autres personnages, il faut pouvoir représenter les émotions des personnages, et que celles-ci influent sur leurs réactions sociales. Par exemple, un personnage sera moins enclin à donner des informations au joueur si celui-ci l'a attaqué que s’il l'a aidé. 
 
 \section{Modèles de personnalité}
@@ -73,8 +127,6 @@ Ces variables sont spécifiques à chacun des 2 personnages qui sont en relation
 
 \chapter{Conclusion}
 
-
 \bibliography{sources/bibliographieIA}{}
 \bibliographystyle{plain}
-  
 \end{document}
