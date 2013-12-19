@@ -17,7 +17,8 @@
 
 Un des challenges principaux de développeur de jeux vidéos est la crédibilité de leurs personnages non joueurs et 
 de leurs réactions. Pour que les réactions des personnages soient réalistes, il s'agit de bien les modéliser pour 
-qu'ils puissent donner l'illusion d'être vivant ~\cite{Bates94therole}. De plus si les réactions des personnages sont imprévisibles
+qu'il puissent donner l'illusion d'être vivant ~\cite{Bates94therole}. De plus, dans les jeux vidéos le joueurs,
+n'est pas simplement spectateur mais bien acteur dans le scénario. Si les réactions du joueur sont imprévisibles,
 cela signifie qu'il faut générer un nouveau scénario en cas d'action imprévue du joueur, ou d'un personnage non joueur.
 
 Nous aborderons d'abord le problème de la création d'un personnage réaliste puis les difficulté de la création de scénario.
@@ -99,13 +100,61 @@ Ces éléments ne sont pas tous modifiés de la même façon. En effet, les trai
 
 \chapter{Génération de l'intrigue}
 
-La génération d'intrigue 
+\section{Narration automatisée}
+
+Au temps où les jeux vidéos n'existaient pas, les recherches se concentrait sur la grammaire et sur la création d'intrigue, c'est à dire sur la génération de texte. Cet aspect n'est pas inintéressant dans l'optique d'un jeux vidéo, car il peut être nécessaire de faire dialoguer les PNJ, voir leur faire raconter une histoire à partir d'un événement généré.
+
+
+\subsection{Principe de la narration automatisée}
+
+La génération de scénario est basé sur l'ordonnancement temporel des différentes scènes à partir d'une structure sémantique de base ~\cite{cavazza2002character}. Elle est décomposée en deux éléments par l'école formaliste Russe ~\cite{Callaway2002213} : la fabula et le suzjet. 
+
+\subsubsection{Fabula}
+
+La fabula est la connaissance du monde dans lequelle se déroule la narration. Cette structure sémantique de base, une ontologie, est ce qui permet de savoir comment interagissent chaque objets et personne du monde. La fabula est la somme de tout les objets du monde permet de générer le flux narratif. \\
+
+La fabula est le suzjet peuvent être distingué car pour une même ontologie on peut obtenir une infinité d'histoire différentes en faisant varier l'ordre de présentation et de même des modifications dans l'ontologie permettent de changer le résultat.
+
+\subsubsection{Suzjet}
+
+Le suzjet est en quelque sorte le style du narrateur. Le choix de l'ordre de présentation, de la syntaxe utilisée, et de la décision de cacher ou non une information, par exemple dans le cas d'un mystère sont extrémement important. Avoir une bonne ontologie ne suffit pas si le narrateur se contente d'énumérer les faits présent à l'intérieur. \\
+Par exemple, dans le cas d'un roman policier si le meurtrier était dévoilé dès le début, la narration serait de mauvaise qualité. Il est donc nécessaire d'évaluer la qualité d'une narration.
+
+\subsection{Evaluation de la qualité d'une narration}
+
+Le meilleur juge de la qualité d'un texte est un être humain, la plupart des évaluations sont donc réalisées par des êtres humains ~\cite{Callaway2002213}. Nous allons donc aborder quels sont les différents critères permettant d'évaluer la qualité d'une narration.
+
+\subsubsection{Cohérence de l'intrigue}
+
+La cohérence de l'intrigue est la pertinence de l'intrigue générée par le narrateur tout au long de l'histoire. Le narrateur doit donc se baser sur une fabula cohérente mais égélement sur un suzjet cohérent. Il est donc nécessaire que le narrateur choisisse un genre ~\cite{Ciarlini:2010:ERP:1658866.1658874} pour que son style soit reconnaissable.
+
+\subsubsection{Réalisme des personnages}
+
+Les personnages sont réaliste si le spectateur ou le lecteur peut penser que les actions réalisées par un personnage sont influencées par sa personalité et par ses émotions. Par exemple, il paraîtrait illogique qu'une informaticienne introvertie ait envie de faire la tournée des bars pour draguer plutôt que de réussir à compiler son système multi-agent. \\
+
+Les personnages sont également plus réaliste si leurs interactions avec les autres personnages sont cohérents avec les actions précédentes, c'est à dire si il y a des liens émotionnelles entre personnages. Il est donc nécessaire de caractériser le type d'action entre personnage (malpoli, romantique, servile, etc.) ~\cite{IRIS:conf/aamas/CavazzaCM2002}. \\
+
+\subsubsection{But narratif (Storytelling goal)}
+
+Pour réaliser des intrigues intéressantes, le narrateur peut avoir besoin de suivre des descriptions narrative de haut niveau ~\cite{Ciarlini:2010:ERP:1658866.1658874} (par exemple, tenir les amoureux éloignées). Les personnages ne répondent donc plus à leur désirs personnels car ils essayent de rendre l'intrigue intéressante pour augmenter le nombre de péripéties du héros. Cette notion de but narratif est donc contradictoire avec le réalisme des personnages. \\
+
+On peut se rappeller ici des innombrables personnages ne servant qu'à construire le scénario et n'ayant pas de but précis, que ce soit dans les jeux vidéos (par exemple le vieux monsieur qui fait la démonstration de la capture d'un pokémon sans cesse dès qu'on lui parle), ou même dans la génération de scénario par un être humain (par exemple, un maître du jeu pourra faire apparaître un PNJ n'ayant d'autre but que d'orienter le joueur pour re-dynamiser un scénario). \\
+
+Pour protéger le scénario il est possible que les personnages ait à intervenir. Encore une fois leur réalisme peut en pâtir. \\
+
+Par exemple si un personnage est important pour l'intrigue (ou que le maître du jeu l'aime bien), il est possible que même si le joueur essaie de le tuer, cela soit impossible quoi qu'il fasse. Pour améliorer le réalisme des personnages on peut utiliser un processus de simulation d'intention permettant au PNJ de réagir avant qu'une action drastique soit obligatoire pour garantir la cohérence du scénario ~\cite{Ciarlini:2010:ERP:1658866.1658874}. Par exemple si on s'aperçoit que le joueur essaie de tuer un personnage de quète le personnage s'éloignera avant qu'un autre personnage de moindre importance ait à se sacrifier pour lui sauver la vie, voir qu'il soit visible pour le joueur que ce PNJ est invincible. \\
+
+Pour conclure le créateur d'intrigue doit discrétement manipuler le but des acteurs de manière à forcer l'apparition d'une intrigue cohérente.
+
+\section{Génération d'intrigue dans les jeux vidéos}
 
 
 
 \chapter*{Conclusion}
 
-Comme nous avons pu le voir, il est possible de représenter les comportements des personnages par différentes méthodes, en particulier les HTN qui semblent très répandus. Pour permettre une réaction naturelles, en relation avec les événements perçus par un personnage, il convient cependant d'affiner le comportement par l'utilisation de différents facteurs psychologiques et narratifs permettant l'illusion de vie ~\cite{Bates94therole}. 
+En ce qui concerne l'application sur notre projet nous n'allons pas générer de texte certains aspect de la génération de scénario ne seront donc pas utile dans notre cas. Par contre tout ce qui concerne la création de personnage et la génération automatique d'intrigue à partir de personnage réalistes se rapprochant de l'humain nous permettra de réaliser une intrigue même si les théories littéraires ne permettent pas de créer des définitions calculables (~\cite{Callaway2002213}). \\
+
+Comme nous avons pu le voir, il est possible de représenter les comportements des personnages par différentes méthodes, en particulier les HTN qui semblent très répandus. Pour permettre une réaction naturelles, en relation avec les évennements perçus par un personnage, il convient cependant d'affiner le comportement par l'utilisation de différents facteurs psychologiques et narratifs permettant l'illusion de vie ~\cite{Bates94therole}.
 
 \bibliography{sources/bibliographieST}{}
 \bibliographystyle{plain}
