@@ -1,4 +1,4 @@
-\documentclass[asi]{picINSA}
+\documentclass[asi]{picINSAIA}
 \usepackage{cite}
 
 % Bout de code pour enlever le ``chapitre'' écrit à chaque fois
@@ -16,7 +16,7 @@
 \begin{document}
 
     \titreGeneral{Bibliographie}
-	\sousTitreGeneral{\newline Sujet RPG 1}
+	\sousTitreGeneral{\newline Sujet RPG 1 : Intelligences Artificielles}
 	\titreAcronyme{\LARGE IHME}
 	\version{1.00}
 	\referenceVersion{bibliographie}
@@ -27,7 +27,12 @@
 \tableofcontents{}
 
 \chapter{Introduction}
-De nos jours, les jeux vidéos prennent de plus en plus d'ampleur, et les joueurs sont devenus plus exigeants que jamais. La qualité d'un jeu vidéo dépend de beaucoup de facteurs, et notament, du sentiment d'immersion resenti par le joueur. Ce sentiment d'immersion est optimal, lorsque le monde dans lequel il est plongé est crédible, et cette crédibilité repose souvent sur le comportement des Personnages Non Jouables (PNJ). Ceux-ci ne peuvent plus se contenter d'un comportement basique et sans réfléxion derrière, ou sinon le joueur se rendra vite compte qu'il tourne en rond dans un univers fermé. Pour éviter cela, l'Intelligence Artificielle (IA) du PNJ est primordiale. \\
+De nos jours, les jeux vidéos prennent de plus en plus d'ampleur, et les joueurs sont devenus plus exigeants que jamais. 
+Si la qualité graphique des jeux a souvent été mise en avant pour les vendre, celle-ci évolue de moins en moins, laissant plus de place à l'évolution des Intelligence Artificielle (IA) et du gameplay.
+
+La qualité d'un jeu vidéo dépend de beaucoup de facteurs, et notament, du sentiment d'immersion resenti par le joueur. Ce sentiment d'immersion est optimal, lorsque le monde dans lequel il est plongé est crédible, et cette crédibilité repose souvent sur le comportement des Personnages Non Jouables (PNJ). Ceux-ci ne peuvent plus se contenter d'un comportement basique et sans réfléxion derrière, ou sinon le joueur se rendra vite compte qu'il tourne en rond dans un univers fermé. Pour éviter cela, l'IA du PNJ est primordiale. \\
+De plus, avec l'augmentation de la puissance de calcul disponible pour le grand publi, les developpeurs disposent de plus d'opportunités de développement d'IA plus puissantes et plus intelligentes.\\
+
 Il existe différentes façons de doter les PNJ d'une IA. Dans cette synthèse bibliographique, nous allons commencer par présenter les IA de type décisionnelles, qui possèdent un fonctionnement fixé et non évolutif. Ensuite, nous parlerons des IA évolutives, capables d'apprendre et de s'améliorer au cours du jeu, ainsi que des systèmes multi-agents. Pour finir nous évoquerons l'implémentation de la personnalité des IA, qui permet de les doter d'un comportement plus riche et plus vraisemblable.
 
 
@@ -75,10 +80,8 @@ Ces agents sont généralement composés d'un ensemble de capteurs leur permetta
 Ces agents peuvent être classés en plusiseurs catégories.
 
 \section{Les agents réactif}
-Les agents réactifs sont la version la plus simple des agents. Pour certaines informations obtenues par les capteurs, certaines actions seront effectuées. Cela correspond à de simple conditions SI ... ALORS. Souvent, ce genre de système contient un très grand nombre de règles de ce genre, ce qui rend le code très difficile à maintenir, malgré sa simplicité de mise en place. De plus, ce genre de d'agent force les développeurs à prendre en compte chaque situation et si une est oubliée, cela peut amener l'agent à effectuer des actions erronées ou illogiques au regard du joueur.
-
-Ces agents restent cependant très utilisés dans des cas où une intelligence simple suffit car ils sont, comme dit précédemment, très simple à mettre en place. Le nombre limité de règles les rend aussi simples à tester et modifier.
-De plus, ils nécessitent une faible puissance de calcul, mais ce paramètre tend à devenir négligeable, au vu de l'augmentation de la puissance de calcul maintenant disponible pour le grand public (et qui permet don de mettre en place des IA plus complexes.
+Les agents réactifs sont la version la plus simple des agents, et sont très similaires à des machines à état fini précédemment décrites. Pour certaines informations obtenues par les capteurs, certaines actions seront effectuées. Il présente donc les mêmes avantages, c'est-à-dire qu'ils sont simples à mettre en place, et demande peu de puissance de calcul, et c'est pourquoi ils sont très utilisés.
+Cependant, ils ont aussi les mêmes défauts, c'est-à-dire difficile à maintenir dans la cas d'un grand nombre de règles, et pouvant entrainer des actions erronées ou illogiques au regard du joueur.
 
 \section{Les agents délibératifs}
 Les agents délibératifs sont plus complexes que les réactifs, car au lieu d'exécuter une action pour certaines entrées, ceux-ci vont ``construire'' un plan à partir des actions qu'ils peuvent exécuter pour arriver à leur but ~\cite{IntelAgents4CompGames} ~\cite{IntelAgentsInCompGames}. Cela va conduire les agents à former une séquence d'actions afin de modifier le monde dans le sens qu'il souhaite.
