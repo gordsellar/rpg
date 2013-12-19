@@ -13,9 +13,15 @@
 
 \tableofcontents{}
 
-\chapter{Génération de l'intrigue}
+\chapter*{Introduction}
 
+Un des challenges principaux de développeur de jeux vidéos est la crédibilité de leurs personnages non joueurs et 
+de leurs réactions. Pour que les réactions des personnages soient réalistes, il s'agit de bien les modéliser pour 
+qu'il puissent donner l'illusion d'être vivant ~\cite{Bates94therole}. De plus si les réactions des personnage sont imprévisibles
+cela signifie qu'il faut générer un nouveau scénario en cas d'action imprévue du joueur, ou d'un personnage non joueur.
 
+Nous aborderons d'abord le problème de la création d'un personnage réaliste puis les difficulté de la création de scénario.
+Enfin nous aborderons les applications possibles sur notre projet puis nous conclurons.
 
 \chapter{Création des personnages}
 ~\\
@@ -91,12 +97,15 @@ Pour faire ceci, ils utilisent un \rq{}Mind Module\lq{} (\textit{module d'esprit
 ~\\
 Ces éléments ne sont pas tous modifiés de la même façon. En effet, les traits sont fixés lors de la création du personnage et ne changeront pas. Les émotions ressenties vont diminuer rapidement après quelques minutes. À l'inverse, l'humeur peut rester pendant plusieurs heures.
 
+\chapter{Génération de l'intrigue}
 
-\section{Conclusion}
-
-Comme nous avons pu le voir, il existe différents moyens de représenter les comportements des personnages. L'utilisation des émotions semble cependant nécessaire pour permettre une réaction naturelles, en relation avec les évennements perçus par un personnage.
+La génération d'intrigue 
 
 
+
+\chapter*{Conclusion}
+
+Comme nous avons pu le voir, il est possible de représenter les comportements des personnages par différentes méthodes, en particulier les HTN qui semblent très répandus. Pour permettre une réaction naturelles, en relation avec les évennements perçus par un personnage, il convient cependant d'affiner le comportement par l'utilisation de différents facteurs psychologiques et narratifs permettant l'illusion de vie ~\cite{Bates94therole}. 
 
 \bibliography{sources/bibliographieST}{}
 \bibliographystyle{plain}
