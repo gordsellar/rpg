@@ -11,7 +11,7 @@ import universe.beliefs.*;
 public class Character extends Entity {
 
 	private int smartness;
-	private Knowledge[] knoledgeOfTheWorld;
+	private Knowledge[] knowledgeOfTheWorld;
 	private Object[] inventory;
 	private Result goal;
 	private Position position;
