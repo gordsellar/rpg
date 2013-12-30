@@ -80,7 +80,7 @@ public class Task {
                 }
                 break;
             case "Object":
-                parametersTypes[i - 1] = universe.entities.Object.class;
+                parametersTypes[i - 1] = universe.entities.Item.class;
                 // TODO look up to retrieve the right Object
                 break;
             case "Zone":

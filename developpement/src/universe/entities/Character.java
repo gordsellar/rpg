@@ -14,7 +14,7 @@ public class Character extends Entity {
 
     private int smartness;
     private Knowledge[] knowledgeOfTheWorld;
-    private Object[] inventory;
+    private Item[] inventory;
     private Objective goal;
     private Position position;
     private int actionMaxLength;
@@ -41,15 +41,15 @@ public class Character extends Entity {
 	return null;
     }
 
-    public void giveObject(Character c, Object o) {
+    public void giveObject(Character c, Item o) {
 	// TODO
     }
 
-    public void lootObject(Object o) {
+    public void lootObject(Item o) {
 	// TODO
     }
 
-    public void askObject(Character c, Object o) {
+    public void askObject(Character c, Item o) {
 	// TODO
     }
 
@@ -61,7 +61,7 @@ public class Character extends Entity {
 	// TODO
     }
 
-    public void readObject(Object o) {
+    public void readObject(Item o) {
 	// TODO
     }
 

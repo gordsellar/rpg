@@ -4,11 +4,11 @@ package universe.entities;
  * 
  */
 
-public class Object extends Entity {
+public class Item extends Entity {
 
 	private Boolean carriable;
 
-	public Object(String name, int id, Boolean carriable) {
+	public Item(String name, int id, Boolean carriable) {
 		super(name, id);
 		this.carriable = carriable;
 	}
