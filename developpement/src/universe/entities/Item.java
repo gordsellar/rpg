@@ -6,19 +6,19 @@ package universe.entities;
 
 public class Item extends Entity {
 
-	private Boolean carriable;
+    private Boolean carriable;
 
-	public Item(String name, int id, Boolean carriable) {
-		super(name, id);
-		this.carriable = carriable;
-	}
+    public Item(String name, Integer id, Boolean carriable) {
+        super(name, id);
+        this.carriable = carriable;
+    }
 
-	public Boolean isCarriable() {
-		return carriable;
-	}
+    public Boolean isCarriable() {
+        return carriable;
+    }
 
-	public void setCarriable(Boolean carriable) {
-		this.carriable = carriable;
-	}
+    public void setCarriable(Boolean carriable) {
+        this.carriable = carriable;
+    }
 
 }
