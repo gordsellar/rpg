@@ -19,7 +19,7 @@ public class Item extends Entity {
     }
 
     public Boolean isCarriable() {
-	return carriable;
+        return carriable;
     }
 
     public void setCarriable(Boolean carriable) {

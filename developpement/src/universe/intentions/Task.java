@@ -1,15 +1,11 @@
 package universe.intentions;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import universe.Position;
-import universe.Zone;
 import universe.entities.NPC;
+import universe.utils.DatabaseManager;
 
 /**
  * Class representing an intention for a BDI system.
@@ -59,35 +55,10 @@ public class Task {
         List<Object> parameters = new ArrayList<>();
         for (int i = 1; i < components.length; i++) {
             String param = components[i];
-            // "Position [x=1, y=2]"
-            String[] splitParam = param.split(" ", 2);
-            // { "Position", "[x=1, y=2]" }
-            switch (splitParam[0]) {
-            case "Character":
-                parametersTypes[i - 1] = Character.class;
-                // TODO look up to retrieve the right Character
-                break;
-            case "Position":
-                String constructParam = splitParam[1];
-                Pattern p = Pattern.compile("\\[x=(\\d+), y=(\\d+)\\]");
-                Matcher m = p.matcher(constructParam);
-                if (m.matches()) {
-                    parametersTypes[i - 1] = Position.class;
-                    int x = Integer.valueOf(m.group(1));
-                    int y = Integer.valueOf(m.group(2));
-
-                    parameters.add(new Position(x, y));
-                }
-                break;
-            case "Object":
-                parametersTypes[i - 1] = universe.entities.Item.class;
-                // TODO look up to retrieve the right Object
-                break;
-            case "Zone":
-                parametersTypes[i - 1] = Zone.class;
-                // TODO create a Zone fromString
-                break;
-            }
+            Object obj = DatabaseManager.findFromString(param);
+            // TODO Exception if no object found
+            parametersTypes[i - 1] = obj.getClass();
+            parameters.add(obj);
         }
 
         Method method = NPC.class.getMethod(methodName, parametersTypes);
@@ -98,19 +69,5 @@ public class Task {
     }
 
     public static void main(String[] args) {
-        Task t = new Task("move;Position [x=3, y=5]");
-
-        try {
-            List<Object> completeMethod = t.getMethod();
-
-            NPC c = new NPC("Azu", 5);
-            System.out.println("Appel");
-            ((Method) completeMethod.get(0)).invoke(c, completeMethod.get(1));
-            System.out.println("Pas d'erreur.");
-        } catch (NoSuchMethodException | ClassNotFoundException
-                | IllegalAccessException | IllegalArgumentException
-                | InvocationTargetException e) {
-            e.printStackTrace();
-        }
     }
 }

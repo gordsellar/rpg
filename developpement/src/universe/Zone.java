@@ -57,6 +57,6 @@ public class Zone {
 
     @Override
     public String toString() {
-	return "Zone [position=" + position + ", radius=" + radius + "]";
+        return "Zone [position=" + position + ", radius=" + radius + "]";
     }
 }
