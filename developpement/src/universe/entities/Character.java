@@ -21,7 +21,7 @@ public class Character extends Entity {
     private CharacterState state;
     private Character killer = null;
 
-    public Character(String name, int smartness) {
+    public Character(String name, Integer smartness) {
 	super(name);
 	this.smartness = smartness;
 	this.state = CharacterState.Ok;

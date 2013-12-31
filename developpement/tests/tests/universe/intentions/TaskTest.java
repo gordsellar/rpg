@@ -19,8 +19,6 @@ public class TaskTest {
     public void testGetMethod() {
         List<Task> tasks = new ArrayList<>();
         tasks.add(new Task("move;Position [x=3, y=5]"));
-        tasks.add(new Task(
-                "learnFromZone;Zone [position=Position [x=1, y=2], radius=2]"));
 
         for (Task t : tasks) {
             try {

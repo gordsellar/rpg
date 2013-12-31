@@ -33,4 +33,11 @@
         </javac>
     </target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target name="javadoc">
+                <javadoc encoding="Utf-8" docencoding="Utf-8" charset="Utf-8" sourcepath="./src" destdir="./doc">
+                <fileset dir="src" defaultexcludes="yes">
+                        <include name="**/*.java" />
+                </fileset>
+        </javadoc>
+    </target>
 </project>
