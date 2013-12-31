@@ -103,7 +103,7 @@ public class Task {
         try {
             List<Object> completeMethod = t.getMethod();
 
-            NPC c = new NPC("Azu", 0, 5);
+            NPC c = new NPC("Azu", 5);
             System.out.println("Appel");
             ((Method) completeMethod.get(0)).invoke(c, completeMethod.get(1));
             System.out.println("Pas d'erreur.");

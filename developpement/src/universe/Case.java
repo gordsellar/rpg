@@ -1,5 +1,7 @@
 package universe;
 
+import java.util.ArrayList;
+
 import universe.entities.*;
 
 /**
@@ -9,39 +11,55 @@ import universe.entities.*;
 
 public class Case {
 
-	private Entity[] entities;
-	private LandType landtype;
+    private ArrayList<Entity> entities;
+    private LandType landtype;
 
-	public Case() {
-		this.landtype = this.getRandomLandType();
-	}
+    public Case() {
+	this.entities = new ArrayList<Entity>();
+	this.landtype = this.getRandomLandType();
+    }
 
-	private LandType getRandomLandType() {
-		// TODO return something else than Grass always
-		return LandType.Grass;
-	}
+    public Case(LandType landtype) {
+	this.entities = new ArrayList<Entity>();
+	this.landtype = landtype;
+    }
 
-	public Case(LandType landtype, Entity[] entities) {
-		this.landtype = landtype;
-		this.entities = entities;
-	}
+    public Case(LandType landtype, ArrayList<Entity> entities) {
+	this.landtype = landtype;
+	this.entities = entities;
+    }
 
-	public void addEntity(Entity entity) {
-		// TODO
-	}
+    private LandType getRandomLandType() {
+	// TODO return something else than Grass always
+	return LandType.Grass;
+    }
 
-	public Entity[] getentities() {
-		return entities;
-	}
+    public void addEntity(Entity entity) {
+	this.entities.add(entity);
+    }
 
-	public void setentities(Entity[] entities) {
-		this.entities = entities;
-	}
+    public void removeEntity(Entity entity) {
+	this.entities.remove(entity);
+    }
 
-	@Override
-	public String toString() {
-		String coffee = "There is " + this.landtype + " on this case.";
-		// TODO entities coffee += ""
-		return coffee;
+    public ArrayList<Entity> getEntities() {
+	return entities;
+    }
+
+    public void setEntities(ArrayList<Entity> entities) {
+	this.entities = entities;
+    }
+
+    @Override
+    public String toString() {
+	String coffee = this.landtype.toString();
+	if (this.entities.size() != 0) {
+	    coffee += " [";
+	    for (Entity e : this.entities) {
+		coffee += e.toString() + ",";
+	    }
+	    coffee += "]";
 	}
+	return coffee;
+    }
 }

@@ -1,4 +1,5 @@
 package universe.entities;
+
 /**
  * @author pierre
  * 
@@ -6,8 +7,8 @@ package universe.entities;
 
 public class NPC extends Character {
 
-	public NPC(String name, int id, int smartness) {
-		super(name, id, smartness);
+	public NPC(String name, int smartness) {
+		super(name, smartness);
 		// TODO Auto-generated constructor stub
 	}
 
