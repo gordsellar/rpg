@@ -27,7 +27,7 @@ public class TaskTest {
                 List<Object> completeMethod = t.getMethod();
 
                 NPC c = (NPC) DatabaseManager
-                        .create(NPC.class, "Azuryus", 0, 5);
+                        .create(NPC.class, "Azuryus", 5);
                 ((Method) completeMethod.get(0)).invoke(c,
                         completeMethod.get(1));
             } catch (NoSuchMethodException | ClassNotFoundException
