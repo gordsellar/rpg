@@ -69,10 +69,12 @@ public class World {
     public static void main(String[] args) {
 	World w = new World(2, 3);
 	NPC n = new NPC("Roger", 14);
+	NPC m = new NPC("Roger", 16); // Another Roger
 	Item i = new Item("Candle", true);
 	Item j = new Item("Match", true);
 	n.addItem(i);
 	w.addEntity(n, new Position(0,1));
+	w.addEntity(m, new Position(1,2));
 	w.addEntity(j, new Position(1,1));
 	System.out.println(w);
     }
