@@ -1,6 +1,8 @@
 package universe.entities;
 
-import universe.beliefs.Knowledge;
+import universe.Position;
+import universe.World;
+import universe.beliefs.Location;
 
 /**
  * @author pierre
@@ -10,12 +12,21 @@ import universe.beliefs.Knowledge;
 public class Item extends Entity {
 
     private Boolean carriable;
+    private int value; // Value in copper
 
-    public Item(String name, Boolean carriable) {
-	super(name);
+    public Item(World w, String name, int copperValue, Boolean carriable) {
+	super(w, name);
 	this.carriable = carriable;
-	this.knowledges.add(new Knowledge());
-	// This particular object is carriable (in position p)
+	this.value = copperValue;
+	// TODO Set the position
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 
     public Boolean isCarriable() {

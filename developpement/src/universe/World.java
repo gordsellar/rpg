@@ -16,8 +16,8 @@ import universe.entities.NPC;
 public class World {
 
     private Case[][] cases;
-    private int x;
-    private int y;
+    public int x;
+    public int y;
 
     public World(int x, int y) {
 	this.x = x;
@@ -29,8 +29,39 @@ public class World {
 	    }
 	}
     }
-    
-    public void addEntity(Entity e, Position p){
+
+    public ArrayList<Entity> getAllEntities() {
+	ArrayList<Entity> entities = new ArrayList<Entity>();
+	for (int i = 0; i < x; i++) {
+	    for (int j = 0; j < y; j++) {
+		entities.addAll(this.cases[i][j].getEntities());
+	    }
+	}
+	return entities;
+    }
+
+    public void removeEntity(Entity e) {
+	for (int i = 0; i < x; i++) {
+	    for (int j = 0; j < y; j++) {
+		try {
+		    this.cases[i][j].removeEntity(e);
+		} finally {
+		}
+
+	    }
+	}
+
+    }
+
+    public Entity getEntityById(int id) {
+	for (Entity e : getAllEntities()) {
+	    if (e.getId() == id)
+		return e;
+	}
+	return null;
+    }
+
+    public void addEntity(Entity e, Position p) {
 	this.cases[p.x][p.y].addEntity(e);
     }
 
@@ -39,7 +70,7 @@ public class World {
 	for (Position p : z.getPositions()) {
 	    // do nothing because we can have position superior to x/y but
 	    // nothing below 0
-	    if (p.x <= this.x && p.y <= this.y) {
+	    if (p.x < this.x && p.y < this.y) {
 		entities.addAll(this.cases[p.x][p.y].getEntities());
 	    }
 	}
@@ -58,24 +89,24 @@ public class World {
 
     @Override
     public String toString() {
-	String coffee="World : {\n";
+	String result = "World : {\n";
 	int len = this.cases.length;
 	for (int i = 0; i < len; i++) {
-	    coffee += "\t" + Arrays.toString(this.cases[i]) + "\n";
+	    result += "\t" + Arrays.toString(this.cases[i]) + "\n";
 	}
-	return coffee + "}";
+	return result + "}";
     }
 
     public static void main(String[] args) {
 	World w = new World(2, 3);
-	NPC n = new NPC("Roger", 14);
-	NPC m = new NPC("Roger", 16); // Another Roger
-	Item i = new Item("Candle", true);
-	Item j = new Item("Match", true);
+	NPC n = new NPC(w, "Roger", 14);
+	NPC m = new NPC(w, "Roger", 16); // Another Roger
+	Item i = new Item(w, "Candle", 500, true);
+	Item j = new Item(w, "Match", 1, true);
 	n.addItem(i);
-	w.addEntity(n, new Position(0,1));
-	w.addEntity(m, new Position(1,2));
-	w.addEntity(j, new Position(1,1));
+	w.addEntity(n, new Position(0, 1));
+	w.addEntity(m, new Position(1, 2));
+	w.addEntity(j, new Position(1, 1));
 	System.out.println(w);
     }
 }

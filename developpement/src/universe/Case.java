@@ -1,6 +1,7 @@
 package universe;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import universe.entities.*;
 
@@ -30,8 +31,15 @@ public class Case {
     }
 
     private LandType getRandomLandType() {
-	// TODO return something else than Grass always
-	return LandType.Grass;
+	int random = new Random().nextInt(100);
+	if (random < 60)
+	    return LandType.Grass;
+	else if (random < 90)
+	    return LandType.Tree;
+	else if (random < 99)
+	    return LandType.Dirt;
+	else
+	    return LandType.Cliff;
     }
 
     public void addEntity(Entity entity) {
@@ -52,14 +60,14 @@ public class Case {
 
     @Override
     public String toString() {
-	String coffee = this.landtype.toString();
+	String result = this.landtype.toString();
 	if (this.entities.size() != 0) {
-	    coffee += " [";
+	    result += " [";
 	    for (Entity e : this.entities) {
-		coffee += e.toString() + ",";
+		result += e.toString() + ",";
 	    }
-	    coffee += "]";
+	    result += "]";
 	}
-	return coffee;
+	return result;
     }
 }

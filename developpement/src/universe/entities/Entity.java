@@ -1,8 +1,14 @@
 package universe.entities;
 
 import java.util.ArrayList;
+import java.util.Random;
 
+import sun.util.logging.resources.logging;
+import universe.Position;
+import universe.World;
 import universe.beliefs.Knowledge;
+import universe.beliefs.Location;
+import universe.beliefs.Possession;
 
 /**
  * @author pierre
@@ -11,18 +17,30 @@ import universe.beliefs.Knowledge;
 
 public class Entity {
 
+    private static int numberOfEntity = -1;
+
+    protected World world;
+    protected Position position;
     protected String name;
     protected ArrayList<Item> inventory;
     protected ArrayList<Knowledge> knowledges;
-    private static int numberOfEntity = -1;
     protected int id;
 
-    public Entity(String name) {
-	this.name = name;
+    public Entity(World w, String name) {
+	this.world = w;
+	this.setName(name);
+	
+	// TODO Make the position system cleaner ?
+	int x, y;
+	x = new Random().nextInt(w.x);
+	y = new Random().nextInt(w.y);
+	this.position = new Position(x, y);
+	w.addEntity(this, this.position);
+
 	Entity.numberOfEntity++;
-	this.id = Entity.numberOfEntity;
-	this.inventory = new ArrayList<Item>();
-	this.knowledges = new ArrayList<Knowledge>();
+	this.setId(Entity.numberOfEntity);
+	this.setInventory(new ArrayList<Item>());
+	this.setKnowledges(new ArrayList<Knowledge>());
     }
 
     public String getName() {
@@ -41,6 +59,19 @@ public class Entity {
 	this.id = id;
     }
 
+    public void setPosition(Position position) {
+	// Changing the position of the entity
+	this.position = position;
+	// Changing the position of all the contained entity (recursively)
+	for (Entity e : this.inventory) {
+	    e.setPosition(position);
+	}
+    }
+
+    public Position getPosition() {
+	return position;
+    }
+
     public ArrayList<Item> getInventory() {
 	return inventory;
     }
@@ -50,6 +81,7 @@ public class Entity {
     }
 
     public void addItem(Item i) {
+	this.world.removeEntity(i);
 	this.inventory.add(i);
     }
 
@@ -57,25 +89,49 @@ public class Entity {
 	this.inventory.remove(i);
     }
 
+    public ArrayList<Knowledge> getAutomaticKnowledges() {
+	ArrayList<Knowledge> automaticKnowledges = new ArrayList<Knowledge>();
+	automaticKnowledges.add(new Location(this, position));
+	for (Item i : this.inventory) {
+	    automaticKnowledges.add(new Possession(this, i));
+	    automaticKnowledges.add(new Location(i, position));
+	}
+	// System.out.println("Automatic knoledges : " + automaticKnowledges);
+	return automaticKnowledges;
+    }
+
     public ArrayList<Knowledge> getKnowledges() {
-	return knowledges;
+	ArrayList<Knowledge> knowledgesResult = new ArrayList<Knowledge>();
+	knowledgesResult.addAll(this.knowledges);
+	knowledgesResult.addAll(getAutomaticKnowledges());
+	return knowledgesResult;
+
     }
 
     public void setKnowledges(ArrayList<Knowledge> knowledges) {
 	this.knowledges = knowledges;
     }
 
-    protected void addKnowledge(Knowledge k) {
-	this.knowledges.add(k);
+    public void addKnowledge(Knowledge k) {
+	ArrayList<Knowledge> alreadyKnown;
+	alreadyKnown = this.getKnowledges();
+	if (!alreadyKnown.contains(k)) {
+	    // System.out.println("Adding belief that '" + k + "' in " + this.name);
+	    this.knowledges.add(k);
+	}
+	else{
+	    // System.out.println("Already known : " + k); 
+	}
+
     }
 
-    protected void removeKnowledge(Knowledge k) {
+    public void removeKnowledge(Knowledge k) throws Exception {
 	this.knowledges.remove(k);
     }
 
     @Override
     public String toString() {
-	String coffee = name + "(id=" + id + ")";
+	String coffee = name + " (id=" + id + ")";
 	if (inventory.size() != 0)
 	    coffee += ", inventory=" + inventory;
 	// We don't print the knowledge of all object
@@ -84,11 +140,12 @@ public class Entity {
     }
 
     public static void main(String[] args) {
-	Entity e = new Entity("Robert");
+	World w = new World(2, 2);
+	Entity e = new Entity(w, "Robert");
 	System.out.println(e.id);
-	Entity f = new Entity("Roger");
+	Entity f = new Entity(w, "Roger");
 	System.out.println(f.id);
-	Entity g = new Entity("Robert");
+	Entity g = new Entity(w, "Robert");
 	System.out.println(g.id);
     }
 }

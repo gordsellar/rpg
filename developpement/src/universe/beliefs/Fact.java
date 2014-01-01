@@ -34,6 +34,6 @@ public class Fact extends Knowledge {
 
     @Override
     public String toString() {
-        return "Fact [age=" + getAge() + ", information=" + information + "]";
+        return information;
     }
 }

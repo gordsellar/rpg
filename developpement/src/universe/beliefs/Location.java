@@ -20,15 +20,15 @@ public class Location extends Knowledge {
      *            the Position of the Entity
      */
     public Location(Entity entity, Position position) {
-        this.setEntity(entity);
-        this.setPosition(position);
+	this.setEntity(entity);
+	this.setPosition(position);
     }
 
     /**
      * @return the Entity
      */
     public Entity getEntity() {
-        return entity;
+	return entity;
     }
 
     /**
@@ -36,15 +36,15 @@ public class Location extends Knowledge {
      *            the Entity to set
      */
     public void setEntity(Entity entity) {
-        resetAge();
-        this.entity = entity;
+	resetAge();
+	this.entity = entity;
     }
 
     /**
      * @return the position
      */
     public Position getPosition() {
-        return position;
+	return position;
     }
 
     /**
@@ -52,13 +52,13 @@ public class Location extends Knowledge {
      *            the Position to set
      */
     public void setPosition(Position position) {
-        resetAge();
-        this.position = position;
+	resetAge();
+	this.position = position;
     }
 
     @Override
     public String toString() {
-        return "Location [age=" + getAge() + ", entity=" + entity
-                + ", position=" + position + "]";
+	String result = entity.getName() + " is located at " + position;
+	return result;
     }
 }

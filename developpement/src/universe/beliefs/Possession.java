@@ -58,7 +58,6 @@ public class Possession extends Knowledge {
 
     @Override
     public String toString() {
-        return "Possession [age=" + getAge() + ", possessedBy=" + possessedBy
-                + ", possession=" + possession + "]";
+        return possessedBy.getName() + " possess " + possession;
     }
 }
