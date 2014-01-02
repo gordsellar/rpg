@@ -1,5 +1,19 @@
 \documentclass[asi]{picINSA}
 
+% Bout de code pour enlever le ``chapitre'' écrit à chaque fois
+\makeatletter
+\def\@makechapterhead#1{
+  {\parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@M
+    \Huge\bfseries  \thechapter.\quad #1\par\nobreak
+    \vskip 40\p@
+  }}
+\makeatother
+% Enlève les doubles pages blanches inutiles
+\let\cleardoublepage\clearpage
+
+
+
 \begin{document}
 
     \titreGeneral{Rapport}
@@ -12,6 +26,60 @@
 
 \tableofcontents{}
 
-% TODO Moverfuckerz
+\chapter{Introduction}
+L'objectif de ce projet est, selon l'énoncé, de "réaliser un générateur de scénarios pour RPG, et de mettre en place le déroulement de ce scénario. Les différents joueurs pourront être soit humains, soit virtuels. La trame du jeu pourra faire l'objet de re-planiffication si nécessaire, en fonction des actions effectuées par les différents joueurs. L'interface serait très légère de manière à se concentrer sur le scénario et sur le comportement des joueurs virtuels." \newline
+Dans ce rapport, nous allons commencer par vous présenter les spécifications que nous avons établies à partir de cet énoncé, et dans un second temps la conception à lequelle nous sommes parvenus.
+
+
+\chapter{Spécifications}
+Après réunions et discussions entre les membres du groupe, voici les spécifications auquelles nous sommes parvenues : \\
+~\\
+\textbf{A faire nécessairement} :
+\begin{itemize}
+\item Positionnement (PNJ/Objet), méthode de déplacement, gestion de l'inventaire et de l'argent
+\item Interaction entre et avec les PNJ (communication)
+\item Objectifs/Scénarios/Quête (décomposées en plusieurs étapes, cachées ou explicites)
+\item Maître du Jeu (aide du joueur et re-planification du scénario)
+\end{itemize}
+~\\
+\textbf{A faire dans un second temps} :
+\begin{itemize}
+\item PNJ ayant leurs objectifs et leurs désirs propres
+\item Gestion des connaissances (en fonction de l’intelligence)
+\item Gestion des distances pour les interactions
+\item Lien avec le programme developpé par Quentin BATEUX
+\end{itemize}
+~\\
+\textbf{A faire si possible} :
+\begin{itemize}
+\item Interaction entre PNJ (communication de l'émotion)
+\item Expérience
+\item Interaction entre PNJ et path finding et combat (en lien avec ce que fait l'autre groupe RPG)
+\end{itemize}
+~\\
+\textbf{Optionnel} :
+\begin{itemize}
+\item Interaction évoluées entre PNJ (accointance, amitié, mariage, couple, enfant)
+\item Transmission des gènes et des désirs
+\item Évolution des objectifs selon des formules de psychologie (formule parabolique de la motivation sur [0;1])
+\item Gestion des connaissances "instantanées" sur le monde.
+\item Gestion de la respiration
+\item Gestion des différents milieux
+\item Gestion de la faim et de la soif
+\item Gestion des bâtiments
+\item Gestion du statut social
+\item Tri des objectifs selon la pyramide de Maslow
+\end{itemize}
+
+
+\chapter{Conception}
+Nos choix de conception ont été faits en nous basant sur les résultats des synthèses bibliographiques que nous avons faites par groupe de 2. \newline
+Une des synthèses concernait l'Intelligence Artificielle dans les jeux vidéos, et après renseignements, nous sommes arrivés à la conclusion que l'utilisation d'un BDI est la solution la plus adaptée au projet. Nous avons donc mis en place un BDI, en l'adaptant à notre projet.
+
+
+
+
+%Mettre les différents diagrammes de conceptions
+
   
 \end{document}

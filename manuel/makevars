@@ -1,5 +1,5 @@
 # Définition du nom du document
-NOM_FICHIER=rapport
+NOM_FICHIER=manuel
 
 # Récupération du chemin de la classe picINSA pour les documents LaTeX
 CLSPATH="$(shell pwd)/lib/cls/"

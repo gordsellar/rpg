@@ -1,0 +1,37 @@
+\documentclass[asi]{picINSA}
+
+% Bout de code pour enlever le ``chapitre'' écrit à chaque fois
+\makeatletter
+\def\@makechapterhead#1{
+  {\parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@M
+    \Huge\bfseries  \thechapter.\quad #1\par\nobreak
+    \vskip 40\p@
+  }}
+\makeatother
+% Enlève les doubles pages blanches inutiles
+\let\cleardoublepage\clearpage
+
+
+\begin{document}
+
+    \titreGeneral{Sujet RPG1 \newline Manuel d'installation et d'utilisation}
+	\sousTitreGeneral{\newline Sylvain GUINGOIN, Maxime PATTYN, \newline Claire RIVOIRE, Pierre SASSOULAS}
+	\titreAcronyme{\LARGE IHME}
+	\version{1.00}
+	\referenceVersion{bibliographie}
+	
+	\couverture{}
+
+\tableofcontents{}
+
+
+\chapter{Installation}
+
+
+
+\chapter{Utilisation}
+
+
+
+\end{document}

@@ -7,22 +7,22 @@ package universe.desires;
 
 public class Objective {
 
-	private String description;
+    private String description;
 
-	public Objective(String description) {
-		this.description = description;
-	}
+    public Objective(String description) {
+        this.description = description;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	@Override
-	public String toString() {
-		return "Objective [description=" + description + "]";
-	}
+    @Override
+    public String toString() {
+        return "Objective [description=" + description + "]";
+    }
 }
