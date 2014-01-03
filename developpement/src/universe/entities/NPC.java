@@ -1,22 +1,28 @@
 package universe.entities;
 
-import universe.World;
 
 /**
  * @author pierre
  * 
  */
 
-public class NPC extends Character {
+public class NPC extends Character implements Runnable {
 
-    public NPC(World w, String name, Integer smartness) {
-        super(w, name, smartness);
+    public NPC(String name, Integer smartness) {
+        super(name, smartness);
         this.generateDesires();
     }
-    
+
     private void generateDesires(){
-	// TODO
-	// Get 500 gold and a significant other ?
+        // TODO
+        // Get 500 gold and a significant other ?
     }
 
+    @Override
+    public void run() {
+        // Get new knowledge of the world on line of sight
+        learnFromZone(getUnderstandabilityZone());
+        // Use knowledges to choose a desire
+        // Execute 1 action from the desire
+    }
 }

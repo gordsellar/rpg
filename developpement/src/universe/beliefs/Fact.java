@@ -1,6 +1,10 @@
 package universe.beliefs;
 
+import universe.entities.Entity;
+
 /**
+ * Class representing an information concerning an Entity. Facts are considered
+ * equals when they concern the same Entity
  * 
  * @author sguingoin
  * 
@@ -10,10 +14,13 @@ public class Fact extends Knowledge {
     private String information;
 
     /**
+     * @param entityConcerned
+     *            the entity concerned by the information
      * @param information
-     *            the information of the Knowledge
+     *            the information of the Entity
      */
-    public Fact(String information) {
+    public Fact(Entity entityConcerned, String information) {
+        this.setEntityConcerned(entityConcerned);
         this.setInformation(information);
     }
 

@@ -10,7 +10,6 @@ import universe.entities.Item;
  */
 public class Possession extends Knowledge {
 
-    private Entity possessedBy;
     private Item possession;
 
     /**
@@ -20,24 +19,8 @@ public class Possession extends Knowledge {
      *            the Item being possessed
      */
     public Possession(Entity possessedBy, Item possession) {
-        this.setPossessedBy(possessedBy);
+        this.setEntityConcerned(possessedBy);
         this.setPossession(possession);
-    }
-
-    /**
-     * @return the possessedBy
-     */
-    public Entity getPossessedBy() {
-        return possessedBy;
-    }
-
-    /**
-     * @param possessedBy
-     *            the Entity possessing the Item
-     */
-    public void setPossessedBy(Entity possessedBy) {
-        resetAge();
-        this.possessedBy = possessedBy;
     }
 
     /**
@@ -58,6 +41,6 @@ public class Possession extends Knowledge {
 
     @Override
     public String toString() {
-        return possessedBy.getName() + " possess " + possession.getName();
+        return entityConcerned.getName() + " possess " + possession.getName();
     }
 }

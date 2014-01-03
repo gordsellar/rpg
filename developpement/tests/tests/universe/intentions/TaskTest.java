@@ -24,14 +24,12 @@ public class TaskTest {
             try {
                 List<Object> completeMethod = t.getMethod();
 
-                NPC c = (NPC) DatabaseManager
-                        .create(NPC.class, "Azuryus", 5);
+                NPC c = (NPC) DatabaseManager.create(NPC.class, "Azuryus", 5);
                 ((Method) completeMethod.get(0)).invoke(c,
                         completeMethod.get(1));
             } catch (NoSuchMethodException | ClassNotFoundException
                     | IllegalAccessException | IllegalArgumentException
-                    | InvocationTargetException | SecurityException
-                    | InstantiationException e) {
+                    | InvocationTargetException | SecurityException e) {
                 e.printStackTrace();
                 fail("Exception");
             }

@@ -1,10 +1,7 @@
 package tests.universe.utils;
 
-import static org.junit.Assert.fail;
-
-import java.lang.reflect.InvocationTargetException;
-
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import universe.Position;
@@ -15,19 +12,17 @@ import universe.utils.DatabaseManager;
 
 public class DatabaseManagerTest {
 
+    @Before
+    public void setUp() {
+        DatabaseManager.emptyEntities();
+    }
+
     @Test
     public void testCreate() {
-        try {
-            DatabaseManager.create(NPC.class, "Azuryus", 5);
-            NPC npc = (NPC) DatabaseManager.findById(0);
-            Assert.assertNotNull(npc);
-            Assert.assertEquals("Azuryus", npc.getName());
-        } catch (NoSuchMethodException | SecurityException
-                | InstantiationException | IllegalAccessException
-                | IllegalArgumentException | InvocationTargetException e) {
-            e.printStackTrace();
-            fail("Exception");
-        }
+        DatabaseManager.create(NPC.class, "Azuryus", 5);
+        NPC npc = (NPC) DatabaseManager.findById(0);
+        Assert.assertNotNull(npc);
+        Assert.assertEquals("Azuryus", npc.getName());
     }
 
     @Test
@@ -43,33 +38,26 @@ public class DatabaseManagerTest {
 
     @Test
     public void testFindBy() {
-        try {
-            // First test: NPC
-            NPC npcCreated = (NPC) DatabaseManager.create(NPC.class, "Azuryus",
-                    5);
+        // First test: NPC
+        NPC npcCreated = (NPC) DatabaseManager.create(NPC.class, "Azuryus", 5);
 
-            NPC npcFound = (NPC) DatabaseManager.findBy(NPC.class,
-                    new String[] { "name" }, new String[] { "Azuryus" });
+        System.out.println(DatabaseManager.getEntities());
 
-            Assert.assertNotNull(npcFound);
-            Assert.assertEquals(npcCreated.getName(), npcFound.getName());
+        NPC npcFound = (NPC) DatabaseManager.findBy(NPC.class,
+                new String[] { "name" }, new String[] { "Azuryus" });
 
-            // Second test: Item
-            Item itemCreated = (Item) DatabaseManager.create(Item.class,
-                    "Sword", true);
+        Assert.assertNotNull(npcFound);
+        Assert.assertEquals(npcCreated.getName(), npcFound.getName());
 
-            Item itemFound = (Item) DatabaseManager.findBy(Item.class,
-                    new String[] { "carriable" }, new String[] { "true" });
+        // Second test: Item
+        Item itemCreated = (Item) DatabaseManager.create(Item.class, "Sword",
+                50, true);
 
-            Assert.assertNotNull(itemFound);
-            Assert.assertEquals(itemCreated.getName(), itemFound.getName());
-        } catch (NoSuchMethodException | SecurityException
-                | InstantiationException | IllegalAccessException
-                | IllegalArgumentException | InvocationTargetException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            fail("Exception");
-        }
+        Item itemFound = (Item) DatabaseManager.findBy(Item.class,
+                new String[] { "carriable" }, new String[] { "true" });
+
+        Assert.assertNotNull(itemFound);
+        Assert.assertEquals(itemCreated.getName(), itemFound.getName());
     }
 
 }

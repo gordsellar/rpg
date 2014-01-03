@@ -31,17 +31,9 @@ public class DatabaseManager {
      * @param parameters
      *            The parameters for the constructor
      * @return The new instance
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
      */
     public static Entity create(Class<? extends Entity> className,
-            Object... parameters) throws NoSuchMethodException,
-            SecurityException, InstantiationException, IllegalAccessException,
-            IllegalArgumentException, InvocationTargetException {
+            Object... parameters) {
         Class<?>[] parametersTypes = new Class<?>[parameters.length];
         int i = 0;
         for (Object object : parameters) {
@@ -49,11 +41,20 @@ public class DatabaseManager {
             i++;
         }
 
-        Constructor<? extends Entity> constructor = className
-                .getConstructor(parametersTypes);
+        Constructor<? extends Entity> constructor;
+        Entity entity = null;
+        try {
+            constructor = className.getConstructor(parametersTypes);
+            entity = constructor.newInstance(parameters);
+            entities.add(entity);
 
-        Entity entity = constructor.newInstance(parameters);
-        entities.add(entity);
+        } catch (NoSuchMethodException | SecurityException
+                | InstantiationException | IllegalAccessException
+                | IllegalArgumentException | InvocationTargetException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
 
         return entity;
     }
@@ -128,19 +129,11 @@ public class DatabaseManager {
      * @param values
      *            The values for each attribute
      * @return The first Entity found
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
      */
     public static Entity findBy(Class<? extends Entity> entityClass,
-            String[] attributes, String[] values)
-                    throws NoSuchMethodException, SecurityException,
-                    IllegalAccessException, IllegalArgumentException,
-                    InvocationTargetException {
+            String[] attributes, String[] values) {
         for (Entity entity : entities) {
-            if (entity.getClass() == entityClass) {
+            if (entityClass.isInstance(entity)) {
                 Boolean found = true;
                 for (int i = 0; i < attributes.length; i++) {
                     String attribute = Character.toUpperCase(attributes[i]
@@ -149,11 +142,26 @@ public class DatabaseManager {
                     try {
                         Method getter = entity.getClass().getMethod(
                                 "get" + attribute);
-                        found &= (getter.invoke(entity).toString() == value);
+                        found &= (getter.invoke(entity).toString()
+                                .equals(value));
                     } catch (NoSuchMethodException e) {
-                        Method getter = entity.getClass().getMethod(
-                                "is" + attribute);
-                        found &= (getter.invoke(entity).toString() == value);
+                        try {
+                            Method getter;
+                            getter = entity.getClass().getMethod(
+                                    "is" + attribute);
+
+                            found &= (getter.invoke(entity).toString()
+                                    .equals(value));
+                        } catch (NoSuchMethodException | IllegalAccessException
+                                | IllegalArgumentException
+                                | InvocationTargetException e1) {
+                            // TODO Auto-generated catch block
+                            e1.printStackTrace();
+                        }
+                    } catch (IllegalAccessException | IllegalArgumentException
+                            | InvocationTargetException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
                     }
                 }
 
@@ -164,5 +172,13 @@ public class DatabaseManager {
         }
         // TODO Exception no Entity found
         return null;
+    }
+
+    public static void emptyEntities() {
+        entities.clear();
+    }
+
+    public static List<Entity> getEntities() {
+        return entities;
     }
 }

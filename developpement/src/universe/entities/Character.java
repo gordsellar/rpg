@@ -5,11 +5,9 @@ import java.util.List;
 import java.util.Random;
 
 import universe.Position;
-import universe.World;
 import universe.Zone;
 import universe.beliefs.Fact;
 import universe.beliefs.Knowledge;
-import universe.beliefs.Possession;
 import universe.desires.Objective;
 
 /**
@@ -23,25 +21,24 @@ public class Character extends Entity {
     private Objective goal;
     private Character killer = null;
 
-    public Character(World w, String name, Integer smartness) {
-	super(w, name);
-	this.characteristic = new Characteristic(smartness);
-	this.learnFromZone(getUnderstandabilityZone());
+    public Character(String name, Integer smartness) {
+        super(name);
+        this.characteristic = new Characteristic(smartness);
     }
 
     /**
      * @return The zone in which a character can have knowledge or comprehension
      */
-    private Zone getUnderstandabilityZone() {
-	return new Zone(position,
-		characteristic.getModifier(characteristic.smartness));
+    protected Zone getUnderstandabilityZone() {
+        return new Zone(position,
+                characteristic.getModifier(characteristic.smartness));
     }
 
     /**
      * @return The zone in which the character can interact
      */
     private Zone getActionZone() {
-	return new Zone(position, characteristic.actionMaxLength);
+        return new Zone(position, characteristic.actionMaxLength);
     }
 
     /**
@@ -51,42 +48,42 @@ public class Character extends Entity {
      * @throws TooFarToInteractException
      */
     private Boolean assertCanInteractWith(Entity e)
-	    throws TooFarToInteractException {
-	if (this.world.getEntities(getActionZone()).contains(e))
-	    return true;
-	else {
-	    throw new TooFarToInteractException(this, e);
-	}
+            throws TooFarToInteractException {
+        if (this.world.getEntities(getActionZone()).contains(e)) {
+            return true;
+        } else {
+            throw new TooFarToInteractException(this, e);
+        }
     }
 
     public Objective getGoal() {
-	return goal;
+        return goal;
     }
 
     public void setGoal(Objective goal) {
-	this.goal = goal;
+        this.goal = goal;
     }
 
     public void setState(CharacterState cs) {
-	this.characteristic.state = cs;
+        this.characteristic.state = cs;
     }
 
     @Override
     public ArrayList<Knowledge> getAutomaticKnowledges() {
-	ArrayList<Knowledge> result = new ArrayList<Knowledge>();
-	// We return the character State, it may be the only things this
-	// character knows, and can talk about.
-	result.add(new Fact(this.name + " is feeling "
-		+ this.characteristic.state));
-	return super.getAutomaticKnowledges();
+        ArrayList<Knowledge> result = new ArrayList<Knowledge>();
+        // We return the character State, it may be the only things this
+        // character knows, and can talk about.
+        result.add(new Fact(this, this.name + " is feeling "
+                + this.characteristic.state));
+        return super.getAutomaticKnowledges();
     }
 
     /**
      * @return A random Knowledge of this character
      */
     public Knowledge discuss() {
-	int n = this.getKnowledges().size();
-	return this.getKnowledges().get(new Random().nextInt(n));
+        int n = this.getKnowledges().size();
+        return this.getKnowledges().get(new Random().nextInt(n));
     }
 
     /**
@@ -95,14 +92,14 @@ public class Character extends Entity {
      * @throws TooFarToInteractException
      */
     public void discussWith(Character c) throws TooFarToInteractException {
-	this.assertCanInteractWith(c);
-	Knowledge k;
-	k = c.discuss();
-	try {
-	    this.addKnowledge(k);
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
+        this.assertCanInteractWith(c);
+        Knowledge k;
+        k = c.discuss();
+        try {
+            this.knowledgesManager.addKnowledge(k);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -111,19 +108,19 @@ public class Character extends Entity {
      * @return A Boolean with the value True if the move is possible
      */
     public Boolean move(Position p) {
-	this.position = p;
-	// TODO Make sure the character can go there
-	return true;
+        this.position = p;
+        // TODO Make sure the character can go there
+        return true;
 
     }
 
     public List<Entity> searchEntityInZone(Zone z, Entity e)
-	    throws TooFarToInteractException {
-	this.assertCanInteractWith(e);
-	int i = 0 + this.characteristic.getModifier(characteristic.smartness);
-	// TODO Make this random so a dumb as a small chance of learning
-	// something trying a lot ?
-	return this.world.getEntities(z).subList(0, i);
+            throws TooFarToInteractException {
+        this.assertCanInteractWith(e);
+        int i = 0 + this.characteristic.getModifier(characteristic.smartness);
+        // TODO Make this random so a dumb as a small chance of learning
+        // something trying a lot ?
+        return this.world.getEntities(z).subList(0, i);
     }
 
     /**
@@ -134,39 +131,40 @@ public class Character extends Entity {
      * @throws TooFarToInteractException
      */
     public void giveObject(Character c, Item i)
-	    throws TooFarToInteractException {
-	this.assertCanInteractWith(c);
-	this.removeItem(i);
-	c.addItem(i);
+            throws TooFarToInteractException {
+        this.assertCanInteractWith(c);
+        this.removeItem(i);
+        c.addItem(i);
     }
 
     public ArrayList<Knowledge> askInformationAboutAnEntity(Character c,
-	    Entity e) {
-	ArrayList<Knowledge> result;
-	if (c.knowsAbout(e)) {
-	    // TODO A character may accept depending on his feeling for the
-	    // other character or hide certain information
-	    result = c.getKnowledgeAbout(e);
-	} else {
-	    result = new ArrayList<Knowledge>();
-	    result.add(new Fact(c.getName()
-		    + " don't have any information about " + e));
-	}
-	return result;
+            Entity e) {
+        ArrayList<Knowledge> result;
+        if (c.knowsAbout(e)) {
+            // TODO A character may accept depending on his feeling for the
+            // other character or hide certain information
+            result = c.getKnowledgeAbout(e);
+        } else {
+            result = new ArrayList<Knowledge>();
+            result.add(new Fact(c, c.getName()
+                    + " don't have any information about " + e));
+        }
+        return result;
     }
 
     public Boolean askObject(Character c, Item i) {
-	// TODO A character may accept depending on his feeling for the other
-	// character
-	if (new Random().nextInt(100) <= 50)
-	    return true;
-	else
-	    return false;
+        // TODO A character may accept depending on his feeling for the other
+        // character
+        if (new Random().nextInt(100) <= 50) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void kill(Character c) {
-	c.killer = this;
-	c.setState(CharacterState.Dead);
+        c.killer = this;
+        c.setState(CharacterState.Dead);
     }
 
     /**
@@ -175,13 +173,13 @@ public class Character extends Entity {
      * @throws TooFarToInteractException
      */
     public void loot(Character c) throws TooFarToInteractException {
-	this.assertCanInteractWith(c);
-	// TODO Permit to select only one item ?
-	ArrayList<Item> lootedItems = c.getInventory();
-	for (Item i : lootedItems) {
-	    this.addItem(i);
-	}
-	c.setInventory(new ArrayList<Item>());
+        this.assertCanInteractWith(c);
+        // TODO Permit to select only one item ?
+        ArrayList<Item> lootedItems = c.getInventory();
+        for (Item i : lootedItems) {
+            this.addItem(i);
+        }
+        c.setInventory(new ArrayList<Item>());
     }
 
     /**
@@ -190,8 +188,8 @@ public class Character extends Entity {
      * @throws TooFarToInteractException
      */
     public void readObject(Item i) throws TooFarToInteractException {
-	this.assertCanInteractWith(i);
-	this.knowledges.addAll(i.getKnowledges());
+        this.assertCanInteractWith(i);
+        this.knowledgesManager.addKnowledges(i.getKnowledges());
     }
 
     /**
@@ -201,36 +199,30 @@ public class Character extends Entity {
      *            The zone in which you search for Knowledge
      * @return The index of the knowledges actually learned in the array list
      */
-    public int[] learnFromZone(Zone zone) {
-	ArrayList<Knowledge> knowledges;
-	Knowledge k = null;
-	int numberLearnable, numberAvailable, numberToLearn;
-	int[] learnedKnowledges;
-	knowledges = world.getKnowledges(zone);
-	numberLearnable = characteristic.getModifier(characteristic.smartness);
-	numberAvailable = knowledges.size();
-	// System.out.println(numberToLearn);
-	numberToLearn = Math.min(numberLearnable, numberAvailable);
-	if (numberToLearn > 0) {
-	    learnedKnowledges = new int[numberToLearn];
-	    for (int numberLearned = 0, i = 0; numberLearned < numberToLearn; numberLearned++) {
-		i = new Random().nextInt(numberAvailable);
-		learnedKnowledges[numberLearned] = i;
-		k = world.getKnowledges(zone).get(i);
-		// System.out.println(this.name + " learned that " + k);
-		this.addKnowledge(k);
-	    }
-	} else {
-	    learnedKnowledges = null;
-	}
-	return learnedKnowledges;
+    public void learnFromZone(Zone zone) {
+        ArrayList<Knowledge> knowledges;
+        int numberLearnable, numberAvailable, numberToLearn;
+        knowledges = world.getKnowledges(zone);
+        numberLearnable = characteristic.getModifier(characteristic.smartness);
+        numberAvailable = knowledges.size();
+        // System.out.println(numberToLearn);
+        numberToLearn = Math.min(numberLearnable, numberAvailable);
+        if (numberToLearn > 0) {
+            List<Knowledge> canLearn = world.getKnowledges(zone);
+            for (int numberLearned = 0; numberLearned < numberToLearn
+                    - numberLearnable; numberLearned++) {
+                int i = new Random().nextInt(canLearn.size());
+                canLearn.remove(i);
+            }
+            this.knowledgesManager.addKnowledges(canLearn);
+        }
     }
 
     @Override
     public String toString() {
-	String result = super.toString();
-	result += ", knowledges=" + this.getKnowledges();
-	result += " smartness=" + characteristic.smartness;
-	return result;
+        String result = super.toString();
+        result += ", knowledges=" + this.getKnowledges();
+        result += " smartness=" + characteristic.smartness;
+        return result;
     }
 }

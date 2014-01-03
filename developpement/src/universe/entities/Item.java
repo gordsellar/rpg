@@ -2,7 +2,6 @@ package universe.entities;
 
 // import java.util.ArrayList;
 
-import universe.World;
 
 /**
  * @author pierre
@@ -15,15 +14,15 @@ public class Item extends Entity {
     // private Boolean container;
     private int value; // Value in copper
 
-    public Item(World w, String name, int copperValue, Boolean carriable){
-	//,}Boolean container) {
-	super(w, name);
-	this.carriable = carriable;
-	// this.container = container;
-	this.value = copperValue;
+    public Item(String name, Integer copperValue, Boolean carriable) {
+        //,}Boolean container) {
+        super(name);
+        this.carriable = carriable;
+        // this.container = container;
+        this.value = copperValue;
     }
 
-/*    public Boolean isContainer() {
+    /*    public Boolean isContainer() {
 	return container;
     }
 
@@ -48,26 +47,26 @@ public class Item extends Entity {
 	// TODO Auto-generated method stub
 	super.removeItem(i);
     }
-    
-    */
+
+     */
 
     public int getValue() {
-	int globalValue = value;
-	for (Item i : inventory) {
-	    globalValue += i.getValue();
-	}
-	return globalValue;
+        int globalValue = value;
+        for (Item i : inventory) {
+            globalValue += i.getValue();
+        }
+        return globalValue;
     }
 
     public void setValue(int value) {
-	this.value = value;
+        this.value = value;
     }
 
     public Boolean isCarriable() {
-	return carriable;
+        return carriable;
     }
 
     public void setCarriable(Boolean carriable) {
-	this.carriable = carriable;
+        this.carriable = carriable;
     }
 }
