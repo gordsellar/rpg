@@ -22,15 +22,19 @@ public class Item extends Entity {
     }
 
     public int getValue() {
-        return value;
+	int globalValue = value;
+	for (Item i : inventory) {
+	    globalValue += i.getValue();
+	}
+	return globalValue;
     }
 
     public void setValue(int value) {
-        this.value = value;
+	this.value = value;
     }
 
     public Boolean isCarriable() {
-        return carriable;
+	return carriable;
     }
 
     public void setCarriable(Boolean carriable) {
