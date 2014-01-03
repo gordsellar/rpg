@@ -2,6 +2,7 @@ include makevars
 
 # Génération des pdf
 all: 
+	cd ../conception; make all
 	TEXINPUTS=${TEXINPUTS}:$(CLSPATH);\
 	export TEXINPUTS;\
 	for file in *.tex; do\
@@ -10,7 +11,8 @@ all:
 		pdflatex $$file;\
 	done;
 	make cleanrep;\
-	
+
+
 # Nettoyage total
 clean: cleanrep cleanpdf
 
