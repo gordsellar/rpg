@@ -1,8 +1,8 @@
 package universe.entities;
 
-import universe.Position;
+// import java.util.ArrayList;
+
 import universe.World;
-import universe.beliefs.Location;
 
 /**
  * @author pierre
@@ -12,14 +12,44 @@ import universe.beliefs.Location;
 public class Item extends Entity {
 
     private Boolean carriable;
+    // private Boolean container;
     private int value; // Value in copper
 
-    public Item(World w, String name, int copperValue, Boolean carriable) {
+    public Item(World w, String name, int copperValue, Boolean carriable){
+	//,}Boolean container) {
 	super(w, name);
 	this.carriable = carriable;
+	// this.container = container;
 	this.value = copperValue;
-	// TODO Set the position
     }
+
+/*    public Boolean isContainer() {
+	return container;
+    }
+
+    public void setContainer(Boolean container) {
+	this.container = container;
+    }
+
+    @Override
+    public void setInventory(ArrayList<Item> inventory) {
+	// TODO Auto-generated method stub
+	super.setInventory(inventory);
+    }
+
+    @Override
+    public void addItem(Item i) {
+	// TODO Auto-generated method stub
+	super.addItem(i);
+    }
+
+    @Override
+    public void removeItem(Item i) {
+	// TODO Auto-generated method stub
+	super.removeItem(i);
+    }
+    
+    */
 
     public int getValue() {
 	int globalValue = value;
