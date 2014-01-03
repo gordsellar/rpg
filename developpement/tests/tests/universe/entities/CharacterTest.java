@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import universe.World;
 import universe.beliefs.Fact;
+import universe.beliefs.Possession;
 import universe.entities.Character;
 import universe.entities.Item;
 
@@ -15,6 +16,7 @@ public class CharacterTest {
 	World w = new World(2, 4);
 	Character roger = new Character(w, "Roger", 14);
 	Character robert = new Character(w, "Robert", 8);
+	Character robert_two = new Character(w, "Robert", 10);
 	Fact f = new Fact("Roger is a dragqueen");
 	Fact g = new Fact("Robert is doing drugs");
 	Fact h = new Fact("Life is amazing");
@@ -30,9 +32,12 @@ public class CharacterTest {
 	robert.addItem(spoon);
 	roger.addItem(matchbox);
 	System.out.println(w);
-	Assert.assertTrue(roger.getKnowledges().contains(f));
-	Assert.assertTrue(roger.getKnowledges().contains(g));
-	Assert.assertTrue(roger.getKnowledges().contains(e));
-	Assert.assertTrue(robert.getKnowledges().contains(h));
+	Assert.assertFalse(robert_two.getName() == "Robert");
+	Assert.assertTrue(roger.knows(new Possession(roger,matchbox)));
+	Assert.assertTrue(roger.knows(new Possession(roger,match)));
+	Assert.assertTrue(roger.knows(f));
+	Assert.assertTrue(roger.knows(g));
+	Assert.assertTrue(roger.knows(e));
+	Assert.assertTrue(robert.knows(h));
     }
 }

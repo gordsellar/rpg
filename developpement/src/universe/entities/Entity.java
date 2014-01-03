@@ -1,6 +1,7 @@
 package universe.entities;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Random;
 
 import universe.Position;
@@ -40,7 +41,8 @@ public class Entity {
 		    unifiedName = name + " " + count;
 		this.setName(unifiedName);
 		nameIsUnique = true;
-		// System.out.println("The name of the entity is " + unifiedName);
+		// System.out.println("The name of the entity is " +
+		// unifiedName);
 	    } catch (DuplicateEntityNameException e) {
 		count++;
 		e.printStackTrace();
@@ -100,6 +102,14 @@ public class Entity {
 	this.inventory = inventory;
     }
 
+    public Boolean got(Item i) {
+	return this.getInventory().contains(i);
+    }
+
+    public Boolean gotAll(Collection<Item> c) {
+	return this.getInventory().containsAll(c);
+    }
+
     public void addItem(Item i) {
 	this.world.removeEntity(i);
 	this.inventory.add(i);
@@ -107,17 +117,6 @@ public class Entity {
 
     public void removeItem(Item i) {
 	this.inventory.remove(i);
-    }
-
-    public ArrayList<Knowledge> getAutomaticKnowledges() {
-	ArrayList<Knowledge> automaticKnowledges = new ArrayList<Knowledge>();
-	automaticKnowledges.add(new Location(this, position));
-	for (Item i : this.inventory) {
-	    automaticKnowledges.add(new Possession(this, i));
-	    automaticKnowledges.add(new Location(i, position));
-	}
-	// System.out.println("Automatic knowledges : " + automaticKnowledges);
-	return automaticKnowledges;
     }
 
     public ArrayList<Knowledge> getKnowledges() {
@@ -132,11 +131,31 @@ public class Entity {
 	this.knowledges = knowledges;
     }
 
+    public boolean knows(Knowledge k) {
+	return this.getKnowledges().contains(k);
+    }
+
+    public boolean knowsAll(Collection<Knowledge> c) {
+	return this.getKnowledges().containsAll(c);
+    }
+
+    public ArrayList<Knowledge> getAutomaticKnowledges() {
+	ArrayList<Knowledge> automaticKnowledges = new ArrayList<Knowledge>();
+	automaticKnowledges.add(new Location(this, position));
+	for (Item i : this.inventory) {
+	    automaticKnowledges.add(new Possession(this, i));
+	    automaticKnowledges.add(new Location(i, position));
+	}
+	// System.out.println("Automatic knowledges : " + automaticKnowledges);
+	return automaticKnowledges;
+    }
+
     public void addKnowledge(Knowledge k) {
 	ArrayList<Knowledge> alreadyKnown;
 	alreadyKnown = this.getKnowledges();
 	if (!alreadyKnown.contains(k)) {
-	    // System.out.println("Adding belief that '" + k + "' in " + this.name);
+	    // System.out.println("Adding belief that '" + k + "' in " +
+	    // this.name);
 	    this.knowledges.add(k);
 	} else {
 	    // System.out.println("Already known : " + k);
