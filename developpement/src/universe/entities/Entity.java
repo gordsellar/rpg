@@ -3,7 +3,6 @@ package universe.entities;
 import java.util.ArrayList;
 import java.util.Random;
 
-import sun.util.logging.resources.logging;
 import universe.Position;
 import universe.World;
 import universe.beliefs.Knowledge;
@@ -27,9 +26,27 @@ public class Entity {
     protected int id;
 
     public Entity(World w, String name) {
+	String unifiedName;
+	Boolean nameIsUnique = false;
+	int count = 1;
+
 	this.world = w;
-	this.setName(name);
-	
+
+	while (!nameIsUnique) {
+	    try {
+		if (count == 1)
+		    unifiedName = name;
+		else
+		    unifiedName = name + " " + count;
+		this.setName(unifiedName);
+		nameIsUnique = true;
+		// System.out.println("The name of the entity is " + unifiedName);
+	    } catch (DuplicateEntityNameException e) {
+		count++;
+		e.printStackTrace();
+	    }
+	}
+
 	// TODO Make the position system cleaner ?
 	int x, y;
 	x = new Random().nextInt(w.x);
@@ -47,7 +64,10 @@ public class Entity {
 	return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name) throws DuplicateEntityNameException {
+	if (this.world.getEntityByName(name) != null) {
+	    throw new DuplicateEntityNameException(name);
+	}
 	this.name = name;
     }
 
@@ -96,7 +116,7 @@ public class Entity {
 	    automaticKnowledges.add(new Possession(this, i));
 	    automaticKnowledges.add(new Location(i, position));
 	}
-	// System.out.println("Automatic knoledges : " + automaticKnowledges);
+	// System.out.println("Automatic knowledges : " + automaticKnowledges);
 	return automaticKnowledges;
     }
 
@@ -118,9 +138,8 @@ public class Entity {
 	if (!alreadyKnown.contains(k)) {
 	    // System.out.println("Adding belief that '" + k + "' in " + this.name);
 	    this.knowledges.add(k);
-	}
-	else{
-	    // System.out.println("Already known : " + k); 
+	} else {
+	    // System.out.println("Already known : " + k);
 	}
 
     }

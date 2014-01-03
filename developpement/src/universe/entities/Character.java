@@ -37,7 +37,7 @@ public class Character extends Entity {
     }
 
     /**
-     * @return The zne in which the character can interact
+     * @return The zone in which the character can interact
      */
     private Zone getActionZone() {
 	return new Zone(position, characteristic.actionMaxLength);
@@ -187,6 +187,7 @@ public class Character extends Entity {
      */
     public int[] learnFromZone(Zone zone) {
 	ArrayList<Knowledge> knowledges;
+	Knowledge k = null;
 	int numberLearnable, numberAvailable, numberToLearn;
 	int[] learnedKnowledges;
 	knowledges = world.getKnowledges(zone);
@@ -199,12 +200,13 @@ public class Character extends Entity {
 	    for (int numberLearned = 0, i = 0; numberLearned < numberToLearn; numberLearned++) {
 		i = new Random().nextInt(numberAvailable);
 		learnedKnowledges[numberLearned] = i;
-		this.addKnowledge(world.getKnowledges(zone).get(i));
+		k = world.getKnowledges(zone).get(i);
+		// System.out.println(this.name + " learned that " + k);
+		this.addKnowledge(k);
 	    }
 	} else {
 	    learnedKnowledges = null;
 	}
-
 	return learnedKnowledges;
     }
 

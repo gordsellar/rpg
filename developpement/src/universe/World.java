@@ -53,6 +53,14 @@ public class World {
 
     }
 
+    public Entity getEntityByName(String name) {
+	for (Entity e : getAllEntities()) {
+	    if (e.getName() == name)
+		return e;
+	}
+	return null;
+    }
+    
     public Entity getEntityById(int id) {
 	for (Entity e : getAllEntities()) {
 	    if (e.getId() == id)
