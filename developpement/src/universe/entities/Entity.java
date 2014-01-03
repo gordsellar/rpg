@@ -6,6 +6,7 @@ import java.util.Random;
 
 import universe.Position;
 import universe.World;
+import universe.beliefs.Fact;
 import universe.beliefs.Knowledge;
 import universe.beliefs.Location;
 import universe.beliefs.Possession;
@@ -112,6 +113,7 @@ public class Entity {
 
     public void addItem(Item i) {
 	this.world.removeEntity(i);
+	i.setPosition(this.getPosition());
 	this.inventory.add(i);
     }
 
@@ -124,7 +126,6 @@ public class Entity {
 	knowledgesResult.addAll(this.knowledges);
 	knowledgesResult.addAll(getAutomaticKnowledges());
 	return knowledgesResult;
-
     }
 
     public void setKnowledges(ArrayList<Knowledge> knowledges) {
@@ -139,31 +140,45 @@ public class Entity {
 	return this.getKnowledges().containsAll(c);
     }
 
-    public ArrayList<Knowledge> getAutomaticKnowledges() {
+    public ArrayList<Knowledge> getKnowledgeAbout(Entity e) {
+	ArrayList<Knowledge> knowledgesAboutAnEntity;
+	knowledgesAboutAnEntity = new ArrayList<Knowledge>();
+	if (this == e)
+	    // TODO Make this smarter
+	    knowledgesAboutAnEntity.add(new Fact("I'm " + e));
+	for (Knowledge k : this.getKnowledges()) {
+	    if (k instanceof Possession) {
+		Possession p = ((Possession) k);
+		if (p.getPossessedBy() == e || p.getPossession() == e)
+		    knowledgesAboutAnEntity.add(k);
+	    } else if (k instanceof Location && ((Location) k).getEntity() == e) {
+		knowledgesAboutAnEntity.add(k);
+	    }
+	}
+	return knowledgesAboutAnEntity;
+    }
+
+    public boolean knowsAbout(Entity e) {
+	return getKnowledgeAbout(e).size() != 0;
+    }
+
+    protected ArrayList<Knowledge> getAutomaticKnowledges() {
 	ArrayList<Knowledge> automaticKnowledges = new ArrayList<Knowledge>();
 	automaticKnowledges.add(new Location(this, position));
 	for (Item i : this.inventory) {
+	    automaticKnowledges.addAll(i.getKnowledges());
 	    automaticKnowledges.add(new Possession(this, i));
-	    automaticKnowledges.add(new Location(i, position));
 	}
 	// System.out.println("Automatic knowledges : " + automaticKnowledges);
 	return automaticKnowledges;
     }
 
     public void addKnowledge(Knowledge k) {
-	ArrayList<Knowledge> alreadyKnown;
-	alreadyKnown = this.getKnowledges();
-	if (!alreadyKnown.contains(k)) {
-	    // System.out.println("Adding belief that '" + k + "' in " +
-	    // this.name);
+	if (!this.getKnowledges().contains(k))
 	    this.knowledges.add(k);
-	} else {
-	    // System.out.println("Already known : " + k);
-	}
-
     }
 
-    public void removeKnowledge(Knowledge k) throws Exception {
+    public void removeKnowledge(Knowledge k) {
 	this.knowledges.remove(k);
     }
 
@@ -175,15 +190,5 @@ public class Entity {
 	// We don't print the knowledge of all object
 	// Just the character one
 	return coffee;
-    }
-
-    public static void main(String[] args) {
-	World w = new World(2, 2);
-	Entity e = new Entity(w, "Robert");
-	System.out.println(e.id);
-	Entity f = new Entity(w, "Roger");
-	System.out.println(f.id);
-	Entity g = new Entity(w, "Robert");
-	System.out.println(g.id);
     }
 }

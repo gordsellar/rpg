@@ -32,9 +32,16 @@ public class CharacterTest {
 	robert.addItem(spoon);
 	roger.addItem(matchbox);
 	System.out.println(w);
+	System.out.println(roger.askInformationAboutAnEntity(robert, spoon));
+	System.out.println(robert.askInformationAboutAnEntity(roger, match));
+	Assert.assertTrue(roger.askInformationAboutAnEntity(robert, spoon)
+		.size() == 2);
+	Assert.assertTrue(robert.askInformationAboutAnEntity(roger, match)
+		.size() == 2);
 	Assert.assertFalse(robert_two.getName() == "Robert");
-	Assert.assertTrue(roger.knows(new Possession(roger,matchbox)));
-	Assert.assertTrue(roger.knows(new Possession(roger,match)));
+	System.out.println(robert.askInformationAboutAnEntity(roger, matchbox));
+	Assert.assertTrue(roger.knows(new Possession(roger, matchbox)));
+	Assert.assertTrue(roger.knows(new Possession(roger, match)));
 	Assert.assertTrue(roger.knows(f));
 	Assert.assertTrue(roger.knows(g));
 	Assert.assertTrue(roger.knows(e));

@@ -9,6 +9,7 @@ import universe.World;
 import universe.Zone;
 import universe.beliefs.Fact;
 import universe.beliefs.Knowledge;
+import universe.beliefs.Possession;
 import universe.desires.Objective;
 
 /**
@@ -139,7 +140,22 @@ public class Character extends Entity {
 	c.addItem(i);
     }
 
-    public Boolean askObject(Character c, Item o) {
+    public ArrayList<Knowledge> askInformationAboutAnEntity(Character c,
+	    Entity e) {
+	ArrayList<Knowledge> result;
+	if (c.knowsAbout(e)) {
+	    // TODO A character may accept depending on his feeling for the
+	    // other character or hide certain information
+	    result = c.getKnowledgeAbout(e);
+	} else {
+	    result = new ArrayList<Knowledge>();
+	    result.add(new Fact(c.getName()
+		    + " don't have any information about " + e));
+	}
+	return result;
+    }
+
+    public Boolean askObject(Character c, Item i) {
 	// TODO A character may accept depending on his feeling for the other
 	// character
 	if (new Random().nextInt(100) <= 50)
