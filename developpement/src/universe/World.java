@@ -47,10 +47,8 @@ public class World {
                     this.cases[i][j].removeEntity(e);
                 } finally {
                 }
-
             }
         }
-
     }
 
     public Entity getEntityByName(String name) {
@@ -106,6 +104,55 @@ public class World {
         }
         return result + "}";
     }
+    
+    public String toAsciiArt() {
+        String result = "World :\n";
+        int height = this.cases.length;
+        int width = this.cases[0].length;
+        for (int i = 0; i < height; i++) {
+            String line1 = ""; String line2 = ""; String line3 = "";
+            for (int j = 0; j < width; j++) {  
+                // Building landColor and landSymbol for Ascii Art
+                String landColor = "\033[0m";
+                String landSymbol = "#";
+                if (this.cases[i][j].getLandType() == LandType.Grass) {
+                    landColor = "\033[32m"; // Console code for green
+                    landSymbol = "„ ";
+                }
+                else if (this.cases[i][j].getLandType() == LandType.Tree) {
+                    landColor = "\033[32";
+                    landSymbol = "φ ";
+                }
+                else if (this.cases[i][j].getLandType() == LandType.Dirt) {
+                    landColor = "\033[33m"; // Console code for yellow
+                    landSymbol = "Ξ ";
+                }
+                else if (this.cases[i][j].getLandType() == LandType.Cliff) {
+                    landColor = "\033[33m";
+                    landSymbol = "Δ ";
+                }
+                
+                // Building Ascii Art
+                line1 += landColor + landSymbol + landSymbol + landSymbol;
+                line3 += landColor + landSymbol + landSymbol + landSymbol;
+                // Line 2 that contains items and npc symbols
+                if (this.cases[i][j].getEntities().contains(Item.class)) {
+                    line2 += landColor + landSymbol + landSymbol + "\033[0m\033[1m♦\033[0m ";
+                }
+                else if (this.cases[i][j].getEntities().contains(NPC.class)) {
+                    line2 += "\033[0m\033[1mθ \033[0m" + landColor + landSymbol + landSymbol;
+                }
+                else if (this.cases[i][j].getEntities().contains(NPC.class) &&
+                         this.cases[i][j].getEntities().contains(Item.class)) {
+                    line2 += "\033[0m\033[1mθ \033[0m" + landColor + landSymbol +
+                             "\033[0m\033[1m♦\033[0m ";
+                }
+            }
+            line1 += "\n"; line2 += "\n"; line3 += "\n";
+            result += line1 + line2 + line3 + "\033[0m";
+        }
+        return result;
+    }
 
     public static void main(String[] args) {
         World w = new World(2, 3);
@@ -122,5 +169,6 @@ public class World {
         w.addEntity(m, new Position(1, 2));
         w.addEntity(j, new Position(1, 1));
         System.out.println(w);
+        System.out.println(w.toAsciiArt());
     }
 }
