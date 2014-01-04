@@ -70,12 +70,12 @@ public class Character extends Entity {
 
     @Override
     public ArrayList<Knowledge> getAutomaticKnowledges() {
-        ArrayList<Knowledge> result = new ArrayList<Knowledge>();
+        ArrayList<Knowledge> result = super.getAutomaticKnowledges();
         // We return the character State, it may be the only things this
         // character knows, and can talk about.
         result.add(new Fact(this, this.name + " is feeling "
                 + this.characteristic.state));
-        return super.getAutomaticKnowledges();
+        return result;
     }
 
     /**
