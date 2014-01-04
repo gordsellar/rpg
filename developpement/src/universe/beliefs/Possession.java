@@ -43,4 +43,20 @@ public class Possession extends Knowledge {
     public String toString() {
         return entityConcerned.getName() + " possess " + possession.getName();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Possession) {
+            if (this.possession.equals(((Possession) o).getPossession())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return 11 * hash + entityConcerned.hashCode();
+    }
 }

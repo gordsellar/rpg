@@ -8,6 +8,7 @@ import universe.Position;
 import universe.Zone;
 import universe.beliefs.Fact;
 import universe.beliefs.Knowledge;
+import universe.beliefs.Location;
 import universe.desires.Objective;
 
 /**
@@ -37,7 +38,7 @@ public class Character extends Entity {
     /**
      * @return The zone in which the character can interact
      */
-    private Zone getActionZone() {
+    public Zone getActionZone() {
         return new Zone(position, characteristic.actionMaxLength);
     }
 
@@ -193,11 +194,29 @@ public class Character extends Entity {
     }
 
     /**
+     * Updates known Knowledges. Scanning the Zone in line of sight to remove
+     * Knowledges of Location not accurate anymore
+     */
+    public void updateKnowledges() {
+        List<Knowledge> knowledges = knowledgesManager.getKnowledges();
+        for (Knowledge knowledge : knowledges) {
+            if (knowledge instanceof Location) {
+                Location l = (Location) knowledge;
+                if (getUnderstandabilityZone().contain(l.getPosition())) {
+                    if (!l.getEntityConcerned().getPosition()
+                            .equals(l.getPosition())) {
+                        knowledgesManager.removeKnowledge(knowledge);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * A character learn what can be learn in a Zone according to its smartness.
      * 
      * @param zone
      *            The zone in which you search for Knowledge
-     * @return The index of the knowledges actually learned in the array list
      */
     public void learnFromZone(Zone zone) {
         ArrayList<Knowledge> knowledges;

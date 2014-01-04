@@ -67,7 +67,4 @@ public class Task {
 
         return completeMethod;
     }
-
-    public static void main(String[] args) {
-    }
 }

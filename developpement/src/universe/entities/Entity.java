@@ -21,8 +21,6 @@ import universe.utils.DatabaseManager;
 
 public class Entity {
 
-    private static int numberOfEntity = -1;
-
     protected World world;
     protected Position position;
     protected String name;
@@ -44,15 +42,12 @@ public class Entity {
                 }
                 this.setName(unifiedName);
                 nameIsUnique = true;
-                System.out.println("The name of the entity is " + unifiedName);
             } catch (DuplicateEntityNameException e) {
                 count++;
                 e.printStackTrace();
             }
         }
 
-        Entity.numberOfEntity++;
-        this.setId(Entity.numberOfEntity);
         this.setInventory(new ArrayList<Item>());
     }
 
