@@ -120,7 +120,7 @@ public class World {
                     landSymbol = "„ ";
                 }
                 else if (this.cases[i][j].getLandType() == LandType.Tree) {
-                    landColor = "\033[32";
+                    landColor = "\033[32m";
                     landSymbol = "φ ";
                 }
                 else if (this.cases[i][j].getLandType() == LandType.Dirt) {
@@ -136,16 +136,28 @@ public class World {
                 line1 += landColor + landSymbol + landSymbol + landSymbol;
                 line3 += landColor + landSymbol + landSymbol + landSymbol;
                 // Line 2 that contains items and npc symbols
-                if (this.cases[i][j].getEntities().contains(Item.class)) {
+                boolean containsItem = false;
+                boolean containsNPC = false;
+                for (Entity e : this.cases[i][j].getEntities()) {
+                    if (Item.class.isInstance(e)) {
+                        containsItem = true;
+                    }
+                    if (NPC.class.isInstance(e)) {
+                        containsNPC = true;
+                    }
+                }
+                if (containsItem && !containsNPC) {
                     line2 += landColor + landSymbol + landSymbol + "\033[0m\033[1m♦\033[0m ";
                 }
-                else if (this.cases[i][j].getEntities().contains(NPC.class)) {
+                else if (containsNPC && !containsItem) {
                     line2 += "\033[0m\033[1mθ \033[0m" + landColor + landSymbol + landSymbol;
                 }
-                else if (this.cases[i][j].getEntities().contains(NPC.class) &&
-                         this.cases[i][j].getEntities().contains(Item.class)) {
+                else if (containsItem && containsNPC) {
                     line2 += "\033[0m\033[1mθ \033[0m" + landColor + landSymbol +
                              "\033[0m\033[1m♦\033[0m ";
+                }
+                else {
+                  line2 += landColor + landSymbol + landSymbol + landSymbol;
                 }
             }
             line1 += "\n"; line2 += "\n"; line3 += "\n";
