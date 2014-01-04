@@ -1,5 +1,7 @@
 package universe.desires;
 
+import universe.entities.Entity;
+
 /**
  * @author claire
  * 
@@ -7,22 +9,58 @@ package universe.desires;
 
 public class Objective {
 
-    private String description;
+    private Verb desire;
+    private int priority;
+    private Entity entity;
 
-    public Objective(String description) {
-        this.description = description;
+    public Objective(Verb desire, Integer priority) {
+        this(desire, priority, null);
     }
 
-    public String getDescription() {
-        return description;
+    public Objective(Verb desire, Integer priority, Entity entity) {
+        this.desire = desire;
+        this.setPriority(priority);
+        this.setEntity(entity);
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public Verb getDesire() {
+        return desire;
+    }
+
+    public void setDesire(Verb desire) {
+        this.desire = desire;
+    }
+
+    /**
+     * @return the priority
+     */
+    public int getPriority() {
+        return priority;
+    }
+
+    /**
+     * @param priority the priority to set
+     */
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    /**
+     * @return the entity
+     */
+    public Entity getEntity() {
+        return entity;
+    }
+
+    /**
+     * @param entity the entity to set
+     */
+    public void setEntity(Entity entity) {
+        this.entity = entity;
     }
 
     @Override
     public String toString() {
-        return "Objective [description=" + description + "]";
+        return "Objective [desire=" + desire + "]";
     }
 }

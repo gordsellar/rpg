@@ -46,4 +46,8 @@ public class KnowledgesManager {
     public List<Knowledge> getKnowledges() {
         return knowledges;
     }
+
+    public void removeKnowledge(Knowledge knowledge) {
+        knowledges.remove(knowledge);
+    }
 }

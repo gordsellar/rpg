@@ -50,7 +50,7 @@ public abstract class Knowledge {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Knowledge) {
+        if (o instanceof Knowledge && this.getClass().equals(o.getClass())) {
             if (this.entityConcerned.equals(((Knowledge) o)
                     .getEntityConcerned())) {
                 return true;

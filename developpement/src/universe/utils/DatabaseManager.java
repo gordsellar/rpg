@@ -46,6 +46,7 @@ public class DatabaseManager {
         try {
             constructor = className.getConstructor(parametersTypes);
             entity = constructor.newInstance(parameters);
+            entity.setId(entities.size());
             entities.add(entity);
 
         } catch (NoSuchMethodException | SecurityException
@@ -86,8 +87,11 @@ public class DatabaseManager {
             }
             break;
         case "Item":
-            System.out.println("Item find not implemented");
-            // TODO look up to retrieve the right Item
+            p = Pattern.compile("\\[id=(\\d+)\\]");
+            m = p.matcher(splitParam[1]);
+            if(m.matches()) {
+                return findById(Integer.valueOf(m.group(1)));
+            }
             break;
         case "Zone":
             // TODO create a Zone fromString
@@ -176,6 +180,7 @@ public class DatabaseManager {
 
     public static void emptyEntities() {
         entities.clear();
+
     }
 
     public static List<Entity> getEntities() {

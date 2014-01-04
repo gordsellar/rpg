@@ -6,7 +6,7 @@ public class Characteristic {
 
     public Gender gender;
     public int smartness;
-    public int actionMaxLength;
+    public int actionMaxLength = 1;
     public CharacterState state;
     
     public Characteristic(Integer smartness) {

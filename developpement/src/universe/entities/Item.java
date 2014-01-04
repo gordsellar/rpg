@@ -69,4 +69,9 @@ public class Item extends Entity {
     public void setCarriable(Boolean carriable) {
         this.carriable = carriable;
     }
+
+    @Override
+    public String toString() {
+        return "Item [id=" + id + "]";
+    }
 }
