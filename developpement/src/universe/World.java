@@ -179,14 +179,14 @@ public class World {
 	    line1 = "     " + line1 + "\n";
 	    if (!(i < 0 || i >= height)) {
 		if (i < 10)
-		    line2 = " " + i + "   " + line2 + "\n";
+		    line2 = "\033[0m " + i + "   " + line2 + "\n";
 		else if (i < 100)
-		    line2 = " " + i + "  " + line2 + "\n";
+		    line2 = "\033[0m " + i + "  " + line2 + "\n";
 		else
-		    line2 = " " + i + " " + line2 + "\n";
+		    line2 = "\033[0m " + i + " " + line2 + "\n";
 	    } else
-		line2 = "     " + line2 + "\n";
-	    line3 = "     " + line3 + "\n";
+		line2 = "\033[0m     " + line2 + "\n";
+	    line3 = "\033[0m     " + line3 + "\n";
 	    result += line1 + line2 + line3 + "\033[0m";
 	}
 
