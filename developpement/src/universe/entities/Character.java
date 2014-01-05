@@ -237,6 +237,10 @@ public class Character extends Entity {
         }
     }
 
+    public void learnFromUnderstandabilityZone() {
+        this.learnFromZone(this.getUnderstandabilityZone());
+    }
+
     @Override
     public String toString() {
         String result = super.toString();

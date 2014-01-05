@@ -1,6 +1,7 @@
 import universe.*;
 import universe.entities.Item;
 import universe.entities.NPC;
+import universe.utils.UI;
 
 class Main {
     public static void main(String [] arg) {
@@ -13,6 +14,7 @@ class Main {
         world.addEntity(pierre, new Position(5, 2));
         world.addEntity(ordinateur, new Position(8, 10));
         world.addEntity(boiteChocolat, new Position(9, 1));
-        System.out.println(world.toAsciiArt());
-    }
+        UI ui = new UI(world);
+        ui.displayWorld();
+        }
 }
