@@ -2,6 +2,7 @@ package universe.entities;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import universe.desires.DesiresManager;
@@ -19,41 +20,55 @@ import universe.intentions.Task;
 public class NPC extends Character implements Runnable {
 
     private DesiresManager desiresManager = new DesiresManager();
+    private List<Task> currentTasks = new ArrayList<>();
+    private int currentTaskIndex = 0;
 
     public NPC(String name, Integer smartness) {
         super(name, smartness);
-        this.generateDesires();
     }
 
-    private void generateDesires(){
+    public void generateDesires(Verb desire) {
         // TODO
         // Get 500 gold and a significant other ?
-        desiresManager.addDesire(new Objective(Verb.OWN, 1));
+        desiresManager.addDesire(new Objective(desire, 1));
     }
 
     @Override
     public void run() {
+        System.out.println(this.toString());
         // Get new knowledge of the world on line of sight
         updateKnowledges();
         learnFromZone(getUnderstandabilityZone());
         // Use knowledges to choose a desire
-        List<Task> taskList = PlanLibrary.getTaskList(this,
-                desiresManager.getObjectives());
+        if (currentTaskIndex >= currentTasks.size()) {
+            currentTasks = PlanLibrary.getTaskList(this,
+                    desiresManager.getObjectives());
+            currentTaskIndex = 0;
+        }
         // Execute 1 action from the desire
-        if (!taskList.isEmpty()) {
-            Task t = taskList.get(0);
+        if (!currentTasks.isEmpty()) {
+            Task t = currentTasks.get(currentTaskIndex);
+            System.out.println(t);
+            currentTaskIndex++;
             List<Object> completeMethod;
             try {
                 completeMethod = t.getMethod();
                 ((Method) completeMethod.get(0)).invoke(this,
                         completeMethod.get(1));
-                System.out.println(completeMethod.get(0));
             }
-            catch (NoSuchMethodException | ClassNotFoundException
+            catch (ClassNotFoundException
                     | IllegalAccessException | IllegalArgumentException
                     | InvocationTargetException e) {
                 e.printStackTrace();
             }
         }
+
+        // Slow down the NPCs...
+        // try {
+        // Thread.sleep(1000 * 2);
+        // }
+        // catch (InterruptedException e) {
+        // e.printStackTrace();
+        // }
     }
 }

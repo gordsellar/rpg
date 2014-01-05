@@ -91,7 +91,7 @@ public class World {
         ArrayList<Entity> entities;
         entities = this.getEntities(z);
         for (Entity e : entities) {
-            knowledges.addAll(e.getKnowledges());
+            knowledges.addAll(e.getVisibleKnowledges());
         }
         return knowledges;
     }
@@ -163,6 +163,7 @@ public class World {
                             containsPlayer = true;
                     }
                 }
+                
                 // Building Ascii Art
                 line1 += landColor + landSymbol + landSymbol + landSymbol;
                 line3 += landColor + landSymbol + landSymbol + landSymbol;

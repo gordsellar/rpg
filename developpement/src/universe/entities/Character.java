@@ -50,7 +50,7 @@ public class Character extends Entity {
      */
     private Boolean assertCanInteractWith(Entity e)
             throws TooFarToInteractException {
-        if (this.world.getEntities(getActionZone()).contains(e)) {
+        if (getActionZone().contain(e.getPosition())) {
             return true;
         } else {
             throw new TooFarToInteractException(this, e);
@@ -70,13 +70,12 @@ public class Character extends Entity {
     }
 
     @Override
-    public ArrayList<Knowledge> getAutomaticKnowledges() {
-        ArrayList<Knowledge> result = super.getAutomaticKnowledges();
+    public void updateAutomaticKnowledges() {
+        super.updateAutomaticKnowledges();
         // We return the character State, it may be the only things this
         // character knows, and can talk about.
-        result.add(new Fact(this, this.name + " is feeling "
-                + this.characteristic.state));
-        return result;
+        knowledgesManager.addKnowledge(new Fact(this, this.name
+                + " is feeling " + this.characteristic.state));
     }
 
     /**
@@ -198,18 +197,21 @@ public class Character extends Entity {
      * Knowledges of Location not accurate anymore
      */
     public void updateKnowledges() {
+        updateAutomaticKnowledges();
         List<Knowledge> knowledges = knowledgesManager.getKnowledges();
+        List<Knowledge> oldKnowledges = new ArrayList<>();
         for (Knowledge knowledge : knowledges) {
             if (knowledge instanceof Location) {
                 Location l = (Location) knowledge;
                 if (getUnderstandabilityZone().contain(l.getPosition())) {
                     if (!l.getEntityConcerned().getPosition()
                             .equals(l.getPosition())) {
-                        knowledgesManager.removeKnowledge(knowledge);
+                        oldKnowledges.add(knowledge);
                     }
                 }
             }
         }
+        knowledgesManager.removeKnowledges(oldKnowledges);
     }
 
     /**

@@ -47,7 +47,23 @@ public class KnowledgesManager {
         return knowledges;
     }
 
+    /**
+     * Removes a knowledge from the list
+     * 
+     * @param knowledge
+     */
     public void removeKnowledge(Knowledge knowledge) {
         knowledges.remove(knowledge);
+    }
+
+    /**
+     * Removes multiple knowledges
+     * 
+     * @param knowledges
+     */
+    public void removeKnowledges(List<Knowledge> knowledges) {
+        for (Knowledge knowledge : knowledges) {
+            removeKnowledge(knowledge);
+        }
     }
 }

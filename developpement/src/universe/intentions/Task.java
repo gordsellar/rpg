@@ -42,11 +42,9 @@ public class Task {
      * 
      * @return List containing the method to be invoked, followed by its
      *         parameters (if any)
-     * @throws NoSuchMethodException
      * @throws ClassNotFoundException
      */
-    public List<Object> getMethod() throws NoSuchMethodException,
-    ClassNotFoundException {
+    public List<Object> getMethod() throws ClassNotFoundException {
         List<Object> completeMethod = new ArrayList<>();
 
         String[] components = action.split(";");
@@ -61,10 +59,33 @@ public class Task {
             parameters.add(obj);
         }
 
-        Method method = NPC.class.getMethod(methodName, parametersTypes);
+        Method method = null;
+        try {
+            method = NPC.class.getMethod(methodName, parametersTypes);
+        }
+        catch (NoSuchMethodException e) {
+            System.out.println("method not found");
+            Method[] methods = NPC.class.getMethods();
+            int i = 0;
+            boolean found = false;
+            while (!found && i < methods.length) {
+
+                if (methods[i].getName().equals(methodName)) {
+                    method = methods[i];
+                    found = true;
+                }
+                i++;
+            }
+        }
+
         completeMethod.add(method);
         completeMethod.addAll(parameters);
 
         return completeMethod;
+    }
+
+    @Override
+    public String toString() {
+        return "Task [action=" + action + "]";
     }
 }

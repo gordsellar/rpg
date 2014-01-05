@@ -15,6 +15,7 @@
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
+                <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
@@ -32,12 +33,17 @@
             <classpath refid="rpg.classpath"/>
         </javac>
     </target>
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
     <target name="javadoc">
-                <javadoc encoding="Utf-8" docencoding="Utf-8" charset="Utf-8" sourcepath="./src" destdir="./doc">
-                <fileset dir="src" defaultexcludes="yes">
-                        <include name="**/*.java" />
-                </fileset>
+        <javadoc encoding="Utf-8" docencoding="Utf-8" charset="Utf-8" sourcepath="./src" destdir="./doc">
+            <fileset dir="src" defaultexcludes="yes">
+                <include name="**/*.java" />
+            </fileset>
         </javadoc>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target name="Launch">
+        <java classname="Main" failonerror="true" fork="yes">
+            <classpath refid="rpg.classpath"/>
+        </java>
     </target>
 </project>

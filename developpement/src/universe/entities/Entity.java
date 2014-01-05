@@ -121,11 +121,16 @@ public class Entity {
         this.inventory.remove(i);
     }
 
+    public List<Knowledge> getVisibleKnowledges() {
+        List<Knowledge> knowledges = new ArrayList<>();
+        knowledges.add(new Location(this, getPosition()));
+
+        return knowledges;
+    }
+
     public List<Knowledge> getKnowledges() {
-        ArrayList<Knowledge> knowledgesResult = new ArrayList<Knowledge>();
-        knowledgesResult.addAll(this.knowledgesManager.getKnowledges());
-        knowledgesResult.addAll(getAutomaticKnowledges());
-        return knowledgesResult;
+        updateAutomaticKnowledges();
+        return this.knowledgesManager.getKnowledges();
     }
 
     public boolean knows(Knowledge k) {
@@ -160,7 +165,7 @@ public class Entity {
         return getKnowledgeAbout(e).size() != 0;
     }
 
-    protected ArrayList<Knowledge> getAutomaticKnowledges() {
+    protected void updateAutomaticKnowledges() {
         ArrayList<Knowledge> automaticKnowledges = new ArrayList<Knowledge>();
         automaticKnowledges.add(new Location(this, position));
         for (Item i : this.inventory) {
@@ -168,7 +173,7 @@ public class Entity {
             automaticKnowledges.add(new Possession(this, i));
         }
         // System.out.println("Automatic knowledges : " + automaticKnowledges);
-        return automaticKnowledges;
+        knowledgesManager.addKnowledges(automaticKnowledges);
     }
 
     public void addKnowledge(Knowledge k) {
