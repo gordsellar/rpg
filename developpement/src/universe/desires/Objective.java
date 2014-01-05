@@ -14,53 +14,59 @@ public class Objective {
     private Entity entity;
 
     public Objective(Verb desire, Integer priority) {
-        this(desire, priority, null);
+	this(desire, priority, null);
     }
 
     public Objective(Verb desire, Integer priority, Entity entity) {
-        this.desire = desire;
-        this.setPriority(priority);
-        this.setEntity(entity);
+	this.desire = desire;
+	this.setPriority(priority);
+	this.setEntity(entity);
     }
 
     public Verb getDesire() {
-        return desire;
+	return desire;
     }
 
     public void setDesire(Verb desire) {
-        this.desire = desire;
+	this.desire = desire;
     }
 
     /**
      * @return the priority
      */
     public int getPriority() {
-        return priority;
+	return priority;
     }
 
     /**
-     * @param priority the priority to set
+     * @param priority
+     *            the priority to set
      */
     public void setPriority(int priority) {
-        this.priority = priority;
+	this.priority = priority;
     }
 
     /**
      * @return the entity
      */
     public Entity getEntity() {
-        return entity;
+	return entity;
     }
 
     /**
-     * @param entity the entity to set
+     * @param entity
+     *            the entity to set
      */
     public void setEntity(Entity entity) {
-        this.entity = entity;
+	this.entity = entity;
     }
 
     @Override
     public String toString() {
-        return "Objective [desire=" + desire + "]";
+	if (entity != null)
+	    return "Objective [desire=" + desire + ", priority=" + priority
+		    + ", entity=" + entity + "]";
+	else
+	    return "Objective [desire=" + desire + ", priority=" + priority;
     }
 }
