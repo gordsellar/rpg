@@ -41,7 +41,7 @@ public class NPC extends Character implements Runnable {
     @Override
     public String toString() {
 	String result = super.toString();
-	result += "Desire:" + desiresManager;
+	result += " " + desiresManager;
 	return result;
     }
 

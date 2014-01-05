@@ -64,9 +64,9 @@ public class Objective {
     @Override
     public String toString() {
 	if (entity != null)
-	    return "Objective [desire=" + desire + ", priority=" + priority
+	    return "[" + desire + ", priority=" + priority
 		    + ", entity=" + entity.getName() + "]";
 	else
-	    return "Objective [desire=" + desire + ", priority=" + priority + "]";
+	    return "[" + desire + ", priority=" + priority + "]";
     }
 }
