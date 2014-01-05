@@ -24,24 +24,24 @@ class Main {
 	NPC roger = (NPC) DatabaseManager.create(NPC.class, "Roger", 5);
 	NPC allayn = (NPC) DatabaseManager.create(NPC.class, "Allayn", 10);
 	NPC allaynSister = (NPC) DatabaseManager.create(NPC.class,
-		"Allayn's sister", 18);
+		"Allayn'sSister", 18);
 	NPC orc = (NPC) DatabaseManager.create(NPC.class,
-		"An orc with information", 12);
+		"AnOrcWithInformation", 12);
 	NPC bandit = (NPC) DatabaseManager.create(NPC.class,
-		"Bandit that captured Allayn", 18);
+		"BanditThatCapturedAllayn", 18);
 	kulvan.setWorld(world);
 	allayn.setWorld(world);
 	roger.setWorld(world);
 	ArrayList<NPC> uselessNPCs = new ArrayList<NPC>();
 	for (int i = 0; i < numberOfUselessNPC; i++) {
-	    uselessNPCs.add((NPC) DatabaseManager.create(NPC.class, "Robert "
+	    uselessNPCs.add((NPC) DatabaseManager.create(NPC.class, "Robert"
 		    + i, 5));
 	    uselessNPCs.get(i).setWorld(world);
 	}
 	ArrayList<Item> goldcoins = new ArrayList<Item>();
 	for (int i = 0; i < numberOfGoldONtheGround; i++) {
 	    goldcoins.add((Item) DatabaseManager.create(Item.class,
-		    "Gold coin n°" + i, 100, true));
+		    "Goldcoinn°" + i, 100, true));
 	    goldcoins.get(i).setWorld(world);
 	}
 	// Creating Items
