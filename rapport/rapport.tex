@@ -1,5 +1,14 @@
 \documentclass[asi]{picINSA}
 
+%\usepackage[latin1]{inputenc}
+%\usepackage[T1]{fontenc}
+%\usepackage[francais]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+
+
 % Bout de code pour enlever le ``chapitre'' écrit à chaque fois
 \makeatletter
 \def\@makechapterhead#1{
@@ -102,9 +111,52 @@ L'autre synthèse bibliographique concernait la scénarisation automatique. Nous
 
 
 
+\section{Interface graphique}
+Etant donné la taille du projet, nous avons opté pour une interface graphique simple, fonctionnant en ligne de commande. Nous avons mis en place un affichage du monde par \textit{AsciiArt}, complété eventuellement par d'autres informations écrites. La récupération des actions de l'utilisateur se fait par saisi de mots-clés parmis une liste d'actions possibles.
 
+\subsection{Représentation du monde}
+La représentation du monde en \textit{AsciiArt} fonctionne ainsi :
+\begin{itemize}
+\item chaque case du monde est représenté par un carré de 3 lignes et 3 colonnes, soit 9 symboles.
+\item 4 types de terrains sont possibles : herbe, terre, forêt, et montagne. Ils sont représentés par les symboles suivants : \\
+\begin{tabular}{| c c c | c c c | c c c | c c c | }
+ \hline		
+  \multicolumn{3}{|c|}{herbe} & \multicolumn{3}{|c|}{terre} & \multicolumn{3}{|c|}{forêt} & \multicolumn{3}{|c|}{montagne} \\	
+\hline
+    \verb+"+ & \verb+"+ & \verb+"+ & $\equiv$ & $\equiv$ & $\equiv$ & $\phi$ & $\phi$ & $\phi$ & $\triangle$ & $\triangle$ & $\triangle$ \\
+    \verb+"+ & \verb+"+ & \verb+"+ & $\equiv$ & $\equiv$ & $\equiv$ & $\phi$ & $\phi$ & $\phi$ & $\triangle$ & $\triangle$ & $\triangle$ \\
+    \verb+"+ & \verb+"+ & \verb+"+ & $\equiv$ & $\equiv$ & $\equiv$ & $\phi$ & $\phi$ & $\phi$ & $\triangle$ & $\triangle$ & $\triangle$ \\
+ \hline  
+ \end{tabular}
+~\\
+\item un objet est représenté par un $\blacklozenge$ à droite de la case.
+\item un PNJ est représenté par un $\theta$ à gauche de la case.
+\item le joueur est représenté par un $\bigoplus$ au centre de la case.
+\end{itemize}
 
-%Mettre les différents diagrammes de conceptions
+\subsubsection{Exemple}
+Dans l'exemple ci-dessous, on peut voir un monde de 5 x 5 cases, avec un PNJ dans la case (1,1), un autre dans la case (5, 4), un objet à la case (0, 5), un autre objet sur la case (5, 1) et enfin le joueur sur la case (3, 3).
+
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics[width=1\textwidth]{images/screenshootWorld01.png}
+    \caption{Exemple de la représentation d'un monde de taille 5 x 5 avec 2 PNJ et 2 objets}	
+  \end{center}
+\end{figure}
+
+\subsection{Interaction du joueur}
+Les interactions avec le joueur se font en lui proposant différentes actions et en le laissant choisir par mot-clés, comme dans l'exemple ci-dessous : \\
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics[width=1\textwidth]{images/screenshootUI01.png}
+    \caption{Exemple d'action possibles}	
+  \end{center}
+\end{figure}
+
+Si le joueur rentre autre chose qu'un des mot-clés prévus, cela provoque un message d'erreur. Les  execeptions et erreurs sont reportées à l'utilisateur. \\
+
+Le jeu est actuellement en anglais, mais tous les messages d'interaction avec le joueur sont implémentés dans le code sous forme de constantes de façon à rendre le changement de langue le plus simple possible. Les mots clés sont sans rapport avec les noms des fonctions appelées derrière, il est donc egalement possible de les changer sans impacter le code.
+
 
   
 \end{document}
