@@ -54,7 +54,7 @@ class Main {
 	world.addEntity(player, playerPosition);
 
 	while (true) {
-	    System.out.println(player.getVisibleKnowledges());
+	    System.out.println(world.toStringInfoEntities());
 	    ui.displayWorld(playerPosition);
 	    player.run();
 	}

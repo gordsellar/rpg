@@ -191,6 +191,7 @@ public class World {
 
 	return result;
     }
+
     /*
      * public static void main(String[] args) { World w = new World(2, 3); NPC n
      * = new NPC("Roger", 14); n.setWorld(w); NPC m = new NPC("Roger", 16); //
@@ -200,4 +201,18 @@ public class World {
      * Position(1, 2)); w.addEntity(j, new Position(1, 1));
      * System.out.println(w); }
      */
+
+    public String toStringInfoEntities() {
+	String result = "";
+	ArrayList<Entity> entities = new ArrayList<Entity>();
+	for (int i = 0; i < x; i++) {
+	    for (int j = 0; j < y; j++) {
+		entities.addAll(this.cases[i][j].getEntities());
+	    }
+	}
+	for (Entity e : entities) {
+		result += e.toString() + "\n";
+	}
+	return result;
+    }
 }
