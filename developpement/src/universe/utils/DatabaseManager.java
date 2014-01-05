@@ -73,24 +73,22 @@ public class DatabaseManager {
         Matcher m;
         switch (splitParam[0]) {
         case "Character":
-            System.out.println("Character find not implemented");
-            // TODO look up to retrieve the right Character
+        case "Item":
+            p = Pattern.compile("\\[id=(\\d+)\\]");
+            m = p.matcher(splitParam[1]);
+            if (m.matches()) {
+                return findById(Integer.valueOf(m.group(1)));
+            }
             break;
+
         case "Position":
-            p = Pattern.compile("\\[x=(\\d+), y=(\\d+)\\]");
+            p = Pattern.compile("\\[x=(-?\\d+), y=(-?\\d+)\\]");
             m = p.matcher(splitParam[1]);
             if (m.matches()) {
                 int x = Integer.valueOf(m.group(1));
                 int y = Integer.valueOf(m.group(2));
 
                 return new Position(x, y);
-            }
-            break;
-        case "Item":
-            p = Pattern.compile("\\[id=(\\d+)\\]");
-            m = p.matcher(splitParam[1]);
-            if(m.matches()) {
-                return findById(Integer.valueOf(m.group(1)));
             }
             break;
         case "Zone":

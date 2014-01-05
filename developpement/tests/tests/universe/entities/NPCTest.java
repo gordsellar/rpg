@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import universe.Position;
 import universe.World;
+import universe.desires.Verb;
 import universe.entities.Item;
 import universe.entities.NPC;
 import universe.utils.DatabaseManager;
@@ -19,9 +20,11 @@ public class NPCTest {
 
     @Test
     public void testGetWorldKnowledge() {
+        System.out.println("World");
         World w = new World(1, 2);
         NPC npc1 = (NPC) DatabaseManager.create(NPC.class, "Azu", 50);
         npc1.setWorld(w);
+        npc1.generateDesires(Verb.OWN);
         npc1.setPosition(new Position(1, 1));
         Item item1 = (Item) DatabaseManager.create(Item.class, "Sword", 20,
                 true);
@@ -45,12 +48,12 @@ public class NPCTest {
         World w = new World(1, 2);
         NPC npc1 = (NPC) DatabaseManager.create(NPC.class, "Azu", 50);
         npc1.setWorld(w);
+        npc1.generateDesires(Verb.OWN);
         npc1.setPosition(new Position(1, 1));
         Item item1 = (Item) DatabaseManager.create(Item.class, "Sword", 20,
                 true);
         item1.setWorld(w);
         item1.setPosition(new Position(1, 2));
-        System.out.println(item1.getId());
 
         // Azu doesn't have the Sword
         Assert.assertFalse(npc1.got(item1));
@@ -67,12 +70,12 @@ public class NPCTest {
         World w = new World(3, 5);
         NPC npc1 = (NPC) DatabaseManager.create(NPC.class, "Azu", 50);
         npc1.setWorld(w);
+        npc1.generateDesires(Verb.OWN);
         npc1.setPosition(new Position(1, 1));
         Item item1 = (Item) DatabaseManager.create(Item.class, "Sword", 20,
                 true);
         item1.setWorld(w);
         item1.setPosition(new Position(3, 5));
-        System.out.println(item1.getId());
 
         // Azu doesn't have the Sword and is away from it
         Assert.assertFalse(npc1.got(item1));
@@ -90,5 +93,36 @@ public class NPCTest {
 
         // Azu now have the Sword
         Assert.assertTrue(npc1.got(item1));
+    }
+
+    @Test
+    public void testLearn() {
+        System.out.println("Learn");
+        World w = new World(3, 5);
+        NPC npc1 = (NPC) DatabaseManager.create(NPC.class, "Azu", 50);
+        npc1.setWorld(w);
+        npc1.generateDesires(Verb.LEARN);
+        npc1.setPosition(new Position(1, 1));
+
+        NPC npc2 = (NPC) DatabaseManager.create(NPC.class, "Pierre", 50);
+        npc2.setWorld(w);
+        npc2.setPosition(new Position(3, 5));
+
+        Assert.assertFalse(npc1.knowsAbout(npc2));
+
+        npc1.run();
+
+        Assert.assertTrue(npc1.knowsAbout(npc2));
+        Assert.assertTrue(npc1.getActionZone().contain(npc2.getPosition()));
+        Assert.assertFalse(npc1.knowsAll(npc2.getKnowledges()));
+
+        // multiple turns because discuss return a random knowledge, and he
+        // wants to know everything
+        npc1.run();
+        npc1.run();
+        npc1.run();
+        npc1.run();
+
+        Assert.assertTrue(npc1.knowsAll(npc2.getKnowledges()));
     }
 }

@@ -27,7 +27,8 @@ public class TaskTest {
                 NPC c = (NPC) DatabaseManager.create(NPC.class, "Azuryus", 5);
                 ((Method) completeMethod.get(0)).invoke(c,
                         completeMethod.get(1));
-            } catch (NoSuchMethodException | ClassNotFoundException
+            }
+            catch (ClassNotFoundException
                     | IllegalAccessException | IllegalArgumentException
                     | InvocationTargetException | SecurityException e) {
                 e.printStackTrace();

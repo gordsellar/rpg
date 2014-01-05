@@ -1,12 +1,11 @@
 package universe.entities;
 
-import java.util.List;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
-import universe.utils.DatabaseManager;
-import universe.utils.UI;
 import universe.intentions.Task;
+import universe.utils.UI;
 
 /**
  * @author claire
@@ -42,14 +41,6 @@ public class Player extends Character implements Runnable {
                 }
             } catch (InvocationTargetException e) {
                 System.out.println("InvocationTargetException");
-                System.out.println("e.getMessage() = " + e.getMessage());
-                System.out.println("e.getStackTrace() = " + e.getStackTrace());
-
-                UI userInterface = new UI(this.world);
-                userInterface.displayMethodError();
-            }
-            catch (NoSuchMethodException e) {
-                System.out.println("NoSuchMethodException");
                 System.out.println("e.getMessage() = " + e.getMessage());
                 System.out.println("e.getStackTrace() = " + e.getStackTrace());
 

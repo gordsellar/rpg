@@ -90,7 +90,7 @@ public class World {
         ArrayList<Entity> entities;
         entities = this.getEntities(z);
         for (Entity e : entities) {
-            knowledges.addAll(e.getKnowledges());
+            knowledges.addAll(e.getVisibleKnowledges());
         }
         return knowledges;
     }
@@ -104,14 +104,14 @@ public class World {
         }
         return result + "}";
     }
-    
+
     public String toAsciiArt() {
         String result = "World :\n";
         int height = this.cases.length;
         int width = this.cases[0].length;
         for (int i = 0; i < height; i++) {
             String line1 = ""; String line2 = ""; String line3 = "";
-            for (int j = 0; j < width; j++) {  
+            for (int j = 0; j < width; j++) {
                 // Building landColor and landSymbol for Ascii Art
                 String landColor = "\033[0m";
                 String landSymbol = "#";
@@ -131,7 +131,7 @@ public class World {
                     landColor = "\033[33m";
                     landSymbol = "Δ ";
                 }
-                
+
                 // Building Ascii Art
                 line1 += landColor + landSymbol + landSymbol + landSymbol;
                 line3 += landColor + landSymbol + landSymbol + landSymbol;
@@ -154,10 +154,10 @@ public class World {
                 }
                 else if (containsItem && containsNPC) {
                     line2 += "\033[0m\033[1mθ \033[0m" + landColor + landSymbol +
-                             "\033[0m\033[1m♦\033[0m ";
+                            "\033[0m\033[1m♦\033[0m ";
                 }
                 else {
-                  line2 += landColor + landSymbol + landSymbol + landSymbol;
+                    line2 += landColor + landSymbol + landSymbol + landSymbol;
                 }
             }
             line1 += "\n"; line2 += "\n"; line3 += "\n";
