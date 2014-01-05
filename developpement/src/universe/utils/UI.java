@@ -4,9 +4,12 @@ import java.util.Scanner;
 import universe.World;
 import universe.entities.Entity;
 import universe.entities.Item;
+import universe.Position;
+
 /**
  * @author claire
- * 
+ * @author maxime
+ *
  */
 
 public class UI {
@@ -41,8 +44,8 @@ public class UI {
         this.display(question);
     }
     
-    public void displayWorld(){
-        this.display(this.world.toAsciiArt());
+    public void displayWorld(Position p){
+        this.display(this.world.toAsciiArt(p));
     }
     
     public void displayPossibilities(){

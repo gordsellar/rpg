@@ -1,20 +1,32 @@
 import universe.*;
+import universe.utils.*;
 import universe.entities.Item;
 import universe.entities.NPC;
-import universe.utils.UI;
+import universe.entities.Player;
+
 
 class Main {
     public static void main(String [] arg) {
-        World world = new World(10, 20);
-        NPC maxime = new NPC("Maxime", 2);
-        NPC pierre = new NPC("Pierre", 10);
-        Item ordinateur = new Item("Computer", 10000, true);
-        Item boiteChocolat = new Item("Boite de chocolats", 50, true);
-        world.addEntity(maxime, new Position(2, 2));
-        world.addEntity(pierre, new Position(5, 2));
-        world.addEntity(ordinateur, new Position(8, 10));
-        world.addEntity(boiteChocolat, new Position(9, 1));
+        // Creating world
+        World world = new World(6, 6);
+        DatabaseManager.emptyEntities();
         UI ui = new UI(world);
-        ui.displayWorld();
+        // Creating player
+        Player player = new Player("Joueur", 20);
+        Position playerPosition = new Position(3, 3);
+        // Creating NPCs
+        NPC maxime = (NPC) DatabaseManager.create(NPC.class, "Maxime", 2);
+        NPC pierre = (NPC) DatabaseManager.create(NPC.class, "Pierre", 10);
+        // Creating Items
+        Item sword = (Item) DatabaseManager.create(Item.class, "Iron Sword", 100, true);
+        Item parchement = (Item) DatabaseManager.create(Item.class, "Parchement", 1, true);
+        // Adding all to World
+        maxime.setWorld(world);
+        pierre.setWorld(world);
+        sword.setWorld(world);
+        parchement.setWorld(world);
+        world.addEntity(player, playerPosition);
+        
+        ui.displayWorld(playerPosition);
         }
 }

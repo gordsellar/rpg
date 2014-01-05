@@ -7,6 +7,7 @@ import universe.beliefs.Knowledge;
 import universe.entities.Entity;
 import universe.entities.Item;
 import universe.entities.NPC;
+import universe.entities.Player;
 
 /**
  * @author pierre
@@ -105,67 +106,96 @@ public class World {
         return result + "}";
     }
     
-    public String toAsciiArt() {
+    public String toAsciiArt(Position playerPosition) {
         String result = "World :\n";
         int height = this.cases.length;
         int width = this.cases[0].length;
-        for (int i = 0; i < height; i++) {
-            String line1 = ""; String line2 = ""; String line3 = "";
-            for (int j = 0; j < width; j++) {  
+        
+        // Display width numbers
+        result += "     ";
+        for (int i = playerPosition.y - 10; i <= playerPosition.y + 10; i++) {
+            if (!(i < 0 || i >= width)) {
+                if (i < 10)
+                    result += "  " + i + "   ";
+                else if (i < 100)
+                    result += "  " + i + "  ";
+                else
+                    result += "  " + i + " ";
+            }
+            else
+                result += "      ";
+        }
+        result += "\n";
+        
+        // Display map
+        for (int i = playerPosition.x - 5; i <= playerPosition.x + 5; i++) {
+            String line1 = "", line2 = "", line3 = "";
+            for (int j = playerPosition.y - 10; j <= playerPosition.y + 10; j++) {
                 // Building landColor and landSymbol for Ascii Art
                 String landColor = "\033[0m";
-                String landSymbol = "#";
-                if (this.cases[i][j].getLandType() == LandType.Grass) {
-                    landColor = "\033[32m"; // Console code for green
-                    landSymbol = "„ ";
+                String landSymbol = "# ";
+                boolean containsItem = false;
+                boolean containsNPC = false;
+                boolean containsPlayer = false;
+                if (!(i < 0 || i >= height || j < 0 || j >= width)) {
+                    if (this.cases[i][j].getLandType() == LandType.Grass) {
+                        landColor = "\033[32m"; // Console code for green
+                        landSymbol = "„ ";
+                    }
+                    else if (this.cases[i][j].getLandType() == LandType.Tree) {
+                        landColor = "\033[32m";
+                        landSymbol = "φ ";
+                    }
+                    else if (this.cases[i][j].getLandType() == LandType.Dirt) {
+                        landColor = "\033[33m"; // Console code for yellow
+                        landSymbol = "Ξ ";
+                    }
+                    else if (this.cases[i][j].getLandType() == LandType.Cliff) {
+                        landColor = "\033[33m";
+                        landSymbol = "Δ ";
+                    }
+                    for (Entity e : this.cases[i][j].getEntities()) {
+                        if (Item.class.isInstance(e))
+                            containsItem = true;
+                        if (NPC.class.isInstance(e))
+                            containsNPC = true;
+                        if (Player.class.isInstance(e))
+                            containsPlayer = true;
+                    }
                 }
-                else if (this.cases[i][j].getLandType() == LandType.Tree) {
-                    landColor = "\033[32m";
-                    landSymbol = "φ ";
-                }
-                else if (this.cases[i][j].getLandType() == LandType.Dirt) {
-                    landColor = "\033[33m"; // Console code for yellow
-                    landSymbol = "Ξ ";
-                }
-                else if (this.cases[i][j].getLandType() == LandType.Cliff) {
-                    landColor = "\033[33m";
-                    landSymbol = "Δ ";
-                }
-                
                 // Building Ascii Art
                 line1 += landColor + landSymbol + landSymbol + landSymbol;
                 line3 += landColor + landSymbol + landSymbol + landSymbol;
                 // Line 2 that contains items and npc symbols
-                boolean containsItem = false;
-                boolean containsNPC = false;
-                for (Entity e : this.cases[i][j].getEntities()) {
-                    if (Item.class.isInstance(e)) {
-                        containsItem = true;
-                    }
-                    if (NPC.class.isInstance(e)) {
-                        containsNPC = true;
-                    }
-                }
-                if (containsItem && !containsNPC) {
-                    line2 += landColor + landSymbol + landSymbol + "\033[0m\033[1m♦\033[0m ";
-                }
-                else if (containsNPC && !containsItem) {
-                    line2 += "\033[0m\033[1mθ \033[0m" + landColor + landSymbol + landSymbol;
-                }
-                else if (containsItem && containsNPC) {
-                    line2 += "\033[0m\033[1mθ \033[0m" + landColor + landSymbol +
-                             "\033[0m\033[1m♦\033[0m ";
-                }
-                else {
-                  line2 += landColor + landSymbol + landSymbol + landSymbol;
-                }
+                String line2s1 = landColor + landSymbol;
+                String line2s2 = landColor + landSymbol;
+                String line2s3 = landColor + landSymbol;
+                if (containsNPC)
+                    line2s1 = "\033[0m\033[1mθ\033[0m ";
+                if (containsPlayer)
+                    line2s2 = "\033[0m\033[1m⊕\033[0m ";
+                if (containsItem)
+                    line2s3 = "\033[0m\033[1m♦\033[0m ";
+                line2 += line2s1 + line2s2 + line2s3;
             }
-            line1 += "\n"; line2 += "\n"; line3 += "\n";
+            line1 = "     " + line1 + "\n";
+            if (!(i < 0 || i >= height)) {
+                if (i < 10)
+                    line2 = " " + i + "   " + line2 + "\n";
+                else if (i < 100)
+                    line2 = " " + i + "  " + line2 + "\n";
+                else
+                    line2 = " " + i + " " + line2 + "\n";
+            }
+            else
+                line2 = "     " + line2 + "\n";
+            line3 = "     " + line3 + "\n"; 
             result += line1 + line2 + line3 + "\033[0m";
         }
+        
         return result;
     }
-
+    /*
     public static void main(String[] args) {
         World w = new World(2, 3);
         NPC n = new NPC("Roger", 14);
@@ -181,6 +211,6 @@ public class World {
         w.addEntity(m, new Position(1, 2));
         w.addEntity(j, new Position(1, 1));
         System.out.println(w);
-        System.out.println(w.toAsciiArt());
     }
+    */
 }
