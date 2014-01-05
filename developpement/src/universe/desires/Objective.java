@@ -67,6 +67,6 @@ public class Objective {
 	    return "Objective [desire=" + desire + ", priority=" + priority
 		    + ", entity=" + entity + "]";
 	else
-	    return "Objective [desire=" + desire + ", priority=" + priority;
+	    return "Objective [desire=" + desire + ", priority=" + priority + "]";
     }
 }

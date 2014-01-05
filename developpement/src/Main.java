@@ -54,11 +54,12 @@ class Main {
 	Item parchement = (Item) DatabaseManager.create(Item.class,
 		"Parchement", 1, true);
 	Objective ownSword = new Objective(Verb.OWN, 5,sword);
-	Objective ownparch = new Objective(Verb.OWN, 5,parchement);
+	Objective ownparch = new Objective(Verb.OWN, 10,parchement);
 	kulvan.addDesire(seeAllayn);
 	allaynSister.addDesire(seeAllayn);
 	roger.addDesire(ownparch);
 	roger.addDesire(ownSword);
+	roger.addDesire(seeAllayn);
 	sword.setWorld(world);
 	parchement.setWorld(world);
 
