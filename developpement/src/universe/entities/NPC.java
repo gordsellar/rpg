@@ -25,12 +25,24 @@ public class NPC extends Character implements Runnable {
 
     public NPC(String name, Integer smartness) {
 	super(name, smartness);
+	this.generateDesires(Verb.OWN);
+    }
+
+    public void addDesire(Objective o) {
+	desiresManager.addDesire(o);
     }
 
     public void generateDesires(Verb desire) {
 	// TODO
 	// Get 500 gold and a significant other ?
 	desiresManager.addDesire(new Objective(desire, 1));
+    }
+
+    @Override
+    public String toString() {
+	String result = super.toString();
+	result += "Desire:" + desiresManager;
+	return result;
     }
 
     @Override

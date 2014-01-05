@@ -14,4 +14,13 @@ public class DesiresManager {
     public List<Objective> getObjectives() {
         return objectives;
     }
+
+    @Override
+    public String toString() {
+	String result= "";
+	for(Objective o : this.objectives){
+	    result += o + ", ";
+	}
+	return result;
+    }
 }
