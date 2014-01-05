@@ -65,7 +65,7 @@ public class Objective {
     public String toString() {
 	if (entity != null)
 	    return "Objective [desire=" + desire + ", priority=" + priority
-		    + ", entity=" + entity + "]";
+		    + ", entity=" + entity.getName() + "]";
 	else
 	    return "Objective [desire=" + desire + ", priority=" + priority + "]";
     }
