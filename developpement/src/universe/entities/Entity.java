@@ -96,14 +96,16 @@ public class Entity {
                 this.position.x = 0;
             if (position.x >= world.x)
                 this.position.x = world.x - 1;
-            if (position.y > 0)
+            if (position.y < 0)
                 this.position.y = 0;
             if (position.y >= world.y)
                 this.position.y = world.y - 1;
         }
+        world.moveEntity(this, this.position);
          // Changing the position of all the contained entity (recursively) 
         for (Entity e : this.inventory) {
             e.setPosition(this.position);
+            world.moveEntity(e, position);
         }
     }
 

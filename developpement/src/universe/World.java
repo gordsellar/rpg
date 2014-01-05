@@ -75,6 +75,11 @@ public class World {
 	this.cases[p.x][p.y].addEntity(e);
     }
 
+    public void moveEntity(Entity e, Position p) {
+        this.removeEntity(e);
+        this.addEntity(e, p);
+    }
+
     public ArrayList<Entity> getEntities(Zone z) {
 	ArrayList<Entity> entities = new ArrayList<Entity>();
 	for (Position p : z.getPositions()) {

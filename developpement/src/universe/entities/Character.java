@@ -109,8 +109,7 @@ public class Character extends Entity {
      * @return A Boolean with the value True if the move is possible
      */
     public Boolean move(Position p) {
-        this.position = p;
-        // TODO Make sure the character can go there
+        this.setPosition(p);
         return true;
 
     }

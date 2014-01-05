@@ -18,7 +18,7 @@ class Main {
 	UI ui = new UI(world);
 	// Creating player
 	Player player = new Player("Joueur", 20);
-	Position playerPosition = new Position(50, 50);
+	player.setWorld(world);
 	// Creating NPCs
 	NPC kulvan = (NPC) DatabaseManager.create(NPC.class, "Kulvan", 20);
 	NPC roger = (NPC) DatabaseManager.create(NPC.class, "Roger", 5);
@@ -51,11 +51,10 @@ class Main {
 		"Parchement", 1, true);
 	sword.setWorld(world);
 	parchement.setWorld(world);
-	world.addEntity(player, playerPosition);
 
 	while (true) {
 	    System.out.println(world.toStringInfoEntities());
-	    ui.displayWorld(playerPosition);
+	    ui.displayWorld(player.getPosition());
 	    player.run();
 	}
     }
