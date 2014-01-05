@@ -10,7 +10,7 @@ import universe.desires.Objective;
 import universe.desires.Verb;
 import universe.intentions.PlanLibrary;
 import universe.intentions.Task;
-
+import universe.utils.UI;
 
 /**
  * @author pierre
@@ -35,7 +35,8 @@ public class NPC extends Character implements Runnable {
 
     @Override
     public void run() {
-        System.out.println(this.toString());
+        UI ui = new UI(this.world);
+        ui.display(this.toString());
         // Get new knowledge of the world on line of sight
         updateKnowledges();
         learnFromZone(getUnderstandabilityZone());
@@ -48,7 +49,7 @@ public class NPC extends Character implements Runnable {
         // Execute 1 action from the desire
         if (!currentTasks.isEmpty()) {
             Task t = currentTasks.get(currentTaskIndex);
-            System.out.println(t);
+            ui.display(t.toString());
             currentTaskIndex++;
             List<Object> completeMethod;
             try {
@@ -59,7 +60,7 @@ public class NPC extends Character implements Runnable {
             catch (ClassNotFoundException
                     | IllegalAccessException | IllegalArgumentException
                     | InvocationTargetException e) {
-                e.printStackTrace();
+                ui.display(e.getMessage());
             }
         }
 

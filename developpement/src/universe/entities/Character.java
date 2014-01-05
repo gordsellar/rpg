@@ -10,7 +10,7 @@ import universe.beliefs.Fact;
 import universe.beliefs.Knowledge;
 import universe.beliefs.Location;
 import universe.desires.Objective;
-
+import universe.utils.UI;
 /**
  * @author pierre
  * 
@@ -98,7 +98,8 @@ public class Character extends Entity {
         try {
             this.knowledgesManager.addKnowledge(k);
         } catch (Exception e) {
-            e.printStackTrace();
+            UI ui = new UI(this.world);
+            ui.displayException(e.getMessage());
         }
     }
 
@@ -226,7 +227,6 @@ public class Character extends Entity {
         knowledges = world.getKnowledges(zone);
         numberLearnable = characteristic.getModifier(characteristic.smartness);
         numberAvailable = knowledges.size();
-        // System.out.println(numberToLearn);
         numberToLearn = Math.min(numberLearnable, numberAvailable);
         if (numberToLearn > 0) {
             List<Knowledge> canLearn = world.getKnowledges(zone);

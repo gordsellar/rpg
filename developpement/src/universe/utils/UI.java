@@ -8,7 +8,6 @@ import universe.Position;
 
 /**
  * @author claire
- * @author maxime
  *
  */
 
@@ -16,6 +15,7 @@ public class UI {
     private World world;
     private static final String question = "What do you want to do ?\n";
     private static final String methodError = "this action can not be carried out\n";
+    private static final String exception = "An exception has been raised :\n";
     private static final String unexpected = "Unexpected answer\n";
     private static final String possibilities = "Possible actions : \n"
             + " -get informations from the zone (enter : getinfo)\n"
@@ -31,7 +31,11 @@ public class UI {
         this.world = world;
     }
 
-    private void display(String message){
+    public UI() {
+        this.world = null;
+    }
+    
+    public void display(String message){
         System.out.println(message);
     }
 
@@ -54,6 +58,10 @@ public class UI {
     
     public void displayMethodError(){
         this.display(methodError);
+    }
+    
+    public void displayException(String m) {
+        this.display(this.exception + m);
     }
     
     public String getUserAction() {

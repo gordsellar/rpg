@@ -13,6 +13,7 @@ import universe.beliefs.KnowledgesManager;
 import universe.beliefs.Location;
 import universe.beliefs.Possession;
 import universe.utils.DatabaseManager;
+import universe.utils.UI;
 
 /**
  * @author pierre
@@ -44,7 +45,8 @@ public class Entity {
                 nameIsUnique = true;
             } catch (DuplicateEntityNameException e) {
                 count++;
-                e.printStackTrace();
+                UI ui = new UI(this.world);
+                ui.displayException(e.getMessage());
             }
         }
 
@@ -172,7 +174,6 @@ public class Entity {
             automaticKnowledges.addAll(i.getKnowledges());
             automaticKnowledges.add(new Possession(this, i));
         }
-        // System.out.println("Automatic knowledges : " + automaticKnowledges);
         knowledgesManager.addKnowledges(automaticKnowledges);
     }
 
