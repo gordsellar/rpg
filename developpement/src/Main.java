@@ -12,7 +12,7 @@ class Main {
     public static void main(String[] arg) {
 	// Creating world
 	int numberOfUselessNPC = 10;
-	int numberOfGoldONtheGround = 5000;
+	int numberOfGoldONtheGround = 500;
 	World world = new World(100, 100);
 	DatabaseManager.emptyEntities();
 	UI ui = new UI(world);
