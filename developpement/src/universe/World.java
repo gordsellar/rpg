@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import universe.beliefs.Knowledge;
+import universe.entities.Character;
 import universe.entities.Entity;
 import universe.entities.Item;
 import universe.entities.NPC;
@@ -211,6 +212,7 @@ public class World {
 	    }
 	}
 	for (Entity e : entities) {
+	    if (e instanceof Character)
 		result += e.toString() + "\n";
 	}
 	return result;
