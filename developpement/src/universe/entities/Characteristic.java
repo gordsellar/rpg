@@ -8,32 +8,32 @@ public class Characteristic {
     public int smartness;
     public int actionMaxLength = 1;
     public CharacterState state;
-    
+
     public Characteristic(Integer smartness) {
 	super();
 	this.gender = this.getGender();
 	this.smartness = smartness;
 	this.state = CharacterState.Ok;
     }
-    
-    public Characteristic(Gender gender, Integer smartness, Integer actionMaxLength,
-	    CharacterState state) {
+
+    public Characteristic(Gender gender, Integer smartness,
+	    Integer actionMaxLength, CharacterState state) {
 	super();
 	this.gender = gender;
 	this.smartness = smartness;
 	this.actionMaxLength = actionMaxLength;
 	this.state = state;
     }
-    
+
     /**
      * @param cara
      *            A strictly positive int
      * @return The D&D modifier for this characteristic (-5 / infinite)
      */
     public int getModifier(int cara) {
-	return (cara - 10) / 2;
+	return cara / 2;// (cara - 10) / 2;
     }
-    
+
     /**
      * @return A random Gender for the character
      */
@@ -48,6 +48,5 @@ public class Characteristic {
 	else
 	    return Gender.Transgender;
     }
-    
 
 }
