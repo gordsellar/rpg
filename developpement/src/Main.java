@@ -63,7 +63,7 @@ class Main {
 	sword.setWorld(world);
 	parchement.setWorld(world);
 
-	while (true) {
+	while (world.active) {
 	    System.out.println(world.toStringInfoEntities());
 	    ui.displayWorld(player.getPosition());
 	    player.run();

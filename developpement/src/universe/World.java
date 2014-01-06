@@ -20,6 +20,7 @@ public class World {
     private Case[][] cases;
     public int x;
     public int y;
+    public Boolean active = true;
 
     public World(int x, int y) {
 	this.x = x;
@@ -76,8 +77,8 @@ public class World {
     }
 
     public void moveEntity(Entity e, Position p) {
-        this.removeEntity(e);
-        this.addEntity(e, p);
+	this.removeEntity(e);
+	this.addEntity(e, p);
     }
 
     public ArrayList<Entity> getEntities(Zone z) {

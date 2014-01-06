@@ -25,7 +25,8 @@ public class UI {
 	    + " -kill someone (enter : kill <name_of_the_person>)\n"
 	    + " -loot someone (enter : loot <name_of_the_person>)\n"
 	    + " -read an object you have (enter : read <name_of_the_object>)\n"
-	    + " -go to a position in particular (enter : goto <x> <y>)\n";
+	    + " -go to a position in particular (enter : goto <x> <y>)\n"
+	    + " -quit the game (enter : quit)";
 
     public UI(World world) {
 	this.world = world;
@@ -110,6 +111,8 @@ public class UI {
 	    String x = action.split(" ")[1];
 	    String y = action.split(" ")[2];
 	    result = "move;Position [x=" + x + ", y=" + y + "]";
+	} else if (action.startsWith("quit")) {
+	    this.world.active = false;
 	} else {
 	    this.display(unexpected);
 	}
