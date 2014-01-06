@@ -209,6 +209,21 @@ public class World {
      * System.out.println(w); }
      */
 
+    public String toStringNameEntities() {
+	String result = "";
+	ArrayList<Entity> entities = new ArrayList<Entity>();
+	for (int i = 0; i < x; i++) {
+	    for (int j = 0; j < y; j++) {
+		entities.addAll(this.cases[i][j].getEntities());
+	    }
+	}
+	for (Entity e : entities) {
+	    if (e instanceof NPC && ((NPC) e).isAlive())
+		result += e.getName() + " (" + e.getPosition() + ")\n";
+	}
+	return result;
+    }
+
     public String toStringInfoEntities() {
 	String result = "";
 	ArrayList<Entity> entities = new ArrayList<Entity>();

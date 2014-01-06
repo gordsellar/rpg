@@ -41,6 +41,10 @@ public class Character extends Entity {
     public Zone getActionZone() {
         return new Zone(position, characteristic.actionMaxLength);
     }
+    
+    public Boolean isAlive(){
+	return this.killer == null;
+    }
 
     /**
      * @param e
