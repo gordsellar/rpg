@@ -40,13 +40,12 @@ public class NPC extends Character implements Runnable {
     @Override
     public String toString() {
         String result = super.toString();
-        result += "Desire:" + desiresManager;
+        result += " " + desiresManager;
         return result;
     }
 
     @Override
     public void run() {
-        long t1 = System.currentTimeMillis();
         do {
             // UI ui = new UI(this.world);
             // ui.display(this.toString());
@@ -88,6 +87,6 @@ public class NPC extends Character implements Runnable {
                 e.printStackTrace();
             }
         }
-        while (System.currentTimeMillis() - t1 < 1000 * 1000);
+        while (world.active);
     }
 }

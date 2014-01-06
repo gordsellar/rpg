@@ -26,7 +26,8 @@ public class UI {
             + " -loot someone (enter : loot <name_of_the_person>)\n"
             + " -pick up an item (enter : pickup <name_of_the_item>"
             + " -read an object you have (enter : read <name_of_the_object>)\n"
-            + " -go to a position in particular (enter : goto <x> <y>)\n";
+            + " -go to a position in particular (enter : goto <x> <y>)\n"
+            + " -quit the game (enter : quit)";
 
     public UI(World world) {
         this.world = world;
@@ -116,6 +117,8 @@ public class UI {
             String itemName = action.split(" ")[1];
             Entity item = DatabaseManager.findByName(itemName);
             result = "addItem;Item [id=" + item.getId() + "]";
+        } else if (action.startsWith("quit")) {
+            this.world.active = false;
         } else {
             this.display(unexpected);
         }

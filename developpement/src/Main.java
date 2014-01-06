@@ -74,10 +74,10 @@ class Main {
             new Thread(npc).start();
         }
 
-        while (true) {
-            System.out.println(world.toStringInfoEntities());
-            ui.displayWorld(player.getPosition());
-            player.run();
-        }
+	while (world.active) {
+	    System.out.println(world.toStringInfoEntities());
+	    ui.displayWorld(player.getPosition());
+	    player.run();
+	}
     }
 }
