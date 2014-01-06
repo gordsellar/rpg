@@ -36,7 +36,8 @@ public class PlanLibrary {
                                 if (!character.getActionZone().contain(p)) {
                                     tasklist.add(new Task("move;" + p));
                                 }
-                                tasklist.add(new Task("addItem;" + e));
+                                tasklist.add(new Task("addItem;Item [id="
+                                        + e.getId() + "]"));
                             }
                         }
                     }

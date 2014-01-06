@@ -223,18 +223,19 @@ public class Character extends Entity {
     public void learnFromZone(Zone zone) {
         ArrayList<Knowledge> knowledges;
         int numberLearnable, numberAvailable, numberToLearn;
-        knowledges = world.getKnowledges(zone);
+        synchronized (world) {
+            knowledges = world.getKnowledges(zone);
+        }
         numberLearnable = characteristic.getModifier(characteristic.smartness);
         numberAvailable = knowledges.size();
         numberToLearn = Math.min(numberLearnable, numberAvailable);
         if (numberToLearn > 0) {
-            List<Knowledge> canLearn = world.getKnowledges(zone);
             for (int numberLearned = 0; numberLearned < numberToLearn
                     - numberLearnable; numberLearned++) {
-                int i = new Random().nextInt(canLearn.size());
-                canLearn.remove(i);
+                int i = new Random().nextInt(knowledges.size());
+                knowledges.remove(i);
             }
-            this.knowledgesManager.addKnowledges(canLearn);
+            this.knowledgesManager.addKnowledges(knowledges);
         }
     }
 

@@ -86,26 +86,30 @@ public class Entity {
 
     public void setPosition(Position position) {
         // Changing the position of the entity as asked
-        if (!(position.x < 0 || position.x >= world.x || 
-              position.y < 0 || position.y >= world.y)) {
+        if (!(position.x < 0 || position.x >= world.x ||
+                position.y < 0 || position.y >= world.y)) {
             this.position = position;
         }
         // If position is out of range, place at the closest valid position
         else {
-            if (position.x < 0)
+            if (position.x < 0) {
                 this.position.x = 0;
-            if (position.x >= world.x)
+            }
+            if (position.x >= world.x) {
                 this.position.x = world.x - 1;
-            if (position.y < 0)
+            }
+            if (position.y < 0) {
                 this.position.y = 0;
-            if (position.y >= world.y)
+            }
+            if (position.y >= world.y) {
                 this.position.y = world.y - 1;
+            }
         }
         world.moveEntity(this, this.position);
-         // Changing the position of all the contained entity (recursively) 
+        // Changing the position of all the contained entity (recursively)
         for (Entity e : this.inventory) {
             e.setPosition(this.position);
-            world.moveEntity(e, position);
+            world.moveEntity(e, this.position);
         }
     }
 

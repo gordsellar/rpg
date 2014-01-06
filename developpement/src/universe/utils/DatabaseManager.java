@@ -119,6 +119,17 @@ public class DatabaseManager {
         return entities.get(id);
     }
 
+    public static Entity findByName(String name) {
+        for (Entity entity : entities) {
+            if (entity.getName().equals(name)) {
+                return entity;
+            }
+        }
+
+        // TODO Exception entity not found
+        return null;
+    }
+
     /**
      * Retrieve an existing Entity using given attributes. If multiple
      * occurrences, returns the first found. Arrays must have the same size.

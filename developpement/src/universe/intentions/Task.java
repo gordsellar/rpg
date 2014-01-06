@@ -64,7 +64,6 @@ public class Task {
             method = NPC.class.getMethod(methodName, parametersTypes);
         }
         catch (NoSuchMethodException e) {
-            System.out.println("method not found");
             Method[] methods = NPC.class.getMethods();
             int i = 0;
             boolean found = false;
