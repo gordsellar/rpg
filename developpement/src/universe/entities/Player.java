@@ -49,6 +49,15 @@ public class Player extends Character implements Runnable {
 	}
     }
 
+    @Override
+    public String toString() {
+	String result = super.toString() + " Item :";
+	for(Item i: this.getInventory()){
+	    result += i;
+	}
+	return result;
+    }
+
     private String getAction() {
 	String result;
 	UI userInterface = new UI(this.world);

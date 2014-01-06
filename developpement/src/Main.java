@@ -15,7 +15,7 @@ class Main {
     public static void main(String[] arg) {
 	// Creating world
 	int numberOfUselessNPC = 3;
-	int numberOfGoldONtheGround = 500;
+	int numberOfGoldONtheGround = 10;
 	World world = new World(100, 100);
 	DatabaseManager.emptyEntities();
 	UI ui = new UI(world);
@@ -79,6 +79,8 @@ class Main {
 	}
 
 	while (world.active) {
+	    System.out.println("Current Character in the world : \n"
+		    + world.toStringInfoEntities());
 	    ui.displayWorld(player.getPosition());
 	    System.out.println("Your state : " + player);
 	    System.out.println("Current Character in the world : \n"
