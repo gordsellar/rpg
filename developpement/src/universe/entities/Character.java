@@ -53,7 +53,8 @@ public class Character extends Entity {
         if (getActionZone().contain(e.getPosition())) {
             return true;
         } else {
-            throw new TooFarToInteractException(this, e);
+            //throw new TooFarToInteractException(this, e);
+            return false;
         }
     }
 
