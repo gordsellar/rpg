@@ -21,16 +21,15 @@
 
 
 \begin{document}
+  \titreGeneral{Rapport}
+  \sousTitreGeneral{\newline Sujet RPG 1}
+  \titreAcronyme{\LARGE IHME}
+  \version{1.00}
+  \referenceVersion{bibliographie}
 
-    \titreGeneral{Rapport}
-	\sousTitreGeneral{\newline Sujet RPG 1}
-	\titreAcronyme{\LARGE IHME}
-	\version{1.00}
-	\referenceVersion{bibliographie}
-	
-	\couverture{}
+  \couverture{}
 
-\tableofcontents{}
+  \tableofcontents{}
 
 \chapter{Introduction}
 L'objectif de ce projet est, de réaliser un générateur de scénarios pour RPG, et de mettre en place le déroulement de ce scénario. Les différents joueurs pourront être soit humains, soit virtuels. La trame du jeu pourra faire l'objet de re-planiffication si nécessaire, en fonction des actions effectuées par les différents joueurs. L'interface serait très légère de manière à se concentrer sur le scénario et sur le comportement des joueurs virtuels. \\
@@ -131,6 +130,22 @@ La représentation du monde en \textit{AsciiArt} fonctionne ainsi :
 \item le joueur est représenté par un $\bigoplus$ au centre de la case.
 \end{itemize}
 
+\subsection{Implémentation}
+
+\subsubsection{PNJ}
+
+Nous avons choisi d'implémenter les PNJ grâce a des threads. Nos PNJ sont donc des automates BDI. Étant donné qu'il parcourt le monde d'eux même il nous ont permis de débuguer le logiciel sans faire de tests unitaires étant donné que les PNJ parcourait le monde et le testait sans que nous agissions. \\
+
+Les PNJ possèdents des caractéristiques. Pour l'instant les PNJ possèdent un sexe, un état et une inteligence mais nous pourrions ajouter facilement d'autre caractéristiques (Force, charisme, sagesse, emotivité, perception auditive, etc.).
+
+\subsubsection{Désirs}
+
+Nous avons implémenté les désirs et les beliefs des PNJ en utilisant un Verbe reliant une entité et un object. Par exemple une entité et une Position pour un belief correspond à la localisation d'une entité. Pour un désir cela correspond à une entité qui doit se trouver à une position pour que l'entité ayant le désir soit satisfaite. Ce système modulaire permet d'ajouter facilement des données sémantiques dans le programme. Pour l'instant les deux verbes implémentés sont "OWN" et "LEARN", mais il serait très facile d'ajouter des désirs comme "KILL"; "LOOT", "FALLINLOVE" voir "BECOMESUCESSFUL" dans une future version du logiciel.
+
+\subsubsection{Gestion des entités du monde}
+
+Nous avons créé un database manager qui pourra être facilement relié à une base de donnée réélle par la suite. Nous utilisons beaucoup l'introspection pour enregistrer les différentes classes du logiciel.
+
 \subsubsection{Exemple}
 Dans l'exemple ci-dessous, on peut voir la représentaion d'une partie de la carte d'un monde. Cette représentation est de 10 cases sur 20, et est centrée sur le joueur. On peut voir,le joueur situé sur la case (50, 50) et des objets dans les différentes cases autour de lui.
 
@@ -157,6 +172,10 @@ Le jeu est actuellement en anglais, mais tous les messages d'interaction avec le
 
 \chapter{Conclusion}
 
+Tout d'abord, nous avons utilisé git comme outils principal pour ce projet ce qui était une bonne expérience, aussi bien en tant que gestionnaire de version, que de gestionnaire de projet. Il est probable que github soit la plateforme que nous utiliserons pour nos projets personnels dans un avenir proche et il semble que git soit bien plus pratique que svn. \\
 
+Durant ce projet, nous avons pu prendre du temps pour lire des articles scientifiques concernant un domaine qui nous passionnaient. Puis nous avons eu l'opportunité d'appliquer ce que nous avions appris en posant la base d'un jeu dont la narration s'adapterait au actions d'un joueur reposant sur l'état de l'art en matière de scénarisation. Pour l'instant nous avons une version basique, et les PNJ n'ont pas une psychologie très évolue. Mais la conception actuelle permettra d'implémenter de nouvelle fonctionalité très facilement. Le lien avec le programme de Quentin devrait être également possible, mais cela ne nous a pas paru primordial car l'ascii-art est bien plus confortable à l'utilisation que ce que nous pensions au début. \\
+
+Il ne fait aucun doute que dès que nous aurons un peu plus de temps libre à notre disposition nous pourrons nous replonger avec plaisir dans ce projet enthousiasmant, et nous apprécions à sa juste valeur la possibilité qui nous a été offerte de pouvoir choisir notre sujet de projet.
   
 \end{document}
