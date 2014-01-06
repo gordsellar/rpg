@@ -1,8 +1,5 @@
 \documentclass[asi]{picINSA}
 
-%\usepackage[latin1]{inputenc}
-%\usepackage[T1]{fontenc}
-%\usepackage[francais]{babel}
 \usepackage{lmodern}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -135,15 +132,15 @@ La représentation du monde en \textit{AsciiArt} fonctionne ainsi :
 \end{itemize}
 
 \subsubsection{Exemple}
-Dans l'exemple ci-dessous, on peut voir un monde de 5 x 5 cases, avec un PNJ dans la case (1,1), un autre dans la case (5, 4), un objet à la case (0, 5), un autre objet sur la case (5, 1) et enfin le joueur sur la case (3, 3).
+Dans l'exemple ci-dessous, on peut voir la représentaion d'une partie de la carte d'un monde. Cette représentation est de 10 cases sur 20, et est centrée sur le joueur. On peut voir,le joueur situé sur la case (50, 50) et des objets dans les différentes cases autour de lui.
 
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=1\textwidth]{images/screenshootWorld01.png}
-    \caption{Exemple de la représentation d'un monde de taille 5 x 5 avec 2 PNJ et 2 objets}	
+    \caption{Exemple de la représentation d'un monde (extrait de la carte de taill 10 x 20)}	
   \end{center}
 \end{figure}
-
+ On peut voir également au dessus de la carte, quelques indications écrites, qui ne peuvent être représentées graphiquement, comme par exemple le nom des PNJ.
 \subsection{Interaction du joueur}
 Les interactions avec le joueur se font en lui proposant différentes actions et en le laissant choisir par mot-clés, comme dans l'exemple ci-dessous : \\
 \begin{figure}[!ht]
@@ -156,6 +153,9 @@ Les interactions avec le joueur se font en lui proposant différentes actions et
 Si le joueur rentre autre chose qu'un des mot-clés prévus, cela provoque un message d'erreur. Les  execeptions et erreurs sont reportées à l'utilisateur. \\
 
 Le jeu est actuellement en anglais, mais tous les messages d'interaction avec le joueur sont implémentés dans le code sous forme de constantes de façon à rendre le changement de langue le plus simple possible. Les mots clés sont sans rapport avec les noms des fonctions appelées derrière, il est donc egalement possible de les changer sans impacter le code.
+
+
+\chapter{Conclusion}
 
 
   
