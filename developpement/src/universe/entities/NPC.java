@@ -87,6 +87,6 @@ public class NPC extends Character implements Runnable {
                 e.printStackTrace();
             }
         }
-        while (world.active);
+        while (world.active && !getState().equals(CharacterState.Dead));
     }
 }

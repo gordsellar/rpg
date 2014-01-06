@@ -20,7 +20,6 @@ public class NPCTest {
 
     @Test
     public void testGetWorldKnowledge() {
-        System.out.println("World");
         World w = new World(1, 2);
         NPC npc1 = (NPC) DatabaseManager.create(NPC.class, "Azu", 50);
         npc1.setWorld(w);
@@ -37,7 +36,16 @@ public class NPCTest {
         Assert.assertTrue(item1.knowsAbout(item1));
 
         // run 1 turn to make Azu learn things around him
-        npc1.run();
+        Thread t = new Thread(npc1);
+        t.start();
+        w.active = false;
+        try {
+            t.join();
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        w.active = true;
 
         // Azu knows about the Sword
         Assert.assertTrue(npc1.knowsAbout(item1));
@@ -59,7 +67,16 @@ public class NPCTest {
         Assert.assertFalse(npc1.got(item1));
 
         // run 1 turn to make Azu pick up the Sword
-        npc1.run();
+        Thread t = new Thread(npc1);
+        t.start();
+        w.active = false;
+        try {
+            t.join();
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        w.active = true;
 
         // Azu now have the Sword
         Assert.assertTrue(npc1.got(item1));
@@ -82,14 +99,32 @@ public class NPCTest {
         Assert.assertFalse(npc1.getActionZone().contain(item1.getPosition()));
 
         // run 1 turn to make Azu move
-        npc1.run();
+        Thread t = new Thread(npc1);
+        t.start();
+        w.active = false;
+        try {
+            t.join();
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        w.active = true;
 
         // Azu still doesn't have the Sword but is near it
         Assert.assertFalse(npc1.got(item1));
         Assert.assertTrue(npc1.getActionZone().contain(item1.getPosition()));
 
         // run another turn to make Azu pick up the Sword
-        npc1.run();
+        t = new Thread(npc1);
+        t.start();
+        w.active = false;
+        try {
+            t.join();
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        w.active = true;
 
         // Azu now have the Sword
         Assert.assertTrue(npc1.got(item1));
@@ -97,7 +132,6 @@ public class NPCTest {
 
     @Test
     public void testLearn() {
-        System.out.println("Learn");
         World w = new World(3, 5);
         NPC npc1 = (NPC) DatabaseManager.create(NPC.class, "Azu", 50);
         npc1.setWorld(w);
@@ -110,18 +144,39 @@ public class NPCTest {
 
         Assert.assertFalse(npc1.knowsAbout(npc2));
 
-        npc1.run();
+        Thread t = new Thread(npc1);
+        t.start();
+        w.active = false;
+        try {
+            t.join();
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        w.active = true;
 
         Assert.assertTrue(npc1.knowsAbout(npc2));
-        Assert.assertTrue(npc1.getActionZone().contain(npc2.getPosition()));
         Assert.assertFalse(npc1.knowsAll(npc2.getKnowledges()));
 
         // multiple turns because discuss return a random knowledge, and he
         // wants to know everything
-        npc1.run();
-        npc1.run();
-        npc1.run();
-        npc1.run();
+        t = new Thread(npc1);
+        t.start();
+
+        try {
+            Thread.sleep(6000);
+        }
+        catch (InterruptedException e1) {
+            e1.printStackTrace();
+        }
+        w.active = false;
+        try {
+            t.join();
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        w.active = true;
 
         Assert.assertTrue(npc1.knowsAll(npc2.getKnowledges()));
     }

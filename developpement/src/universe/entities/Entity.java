@@ -39,7 +39,7 @@ public class Entity {
                 if (count == 1) {
                     unifiedName = name;
                 } else {
-                    unifiedName = name + " " + count;
+                    unifiedName = name + count;
                 }
                 this.setName(unifiedName);
                 nameIsUnique = true;
@@ -191,7 +191,7 @@ public class Entity {
         ArrayList<Knowledge> automaticKnowledges = new ArrayList<Knowledge>();
         automaticKnowledges.add(new Location(this, position));
         for (Item i : this.inventory) {
-            automaticKnowledges.addAll(i.getKnowledges());
+            automaticKnowledges.addAll(i.getVisibleKnowledges());
             automaticKnowledges.add(new Possession(this, i));
         }
         knowledgesManager.addKnowledges(automaticKnowledges);

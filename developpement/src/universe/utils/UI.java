@@ -24,7 +24,7 @@ public class UI {
             + " -give an objet to someone (enter : give <name_of_the_object> <name_of_the_person>)\n"
             + " -kill someone (enter : kill <name_of_the_person>)\n"
             + " -loot someone (enter : loot <name_of_the_person>)\n"
-            + " -pick up an item (enter : pickup <name_of_the_item>"
+            + " -pick up an item (enter : pickup <name_of_the_item>\n"
             + " -read an object you have (enter : read <name_of_the_object>)\n"
             + " -go to a position in particular (enter : goto <x> <y>)\n"
             + " -quit the game (enter : quit)";
