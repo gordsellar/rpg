@@ -30,9 +30,69 @@
   
 \end{frame}
 
-\section{BDI et Entités}
+\section{IA et gestion des entités}
+
+\subsection{BDI}
 \begin{frame}
-  
+  \frametitle{IA des PNJs}
+  Fonctionnement des PNJs :
+  \begin{itemize}
+  \item Observer autour d'eux
+  \item Choisir une action
+  \item Effectuer cette action
+  \end{itemize}
+  ~\\  
+  \onslide<2>{
+    Implémentation sous forme de BDI : 
+    \begin{itemize}
+    \item Connaissances
+    \item Désirs et plan d'action
+    \item Actions
+    \end{itemize}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{IA des PNJs}
+  Les connaissances :
+  \begin{itemize}
+  \item Fait
+  \item Position
+  \item Possession
+  \end{itemize}
+  ~\\
+  \onslide<2->{
+    Les désirs sont des listes d'actions
+    ~\\
+    2 désirs possibles :
+    \begin{itemize}
+    \item Possession : ramasser des objets
+    \item Connaissance : parler avec tout le monde
+    \end{itemize}
+    Si aucun désir réalisable : exploration du monde
+  }
+\end{frame}
+
+\begin{frame}
+  Les actions :
+  \begin{itemize}
+  \item Méthode à exécuter sur le PNJ
+  \item Paramètres de la méthode
+  \item Représenté en chaine de caractère
+  \item Appel de la méthode par introspection
+  \end{itemize}
+\end{frame}
+
+\subsection{DatabaseManager}
+\begin{frame}
+  \frametitle{Gestion des entités}
+  Classe \textbf{DatabaseManager} : Injection de dépendances
+  \begin{itemize}
+  \item Stockage de l'ensemble des entités
+  \item Récupération à partir d'un id
+  \item Recherche à partir d'un ou plusieurs attributs
+  \item Création d'objet ou recherche d'entité ``from String''
+  \end{itemize}
 \end{frame}
 
 \section{Interactions utilisateur}
