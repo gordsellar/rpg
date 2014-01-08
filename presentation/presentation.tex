@@ -1,7 +1,23 @@
 \documentclass{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[french]{babel}
+\usepackage{pgf}
+\usepackage{xcolor}  
+\usepackage{graphicx}
+\usepackage{colortbl}
+\usepackage{wrapfig}
+\usepackage{multimedia}
+\usepackage{pifont}
+\setbeamercolor*{Title bar}{fg=black}
+\setbeamercolor*{Location bar}{fg=black}
+\setbeamercolor*{frametitle}{parent=Title bar}
+\setbeamercolor*{block body}{bg=white,fg=black}
+\setbeamercolor*{normal text}{bg=white,fg=black}
+\setbeamercolor*{section in head/foot}{bg=white,fg=black}%Couleur de la liste de navigation
 
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\definecolor{vertFleche}{rgb}{0.20,0.43,0.09} % vert moyen
 \usetheme{Normal}
 
 
@@ -25,7 +41,6 @@
 \section{Introduction}
 \begin{frame}
   \frametitle{Objectifs du projet}
-  
     \begin{itemize}
         \item Jeux de rôle
         \item Personnages virtuels autonomes
@@ -33,7 +48,19 @@
         \item Interface graphique minimale
         \item Code modulaire pour les futur ASI5
     \end{itemize} 
-  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Réalisation}
+    \begin{itemize}
+        \item Positionnement, déplacement, inventaire \only<2>{\textcolor{vertFleche}{\LARGE \cmark{}}  \textit{\small} }
+        \item Interaction entre et avec les PNJ \only<2>{\textcolor{vertFleche}{\LARGE \cmark{}} \textit{\small }}
+        \item Objectifs priorisés comportant des étapes \only<2>{\textcolor{vertFleche}{\LARGE \cmark{}} \textit{\small }}
+        \item Re-planification du scénario \only<2>{\textcolor{vertFleche}{\LARGE \cmark{}} \textit{\small }}
+        \item Connaissances sur le monde \only<2>{\textcolor{vertFleche}{\LARGE \cmark{}} \textit{\small }}
+        \item Distance d'interaction  \only<2>{\textcolor{red}{\LARGE \xmark{}} \textit{\small }}
+        \item Lien avec le programme de Quentin \only<2>{\textcolor{red}{\LARGE \xmark{}} \textit{\small }}
+    \end{itemize} 
 \end{frame}
 
 \section{Monde et environnement}
@@ -54,16 +81,15 @@
         \item Caracteristiques provenant de D\&D
         \item État provenant de D\&D
         \item Gestion du sexe
-        \item Implémentation de l'inteligence dans un premier temps
+        \item Implémentation de l'intelligence dans un premier temps
         \item Désirs
     \end{itemize} 
 \end{frame}
 
 \begin{frame}
       \frametitle{Actions possibles pour les personnages}
-      
     \begin{itemize}
-    \item Action limitées ou favorisées par une caractéristique
+        \item Action limitées ou favorisées par une caractéristique
         \item Se déplacer dans le monde
         \item Chercher une entité dans une zone
         \item Analyser un objet

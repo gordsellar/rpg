@@ -5,6 +5,7 @@ all: presentation
 # Génération du pdf
 presentation:
 	pdflatex presentation.tex;\
+	pdflatex presentation.tex;\
 	make cleanrep
 
 # Nettoyage total
