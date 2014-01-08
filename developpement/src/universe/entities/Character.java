@@ -109,7 +109,7 @@ public class Character extends Entity {
 		this.assertCanInteractWith(c);
 		Knowledge k, j;
 		k = c.discuss();
-		j = new Fact(c, this.getName() + "said " + k + " to " + c.getName());
+		j = new Fact(c, c.getName() + " said '" + k + "' to " + this.getName());
 		try {
 			this.knowledgesManager.addKnowledge(k);
 			c.knowledgesManager.addKnowledge(j);
@@ -182,7 +182,7 @@ public class Character extends Entity {
 	public void kill(Character c) {
 		c.killer = this;
 		this.addKnowledge(new Fact(this, c + "is probably dead, because "
-				+ this + " made what was necessary to finish it."));
+				+ this + " made what was necessary to finish it"));
 		Item lastWill = (Item) DatabaseManager.create(Item.class, "LetterFrom"
 				+ c.getName(), 1, true);
 		for (Knowledge k : c.getKnowledges()) {
