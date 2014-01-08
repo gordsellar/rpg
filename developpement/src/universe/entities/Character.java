@@ -97,7 +97,7 @@ public class Character extends Entity {
         if(this.isAlive())
             return this.getKnowledges().get(new Random().nextInt(n));
         else
-            return Fact(this.getName() + " seem to be dead. Even a little greener than usual for an orc.")
+            return new Fact(this, this.getName() + " seems to be dead");
     }
 
     /**
