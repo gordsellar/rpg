@@ -46,6 +46,24 @@
 
 \setbeamertemplate{background}{\pgfuseimage{fond}}
 
+
+\setbeamertemplate{footline}
+{
+  \linethickness{0.40pt}
+  \framelatex{
+  \begin{beamercolorbox}[leftskip=.3cm,wd=\paperwidth,ht=0.24\beamer@headheight,sep=0.1cm]{Location bar}
+    \usebeamerfont{section in head/foot}%
+
+
+    ~ ~ ~ ~
+    \insertshortauthor~|~\insertshorttitle
+    \hfill
+    Page \insertframenumber/\inserttotalframenumber
+  \end{beamercolorbox}}
+}
+
+
+
 \makeatletter
 \setbeamertemplate{sidebar \beamer@sidebarside}
 {
