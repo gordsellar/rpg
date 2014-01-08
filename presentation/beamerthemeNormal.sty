@@ -1,0 +1,76 @@
+\usetheme{Warsaw}
+
+\RequirePackage{pgf}
+
+\pgfdeclareimage[height=96mm,width=128mm]{fond}{./images/fondBeamer.jpg}
+\useoutertheme{sidebar}
+
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamercovered{transparent}
+
+\beamer@headheight=0.13\paperwidth
+
+
+\definecolor{darkcolor}{HTML}{0A377A}
+\definecolor{darkdarkcolor}{HTML}{032C3D}
+\definecolor{lightcolor}{HTML}{0099d5}
+\definecolor{gray}{HTML}{353535}
+\definecolor{lightgray}{HTML}{eeeeee} 
+\definecolor{color}{HTML}{6494CE}
+\definecolor{colortheme}{HTML}{134184}
+
+\setbeamercolor*{Title bar}{fg=white, bg=darkcolor} %titre de frametitle
+\setbeamercolor*{Location bar}{fg=darkcolor,bg=lightgray}%couleur de fond de la barre en bas, couleur du texte dans la barre en bas
+\setbeamercolor*{frametitle}{parent=Title bar} %titre de frametitle
+\setbeamercolor*{block title}{bg=darkcolor,fg=white}%couleur de fond des titres des blocs, couleur du texte dans les titres des blocs
+\setbeamercolor*{block body}{bg=lightgray,fg=gray}%couleur de fond des blocs, couleur du texte dans les blocs
+\setbeamercolor*{normal text}{bg=white,fg=gray}%couleur de fond, couleur du texte en dehors des blocs
+\setbeamercolor*{section in head/foot}{bg=color,fg=black} %titre des autres parties et de la partie ou on est, tout en haut
+\usecolortheme[named=colortheme]{structure} % fond du titre principal, puces ...
+
+
+
+\setbeamerfont{section in head/foot}{size=\tiny,series=\normalfont}
+\setbeamerfont{frametitle}{size=\Large}
+
+%\setbeamertemplate{headline}
+\setbeamertemplate{frametitle}
+{
+  \vskip-0.25\beamer@headheight
+  \vskip-\baselineskip
+  \vskip-0.2cm
+  \hskip0.7cm\usebeamerfont*{frametitle}\insertframetitle
+  \vskip-0.10em
+  \hskip0.7cm\usebeamerfont*{framesubtitle}\insertframesubtitle
+}
+
+\setbeamertemplate{background}{\pgfuseimage{fond}}
+
+\makeatletter
+\setbeamertemplate{sidebar \beamer@sidebarside}
+{
+    \beamer@tempdim=\beamer@sidebarwidth%
+    \advance\beamer@tempdim by -6pt%
+    {\usebeamerfont{title in sidebar}%
+      \vskip1.5em%
+      \hskip3pt%
+      \usebeamercolor[fg]{title in sidebar}%
+%      \insertshorttitle[width=\beamer@tempdim,center,respectlinebreaks]\par%
+      \vskip1.25em%
+    }%
+    {%
+      \hskip3pt%
+      \usebeamercolor[fg]{author in sidebar}%
+      \usebeamerfont{author in sidebar}%
+%      \insertshortauthor[width=\beamer@tempdim,center,respectlinebreaks]\par%
+      \vskip1.25em%
+    }%
+    \insertverticalnavigation{\beamer@sidebarwidth}%
+    \vfill
+    \ifx\beamer@sidebarside\beamer@lefttext%%   \else%
+      \usebeamercolor{normal text}%
+      \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+      \vskip2pt%
+    \fi%
+}%
+\makeatother
