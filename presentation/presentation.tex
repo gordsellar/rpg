@@ -176,9 +176,84 @@
 \end{frame}
 
 \author{RIVOIRE Claire}
+
+
+
+\section{Interface graphique}
+
+\begin{frame}
+
+   \frametitle{Représentation du monde}
+ \begin{columns}[t]
+  \begin{column}{5cm}
+\textbf{4 types de terrain} \\
+\vspace{5mm} 
+\begin{itemize}
+ \item  Herbe  ~\\
+\vspace{5mm} 
+ \item   Terre ~ \\
+\vspace{5mm} 
+ \item  Forêt ~ \\
+\vspace{5mm} 
+ \item  Montagne 
+\end{itemize}
+  \end{column}
+  
+  \begin{column}{5cm}
+\textbf{3 entités}
+\vspace{5mm} 
+\begin{itemize}
+ \item  Objet ~ \\
+\vspace{5mm} 
+ \item  PNJ ~ \\
+\vspace{5mm} 
+ \item Joueur 
+\end{itemize}
+
+  \end{column}
+ \end{columns}
+
+
+  \begin{picture}(0,0)
+    \put(70, 92){\includegraphics[scale=0.5]{./images/screenshootHerbe.png}}
+  \end{picture}	
+  \begin{picture}(0,0)
+    \put(66, 60){\includegraphics[scale=0.47]{./images/screenshootTerre.png}}
+  \end{picture}	
+  \begin{picture}(0,0)
+    \put(62,27){\includegraphics[scale=0.5]{./images/screenshootForet.png}}
+  \end{picture}	
+  \begin{picture}(0,0)
+    \put(58,-4){\includegraphics[scale=0.5]{./images/screenshootMontagne.png}}
+  \end{picture}	
+
+  \begin{picture}(0,0)
+    \put(210, 107){\includegraphics[scale=0.5]{./images/screenshootObjet.png}}
+  \end{picture}	
+  \begin{picture}(0,0)
+    \put(206, 75){\includegraphics[scale=0.47]{./images/screenshootPNJ.png}}
+  \end{picture}	
+  \begin{picture}(0,0)
+    \put(202, 42){\includegraphics[scale=0.5]{./images/screenshootJoueur.png}}
+  \end{picture}	
+\end{frame}
+
+\begin{frame}
+\frametitle{Représentation du monde}
+\begin{figure}
+    \begin{center}
+      \includegraphics[scale=0.22]{./images/screenshootWorld.png}
+      \caption{Le monde}
+    \end{center}
+  \end{figure}
+\end{frame}
+
+
 \section{Interactions utilisateur}
 \begin{frame}
    \frametitle{Fonctionnement}
+~\\
+~\\
   \begin{itemize}
   \item En ligne de commande
   \item Présentation des possibilités
@@ -195,18 +270,14 @@
 \begin{frame}
    \frametitle{Implémentation}
   \begin{itemize}
-  \item utilisation d'une classe spécifique : \textbf{UI}
-  \item séparation IHM / partie métier
+  \item Utilisation d'une classe spécifique : \textbf{UI}
+  \item Séparation IHM / partie métier
   \item Messages stockés dans des constantes
   \item Mots-clés sans rapport avec les fonctions
   \end{itemize} 
 \end{frame}
 
 \author{PATTYN Maxime}
-\section{Interface graphique}
-\begin{frame}
-  
-\end{frame}
 
 \section{Demonstration}
 \begin{frame}
