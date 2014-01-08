@@ -94,7 +94,10 @@ public class Character extends Entity {
      */
     public Knowledge discuss() {
         int n = this.getKnowledges().size();
-        return this.getKnowledges().get(new Random().nextInt(n));
+        if(this.isAlive())
+            return this.getKnowledges().get(new Random().nextInt(n));
+        else
+            return Fact(this.getName() + " seem to be dead. Even a little greener than usual for an orc.")
     }
 
     /**
