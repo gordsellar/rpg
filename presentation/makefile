@@ -13,10 +13,10 @@ clean: cleanpdf cleanrep
 
 # Nettoyage du répertoire
 cleanrep:	
-	rm *.aux *.cb *.cb2 *.log *.toc *.out *.nav *.snm
+	rm -rf *.aux *.cb *.cb2 *.log *.toc *.out *.nav *.snm
 
 
 # Nettoyage des pdf
-cleanpdf:	
-	rm $(NOM_FICHIER).pdf 
-	rm ./images/*.pdf
+cleanpdf:
+	rm -rf *.pdf
+	rm -rf ./images/*.pdf
